@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Comité de Estudios de Posgrado
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %header
+      .navbar-fixed
+        %nav
+          .nav-wrapper
+            %a.brand-logo.center{:href => "/"} CEP
+            %a.button-collapse.show-on-large{"data-activates" => "side-menu", :href => "#"}
+              %i.fa.fa-bars.fa-2x{"aria-hidden" => "true"}
+      %ul#side-menu.side-nav
+        %li
+          .center
+            =image_tag "http://cimav.edu.mx/foto/ion/200", class:'circle img-responsive', alt:'*'
+        %li
+          %a{href: "sass.html"} Sesiones
+        %li
+          %a{href: "sass.html"} Usuarios
+        .divider
+        %li
+          %a{href: "logout"} Cerrar Sesión
+
+
+    .container
+      = yield

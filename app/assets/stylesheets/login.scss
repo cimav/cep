@@ -1,0 +1,40 @@
+$brand: #10222B;
+#body-login {
+  background-color: $brand;
+  padding-top: 20px;
+  #login-area {
+    background: transparent image-url(logo-cep) center top no-repeat;
+    padding-top: 260px;
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 640px;
+    .login-title {
+      color:#fff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 0 30px rgba(0, 0, 0, .075);
+      font-size: 36px;
+      text-align: center;
+    }
+    .login-message {
+      margin-top: 20px;
+      text-align: center;
+      color: #ffd6d6;
+    }
+    .login-methods {
+      margin-top: 20px;
+      text-align: center;
+    }
+    button {
+      border: 2px solid darken($brand, 5%);
+      background: #fafafa;
+      color: $brand;
+      //@include rounded(8px);
+    }
+    button:hover {
+      //background-color: #9ba2a5;
+    }
+    rounded corner {
+      background-repeat: repeat-x;
+      border-color: darken(#fafafa, 14%);
+    }
+  }
+}
