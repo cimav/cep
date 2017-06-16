@@ -10,7 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613043117) do
+ActiveRecord::Schema.define(version: 20170616221423) do
+
+  create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "agreement_id"
+    t.string   "file"
+    t.string   "name"
+    t.integer  "file_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["agreement_id"], name: "index_agreement_files_on_agreement_id", using: :btree
+  end
+
+  create_table "agreements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "meeting_id"
+    t.integer  "status"
+    t.integer  "agreement_type"
+    t.string   "description"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["meeting_id"], name: "index_agreements_on_meeting_id", using: :btree
+  end
+
+  create_table "meetings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "meeting_type"
+    t.datetime "date"
+    t.integer  "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "responses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "agreement_id"
+    t.integer  "user_id"
+    t.string   "comment"
+    t.string   "answer"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["agreement_id"], name: "index_responses_on_agreement_id", using: :btree
+    t.index ["user_id"], name: "index_responses_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -22,4 +61,8 @@ ActiveRecord::Schema.define(version: 20170613043117) do
     t.index ["staff_id"], name: "index_users_on_staff_id", using: :btree
   end
 
+  add_foreign_key "agreement_files", "agreements"
+  add_foreign_key "agreements", "meetings"
+  add_foreign_key "responses", "agreements"
+  add_foreign_key "responses", "users"
 end
