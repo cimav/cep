@@ -1,0 +1,34 @@
+.row
+  =form_for @meeting do |f|
+    .row
+      .input-field.col.l3
+        %h5 Tipo de reunión
+        .row
+          =f.radio_button :meeting_type, Meeting::ORDINARY, checked:'checked'
+          =f.label :meeting_type, 'Ordinaria', value:Meeting::ORDINARY
+        .row
+          =f.radio_button :meeting_type, Meeting::EXTRAORDINARY
+          =f.label :meeting_type, 'Extraordinaria', value:Meeting::EXTRAORDINARY
+      .input-field.col.l3
+
+        %h5 Fecha
+        =text_field_tag :date , @date, class: "datepicker",placeholder:'Selecciona la fecha de la reunión'
+
+      .input-field.col.l3
+        %h5 Hora
+        =text_field_tag :time,@time, class: "timepicker",placeholder:'Selecciona la hora de la reunión',:type => "time"
+      .input-field.col.l3
+        =f.submit 'Actualizar reunión', class:'btn'
+.divider
+.row.section
+  .col.l2
+    .collection
+      -@meeting.agreement.each do |agreement|
+
+        =link_to 'dfd', class:'collection-item avatar' do
+          -if agreement.status == Meeting::OPENED
+            %i.fa.fa-unlock.circle.blue{"aria-hidden" => "true"}
+          -else
+            %i.fa.fa-lock.circle{"aria-hidden" => "true"}
+  .col.l10
+    %h1.center Info del acuerdo

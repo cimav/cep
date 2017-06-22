@@ -36,5 +36,6 @@ class ApplicationController < ActionController::Base
     return name
   end
   helper_method :current_user
+  helper_method :get_month_name
   helper_method :is_admin
 end

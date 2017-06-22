@@ -19,13 +19,13 @@
           .center
             =image_tag "http://cimav.edu.mx/foto/ion/200", class:'circle img-responsive', alt:'*'
         %li
-          %a{href: "#"} Sesiones
+          %a{href: "/meetings"} Sesiones
         %li
-          %a{href: "users"} Usuarios
+          %a{href: "/users"} Usuarios
         .divider
         %li
-          %a{href: "logout"} Cerrar Sesión
+          %a{href: "/logout"} Cerrar Sesión
 
 
-    .container
-      = yield
+
+    = yield

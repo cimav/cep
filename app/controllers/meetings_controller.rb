@@ -1,10 +1,14 @@
 class MeetingsController < ApplicationController
   def index
-    @meetings = Meeting.all
+    @meetings = Meeting.all.order(date: :desc)
   end
 
   def show
     @meeting = Meeting.find(params[:id])
+    datetime = @meeting.date.to_s()
+    @date = datetime.split(" ")[0].to_date.strftime("%d %B, %Y")
+
+    @time = datetime.split(" ")[1].to_time.strftime('%l:%M%P') rescue "" #hora con formato 12H
   end
 
   def new
@@ -12,11 +16,14 @@ class MeetingsController < ApplicationController
   end
 
   def create
-    meeting = Meeting.new(meeting_params)
+    data = meeting_params
+    data[:date] = get_datetime(params)
+
+    meeting = Meeting.new(data)
     if meeting.save
       redirect_to meeting
     else
-      render plain: 'No se pudo crear el acuerdo'
+      render plain: 'No se pudo crear la reunión'
     end
   end
 
@@ -25,7 +32,7 @@ class MeetingsController < ApplicationController
     if meeting.destroy
       redirect_to meetings_index_path
     else
-      render plain: 'No se pudo eliminar el acuerdo'
+      render plain: 'No se pudo eliminar la reunión'
     end
   end
 
@@ -38,6 +45,12 @@ class MeetingsController < ApplicationController
 
   def meeting_params
     params.require(:meeting).permit(:status, :meeting_type, :date)
+  end
+
+  def get_datetime(params)
+    date    = params[:meeting][:date]
+    time    = params[:meeting_time]
+    return "#{date} #{time}"
   end
 
 end
