@@ -43,6 +43,7 @@ document.addEventListener("turbolinks:load", function() {
         submit:'HH:i'
     });
 
+    $('ul.tabs').tabs('select_tab', 'tab_id');
 
 
 })

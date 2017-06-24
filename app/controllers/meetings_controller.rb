@@ -9,6 +9,7 @@ class MeetingsController < ApplicationController
     @date = datetime.split(" ")[0].to_date.strftime("%d %B, %Y")
 
     @time = datetime.split(" ")[1].to_time.strftime('%l:%M%P') rescue "" #hora con formato 12H
+
   end
 
   def new

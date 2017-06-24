@@ -25,5 +25,6 @@ Rails.application.routes.draw do
 
   resources 'users'
   resources 'meetings'
+  resources 'agreements'
 
 end

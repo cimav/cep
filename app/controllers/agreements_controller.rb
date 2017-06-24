@@ -5,6 +5,7 @@ class AgreementsController < ApplicationController
 
   def show
     @agreement = Agreement.find(params[:id])
+    @hola = params[:hola]
   end
 
   def new
@@ -31,6 +32,15 @@ class AgreementsController < ApplicationController
 
   def edit
     @agreement = Agreement.find(params[:id])
+  end
+  def update
+    agreement = Agreement.find(params[:id])
+    respond_to do |format|
+    if agreement.update(agreement_params)
+      format.json {render json: agreement}
+    end
+    end
+
   end
 
 
