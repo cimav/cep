@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616221423) do
+ActiveRecord::Schema.define(version: 20170719213231) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
@@ -51,6 +51,20 @@ ActiveRecord::Schema.define(version: 20170616221423) do
     t.index ["user_id"], name: "index_responses_on_user_id", using: :btree
   end
 
+  create_table "synod_designations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "student_id"
+    t.integer  "agreement_id"
+    t.integer  "synodal1"
+    t.integer  "synodal2"
+    t.integer  "synodal3"
+    t.integer  "synodal4"
+    t.integer  "synodal5"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["agreement_id"], name: "index_synod_designations_on_agreement_id", using: :btree
+    t.index ["student_id"], name: "index_synod_designations_on_student_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "email"
@@ -65,4 +79,5 @@ ActiveRecord::Schema.define(version: 20170616221423) do
   add_foreign_key "agreements", "meetings"
   add_foreign_key "responses", "agreements"
   add_foreign_key "responses", "users"
+  add_foreign_key "synod_designations", "agreements"
 end

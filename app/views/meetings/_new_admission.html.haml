@@ -1,0 +1,6 @@
+= form_for agreement,class:'form_agreement alertas' do |f|
+  .row.input-field
+    %label.active{:for => "agreement_description"} Descripción
+    =f.text_field :description
+  .row
+    =f.submit 'listo',class:'btn'

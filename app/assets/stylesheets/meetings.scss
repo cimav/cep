@@ -11,7 +11,7 @@
   border-bottom: 1px solid #f0f0f0;
 }
 .tab-content{
-  height: 200px;
+  //height: 200px;
   width: 100%;
   background: #fcfcfc;
   border:1px solid #f0f0f0;
@@ -20,7 +20,10 @@
   display: none;
 }
 li{
+  a{
+    color: inherit !important;
+  }
   .active{
-    background-color: #2E2F30 !important;
+    background-color: rgba(14, 58, 86, 0.58) !important;
   }
 }

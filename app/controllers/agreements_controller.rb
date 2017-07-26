@@ -5,7 +5,6 @@ class AgreementsController < ApplicationController
 
   def show
     @agreement = Agreement.find(params[:id])
-    @hola = params[:hola]
   end
 
   def new
@@ -14,11 +13,27 @@ class AgreementsController < ApplicationController
 
   def create
     agreement = Agreement.new(agreement_params)
+    agreement.meeting_id = params[:meeting_id]
     if agreement.save
-      redirect_to agreement
+      case agreement.agreement_type
+        when Agreement::ASIG_SINODAL
+          synod_designation = agreement.synod_designation.new
+          synod_designation.student_id = params[:student_id]
+          synod_designation.save
+      end
+
+
+
+
+      flash[:success] = "Acuerdo creado"
+      redirect_to agreement.meeting
+
     else
-      render plain: 'No se pudo crear el acuerdo'
+      flash[:error] = "Error al crear acuerdo"
+      flash[:error] = agreement.errors.full_messages[0]
+      redirect_to agreement.meeting
     end
+
   end
 
   def delete
@@ -35,10 +50,29 @@ class AgreementsController < ApplicationController
   end
   def update
     agreement = Agreement.find(params[:id])
-    respond_to do |format|
     if agreement.update(agreement_params)
-      format.json {render json: agreement}
-    end
+      case agreement.agreement_type
+        when Agreement::ASIG_SINODAL
+        synod_designation = agreement.synod_designation
+        synod_designation.student_id = params[:student_id]
+        synod_designation.synodal1 = params[:synodal1]
+        synod_designation.synodal2 = params[:synodal2]
+        synod_designation.synodal3 = params[:synodal3]
+        synod_designation.synodal4 = params[:synodal4]
+        synod_designation.synodal5 = params[:synodal5]
+
+        if synod_designation.save
+          flash[:notice] = "Se actualizó el acuerdo"
+        else
+          flash[:error] = "No se pudo actualizar"
+        end
+      end
+      redirect_to agreement.meeting
+
+    else
+      flash[:error] = "No se pudo actualizar"
+      flash[:error] = agreement.errors.full_messages[0]
+      redirect_to agreement.meeting
     end
 
   end

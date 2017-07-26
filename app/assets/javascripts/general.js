@@ -1,5 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
-
+$(document).ready(function(){
     $(".button-collapse").sideNav();
 
 
@@ -31,20 +30,21 @@ document.addEventListener("turbolinks:load", function() {
 
     });
 
-
     $('.timepicker').pickatime({
-        default: 'now',
-        twelvehour: true, // change to 12 hour AM/PM clock from 24 hour
-        donetext: 'OK',
-        darktheme: true,
-        autoclose: false,
-        formatSubmit: 'HH:i',
-        vibrate: true, // vibrate the device when dragging clock hand
-        submit:'HH:i'
+        default: 'now', // Set default time
+        fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+        twelvehour: true, // Use AM/PM or 24-hour format
+        donetext: 'OK', // text for done-button
+        cleartext: 'Clear', // text for clear-button
+        canceltext: 'Cancel', // Text for cancel-button
+        autoclose: false, // automatic close timepicker
+        ampmclickable: true, // make AM PM clickable
+        aftershow: function(){} //Function for after opening timepicker
     });
+    $('select').material_select();
+    $('.modal').modal();
 
-    $('ul.tabs').tabs('select_tab', 'tab_id');
+    $(".alertas").delay(4000).fadeOut();
 
 
-})
-
+});

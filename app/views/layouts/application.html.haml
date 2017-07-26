@@ -1,11 +1,15 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %title Comité de Estudios de Posgrado
-    = csrf_meta_tags
+    = csrf_meta_tag
+
+
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+
   %body
     %header
       .navbar-fixed
@@ -17,7 +21,7 @@
       %ul#side-menu.side-nav
         %li
           .center
-            =image_tag "http://cimav.edu.mx/foto/ion/200", class:'circle img-responsive', alt:'*'
+            =image_tag "http://cimav.edu.mx/foto/teresa.mariscal/200", class:'circle img-responsive', alt:'*'
         %li
           %a{href: "/meetings"} Sesiones
         %li
@@ -26,5 +30,6 @@
         %li
           %a{href: "/logout"} Cerrar Sesión
 
-
+    -if flash
+      =render partial: 'layouts/flash_message', flash: flash
     = yield

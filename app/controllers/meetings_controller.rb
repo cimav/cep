@@ -1,9 +1,11 @@
 class MeetingsController < ApplicationController
   def index
     @meetings = Meeting.all.order(date: :desc)
+
   end
 
   def show
+    @agreement_new = Agreement.new
     @meeting = Meeting.find(params[:id])
     datetime = @meeting.date.to_s()
     @date = datetime.split(" ")[0].to_date.strftime("%d %B, %Y")
@@ -17,10 +19,12 @@ class MeetingsController < ApplicationController
   end
 
   def create
+    data = {}
     data = meeting_params
     data[:date] = get_datetime(params)
 
     meeting = Meeting.new(data)
+    meeting.status = Meeting::OPENED
     if meeting.save
       redirect_to meeting
     else
@@ -42,6 +46,7 @@ class MeetingsController < ApplicationController
   end
 
 
+
   private
 
   def meeting_params
@@ -50,7 +55,7 @@ class MeetingsController < ApplicationController
 
   def get_datetime(params)
     date    = params[:meeting][:date]
-    time    = params[:meeting_time]
+    time    = params[:time]
     return "#{date} #{time}"
   end
 

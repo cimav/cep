@@ -1,0 +1,2 @@
+class SynodDesignationsController < ApplicationController
+end

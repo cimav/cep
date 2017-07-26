@@ -1,0 +1,26 @@
+= form_for agreement,class:'form_agreement alertas' do |f|
+  .row.input-field
+    %label.active{:for => "agreement_description"} Descripción
+    =f.text_field :description
+  .row.input-field
+    %label.active{:for => "student_id"} Estudiante
+    =select_tag 'student_id', options_from_collection_for_select(Student.all, :id, :full_name, agreement.synod_designation.student_id)
+  .row
+    .row.input-field
+      %label.active{:for => "synodal1"} Sinodal 1
+      =select_tag 'synodal1', options_from_collection_for_select(Staff.all, :id, :full_name, agreement.synod_designation.synodal1),prompt:'-- Seleccione un docente --'
+    .row.input-field
+      %label.active{:for => "synodal2"} Sinodal 2
+      =select_tag 'synodal2', options_from_collection_for_select(Staff.all, :id, :full_name, agreement.synod_designation.synodal2),prompt:'-- Seleccione un docente --'
+    .row.input-field
+      %label.active{:for => "synodal"} Sinodal 3
+      =select_tag 'synodal3', options_from_collection_for_select(Staff.all, :id, :full_name, agreement.synod_designation.synodal3),prompt:'-- Seleccione un docente --'
+    .row.input-field
+      %label.active{:for => "synodal4"} Sinodal 4
+      =select_tag 'synodal4', options_from_collection_for_select(Staff.all, :id, :full_name, agreement.synod_designation.synodal4),prompt:'-- Seleccione un docente --'
+    .row.input-field
+      %label.active{:for => "synodal5"} Sinodal 5
+      =select_tag 'synodal5', options_from_collection_for_select(Staff.all, :id, :full_name, agreement.synod_designation.synodal5),prompt:'-- Seleccione un docente --'
+
+  .row
+    =f.submit 'listo',class:'btn'
