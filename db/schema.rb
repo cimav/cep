@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719213231) do
+ActiveRecord::Schema.define(version: 20170726200131) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
@@ -25,10 +25,13 @@ ActiveRecord::Schema.define(version: 20170719213231) do
   create_table "agreements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "meeting_id"
     t.integer  "status"
-    t.integer  "agreement_type"
+    t.string   "agreeable_type"
+    t.integer  "agreeable_id"
     t.string   "description"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["agreeable_id", "agreeable_type"], name: "index_agreements_on_agreeable_id_and_agreeable_type", using: :btree
+    t.index ["agreeable_type", "agreeable_id"], name: "index_agreements_on_agreeable_type_and_agreeable_id", using: :btree
     t.index ["meeting_id"], name: "index_agreements_on_meeting_id", using: :btree
   end
 
@@ -38,6 +41,13 @@ ActiveRecord::Schema.define(version: 20170719213231) do
     t.integer  "status"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "new_admissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_new_admissions_on_student_id", using: :btree
   end
 
   create_table "responses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -53,15 +63,13 @@ ActiveRecord::Schema.define(version: 20170719213231) do
 
   create_table "synod_designations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "student_id"
-    t.integer  "agreement_id"
     t.integer  "synodal1"
     t.integer  "synodal2"
     t.integer  "synodal3"
     t.integer  "synodal4"
     t.integer  "synodal5"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["agreement_id"], name: "index_synod_designations_on_agreement_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_synod_designations_on_student_id", using: :btree
   end
 
@@ -79,5 +87,4 @@ ActiveRecord::Schema.define(version: 20170719213231) do
   add_foreign_key "agreements", "meetings"
   add_foreign_key "responses", "agreements"
   add_foreign_key "responses", "users"
-  add_foreign_key "synod_designations", "agreements"
 end

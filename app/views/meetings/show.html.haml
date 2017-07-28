@@ -1,12 +1,9 @@
 %br
 %br
 %br
-%br
-%br
-%br
-%br
-%br
-=@meeting.id
+%h1
+  Sesión numero
+  =@meeting.id
 %br
 .row
   .col.l2
@@ -26,16 +23,28 @@
     %h5.center Info del acuerdo
     -@meeting.agreement.each do |agreement|
       .col.tab-content{id:"test#{agreement.id}"}
-        -if agreement.agreement_type.equal? Agreement::ASIG_SINODAL
-          =render partial: 'synod_designation', locals:{agreement: agreement}
-        -elsif agreement.agreement_type.equal? Agreement::NUEVO_INGRESO
-          =render partial: 'new_admission', locals:{agreement: agreement}
-.fixed-action-btn
+        -if agreement.agreeable_type.eql? "SynodDesignation"
+          =render partial: 'synod_designations/edit', locals:{synod_designation: SynodDesignation.find(agreement.agreeable_id)}
+        -elsif agreement.agreeable_type.eql? "NewAdmission"
+          =render partial: 'new_admissions/edit', locals:{new_admission: NewAdmission.find(agreement.agreeable_id)}
 
-  %a.btn-floating.btn-large.red.tooltipped{href:'#modal_acuerdo',"data-position" => "left", "data-tooltip" => "Nuevo acuerdo", "data-delay" => "50"}
-    %i.fa.fa-plus{"aria-hidden" => "true"}
-/ Modal Structure
-#modal_acuerdo.modal.modal-fixed-footer
+  .fixed-action-btn
+    %a.btn-floating.btn-large.red.tooltipped{href:'#agreement_types', "data-position"=>'left', "data-delay"=>"50", "data-tooltip"=>"Nuevo acuerdo"}
+      %i.fa.fa-plus{"aria-hidden" => "true"}
+
+/opciones
+#agreement_types.modal
   .modal-content
-    =render partial: 'new_agreement', locals:{meeting:@meeting}
+
+    .collection
+      %a.collection-item.modal-close{:href => "#modal_synodal_designation"} Designación de sinodales
+      %a.collection-item.active.modal-close{:href => "#modal_new_admission"} Nuevo ingreso
+
+#modal_synodal_designation.modal
+  .modal-content
+    =render partial: 'synod_designations/new', locals:{meeting:@meeting, synod_designation: SynodDesignation.new}
+
+#modal_new_admission.modal
+  .modal-content
+    =render partial: 'new_admissions/new', locals:{meeting:@meeting, new_admission: NewAdmission.new}
 

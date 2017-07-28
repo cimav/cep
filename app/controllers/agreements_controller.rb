@@ -15,25 +15,21 @@ class AgreementsController < ApplicationController
     agreement = Agreement.new(agreement_params)
     agreement.meeting_id = params[:meeting_id]
     if agreement.save
-      case agreement.agreement_type
-        when Agreement::ASIG_SINODAL
-          synod_designation = agreement.synod_designation.new
+      case agreement.agreeable_type
+        when Agreement::SYNOD_DESINGATION
+          synod_designation = agreement.build_synod_designation
           synod_designation.student_id = params[:student_id]
-          synod_designation.save
+          if agreement.save
+            flash[:success] = "Acuerdo creado"
+          end
       end
-
-
-
-
-      flash[:success] = "Acuerdo creado"
-      redirect_to agreement.meeting
 
     else
       flash[:error] = "Error al crear acuerdo"
       flash[:error] = agreement.errors.full_messages[0]
-      redirect_to agreement.meeting
-    end
 
+    end
+    redirect_to agreement.meeting
   end
 
   def delete
@@ -52,7 +48,7 @@ class AgreementsController < ApplicationController
     agreement = Agreement.find(params[:id])
     if agreement.update(agreement_params)
       case agreement.agreement_type
-        when Agreement::ASIG_SINODAL
+        when Agreement::SYNOD_DESINGATION
         synod_designation = agreement.synod_designation
         synod_designation.student_id = params[:student_id]
         synod_designation.synodal1 = params[:synodal1]

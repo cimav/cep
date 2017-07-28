@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources 'meetings'
   resources 'agreements'
   resources 'synod_designations'
+  resources 'new_admissions'
 
 end

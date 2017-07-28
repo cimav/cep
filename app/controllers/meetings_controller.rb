@@ -7,6 +7,7 @@ class MeetingsController < ApplicationController
   def show
     @agreement_new = Agreement.new
     @meeting = Meeting.find(params[:id])
+    @staffs = Staff.all.order(:first_name)
     datetime = @meeting.date.to_s()
     @date = datetime.split(" ")[0].to_date.strftime("%d %B, %Y")
 

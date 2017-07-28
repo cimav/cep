@@ -1,4 +1,4 @@
-class SynodDesignation < ApplicationRecord
+class NewAdmission < ApplicationRecord
   belongs_to :student
   has_one :agreement, as: :agreeable
 end

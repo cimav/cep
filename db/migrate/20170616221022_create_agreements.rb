@@ -3,10 +3,11 @@ class CreateAgreements < ActiveRecord::Migration[5.0]
     create_table :agreements do |t|
       t.references :meeting, foreign_key: true
       t.integer :status
-      t.integer :agreement_type
+      t.belongs_to :agreeable, polymorphic: true
       t.string :description
 
       t.timestamps
     end
+    add_index :agreements, [:agreeable_id, :agreeable_type]
   end
 end

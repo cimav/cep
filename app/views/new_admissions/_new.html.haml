@@ -1,0 +1,12 @@
+= form_for new_admission, class:'form_agreement' do |f|
+  .row.input-field
+
+    %label.active{:for => "description"} Descripción
+    =text_field_tag :description
+    %input{type: "text", name: "meeting_id" , value: meeting.id, hidden:true}
+  .row.input-field
+    %label.active{:for => "stdent_id"} Sinodal 1
+    =f.collection_select :student_id, Student.all, :id, :full_name,prompt: true
+
+  .row
+    =f.submit 'listo',class:'btn'
