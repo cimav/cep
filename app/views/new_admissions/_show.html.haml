@@ -1,0 +1,44 @@
+
+.row
+  .col.l7
+    .card
+      .card-content
+        .card-title
+          Descripción
+        =@agreement.description
+  .col.l5
+    .card
+      .card-content
+        .row
+
+          .col.l2
+            %img.circle.responsive-img{src:"http://posgrado.cimav.edu.mx/images/student/image/#{@agreement.agreeable.student.id}/#{@agreement.agreeable.student.image}"}
+          .col.l10
+            .card-title
+              =new_admission.student.full_name
+            %p
+              %b
+                Matrícula
+              =new_admission.student.card
+              %br
+                %b
+                  Programa:
+                =new_admission.student.program.name
+              %br
+                %b
+                  Estatus:
+                =new_admission.student.get_status
+              %br
+                %b
+                  Sexo:
+                =new_admission.student.gender
+              %br
+                %b
+                  Campus
+                =new_admission.student.campus.name
+              %br
+                %b
+                  Fecha de inicio:
+                =new_admission.student.start_date
+
+

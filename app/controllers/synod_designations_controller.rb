@@ -25,18 +25,22 @@ class SynodDesignationsController < ApplicationController
 
   def update
     synod_designation = SynodDesignation.find(params[:id])
+    response = {}
+
+    respond_to do |format|
     if synod_designation.update(synod_designation_params)
       synod_designation.agreement.update(description:params[:description])
-      flash[:success] = "Acuerdo actualizado"
+
+      response[:message] = 'Acuerdo actualizado'
 
     else
-      flash[:error] = "Error al actualizar acuerdo"
-      flash[:error] = agreement.errors.full_messages[0]
-
+      response[:message] = 'Error al actualizar acuerdo'
     end
-    redirect_to synod_designation.agreement.meeting
-
+    response[:object] = synod_designation
+    format.json {render json: response}
+    end
   end
+
 
 
 

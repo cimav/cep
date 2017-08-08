@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
   get 'logout' => 'sessions#destroy'
 
+  #agreements
+  get '/meetings/:meeting_id/agreements/:agreement_id' => 'agreements#edit'
+
   resources 'users'
   resources 'meetings'
-  resources 'agreements'
   resources 'synod_designations'
   resources 'new_admissions'
+
 
 end

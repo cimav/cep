@@ -17,7 +17,7 @@ class AgreementsController < ApplicationController
     if agreement.save
       case agreement.agreeable_type
         when Agreement::SYNOD_DESINGATION
-          synod_designation = agreement.build_synod_designation
+          synod_designation = agreem  ent.build_synod_designation
           synod_designation.student_id = params[:student_id]
           if agreement.save
             flash[:success] = "Acuerdo creado"
@@ -32,17 +32,21 @@ class AgreementsController < ApplicationController
     redirect_to agreement.meeting
   end
 
-  def delete
+  def destroy
     agreement = Agreement.find(params[:id])
-    if agreement.destroy
-      redirect_to agreements_index_path
+    if agreement.agreeable.destroy
+      flash[:notice] = "Se eliminó el acuerdo"
     else
-      render plain: 'No se pudo eliminar el acuerdo'
+      flash[:error] = 'No se pudo eliminar el acuerdo'
     end
+    redirect_to agreement.meeting
   end
 
   def edit
-    @agreement = Agreement.find(params[:id])
+    @agreement = Agreement.find(params[:agreement_id])
+    @staffs = Staff.all.order(:first_name)
+    @students = Student.select("MAX(id) as id,first_name,last_name").where(:status=>[1,2,3,5,6]).group("first_name, last_name").order("first_name")
+    render layout:false
   end
   def update
     agreement = Agreement.find(params[:id])

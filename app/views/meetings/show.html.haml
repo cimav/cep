@@ -8,29 +8,20 @@
 .row
   .col.l2
     %h5.center Acuerdos
-    %ul.tabs#coco
+    .collection
       -@meeting.agreement.each do |agreement|
 
-        %li.tab.active
-          %a{href:"#test#{agreement.id}"}
-            =agreement.description
-            -if agreement.status == Meeting::OPENED
-              %i.fa.fa-unlock.circle.blue{"aria-hidden" => "true"}
-            -else
-              %i.fa.fa-lock.circle{"aria-hidden" => "true"}
 
-  .col.m8
+        =link_to agreement.description, "/meetings/#{@meeting.id}/agreements/#{agreement.id}",remote:true, class:'collection-item agreement-item'
+
+
+  .col.l10
     %h5.center Info del acuerdo
-    -@meeting.agreement.each do |agreement|
-      .col.tab-content{id:"test#{agreement.id}"}
-        -if agreement.agreeable_type.eql? "SynodDesignation"
-          =render partial: 'synod_designations/edit', locals:{synod_designation: SynodDesignation.find(agreement.agreeable_id)}
-        -elsif agreement.agreeable_type.eql? "NewAdmission"
-          =render partial: 'new_admissions/edit', locals:{new_admission: NewAdmission.find(agreement.agreeable_id)}
+    #agreement-body
 
-  .fixed-action-btn
-    %a.btn-floating.btn-large.red.tooltipped{href:'#agreement_types', "data-position"=>'left', "data-delay"=>"50", "data-tooltip"=>"Nuevo acuerdo"}
-      %i.fa.fa-plus{"aria-hidden" => "true"}
+.fixed-action-btn
+  %a.btn-floating.btn-large.red.tooltipped{href:'#agreement_types', "data-position"=>'left', "data-delay"=>"50", "data-tooltip"=>"Nuevo acuerdo"}
+    %i.fa.fa-plus{"aria-hidden" => "true"}
 
 /opciones
 #agreement_types.modal
@@ -39,12 +30,3 @@
     .collection
       %a.collection-item.modal-close{:href => "#modal_synodal_designation"} Designación de sinodales
       %a.collection-item.active.modal-close{:href => "#modal_new_admission"} Nuevo ingreso
-
-#modal_synodal_designation.modal
-  .modal-content
-    =render partial: 'synod_designations/new', locals:{meeting:@meeting, synod_designation: SynodDesignation.new}
-
-#modal_new_admission.modal
-  .modal-content
-    =render partial: 'new_admissions/new', locals:{meeting:@meeting, new_admission: NewAdmission.new}
-

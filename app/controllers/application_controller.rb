@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+
   def authenticated?
     if session[:user_auth].blank?
       logger.info "############### |#{session[:user_email]}|"

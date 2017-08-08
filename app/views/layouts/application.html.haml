@@ -30,6 +30,5 @@
         %li
           %a{href: "/logout"} Cerrar Sesión
 
-    -if flash
-      =render partial: 'layouts/flash_message', flash: flash
+
     = yield

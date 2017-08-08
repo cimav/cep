@@ -1,11 +1,11 @@
-= form_for synod_designation,class:'form_agreement alertas' do |f|
+= form_for agreeable, html:{ remote: true, class:'alertas'} do |f|
   .row.input-field
 
     %label.active{:for => "description"} Descripción
-    =text_field_tag :description, synod_designation.agreement.description
+    =text_field_tag :description, agreeable.agreement.description
   .row.input-field
-    %label.active{:for => "stdent_id"} Sinodal 1
-    =f.collection_select :student_id, Student.all, :id, :full_name,prompt: true
+    %label.active{:for => "student_id"} Estudiante
+    =f.collection_select :student_id, @students, :id, :full_name,prompt: true
   .row
     .col.l1
     .col.l11
@@ -15,16 +15,17 @@
         =f.collection_select :synodal1, @staffs, :id, :full_name,prompt: true
       .row.input-field
         %label.active{:for => "synodal2"} Sinodal 2
-        =f.collection_select :synodal2,  Staff.all, :id, :full_name,prompt: true
+        =f.collection_select :synodal2,  @staffs, :id, :full_name,prompt: true
       .row.input-field
         %label.active{:for => "synodal"} Sinodal 3
-        =f.collection_select 'synodal3', Staff.all, :id, :full_name,prompt: true
+        =f.collection_select 'synodal3', @staffs, :id, :full_name,prompt: true
       .row.input-field
         %label.active{:for => "synodal4"} Sinodal 4
-        =f.collection_select 'synodal4',  Staff.all, :id, :full_name,prompt: true
+        =f.collection_select 'synodal4',  @staffs, :id, :full_name,prompt: true
       .row.input-field
         %label.active{:for => "synodal5"} Sinodal 5
-        =f.collection_select 'synodal5',  Staff.all, :id, :full_name,prompt: true
+        =f.collection_select 'synodal5',  @staffs, :id, :full_name,prompt: true
 
   .row
-    =f.submit 'listo',class:'btn'
+    =f.submit 'listo',class:'btn '
+

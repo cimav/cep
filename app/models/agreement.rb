@@ -3,13 +3,14 @@ class Agreement < ApplicationRecord
   has_many :agreement_file
   belongs_to :agreeable, polymorphic: true
 
-  SYNOD_DESINGATION = 1
-  NEW_STUDENT =2
-
-  TYPES = {SYNOD_DESINGATION => 'Asignación de sinodal', NEW_STUDENT => 'Nuevo ingreso'}
 
   def get_type
-    TYPES[self.agreeable_type]
+    case self.agreeable_type
+      when "NewAdmission"
+        "Nuevo ingreso"
+      when "SynodDesignation"
+        "Designación de sinodales"
+    end
   end
 
 end
