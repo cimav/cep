@@ -6,6 +6,8 @@
   =@meeting.id
 %br
 .row
+
+
   .col.l2
     %h5.center Acuerdos
     .collection
@@ -16,8 +18,20 @@
 
 
   .col.l10
+
     %h5.center Info del acuerdo
+    #preloader-agreement.center
+      .preloader-wrapper.big.active
+        .spinner-layer.spinner-blue-only
+          .circle-clipper.left
+            .circle
+          .gap-patch
+            .circle
+          .circle-clipper.right
+            .circle
     #agreement-body
+
+
 
 .fixed-action-btn
   %a.btn-floating.btn-large.red.tooltipped{href:'#agreement_types', "data-position"=>'left', "data-delay"=>"50", "data-tooltip"=>"Nuevo acuerdo"}
@@ -28,5 +42,18 @@
   .modal-content
 
     .collection
-      %a.collection-item.modal-close{:href => "#modal_synodal_designation"} Designación de sinodales
-      %a.collection-item.active.modal-close{:href => "#modal_new_admission"} Nuevo ingreso
+      =link_to 'Designación de sinodales', "/meetings/#{@meeting.id}/synod_designations/new", remote:true, class:'collection-item modal-close agreement-new'
+      =link_to 'Nuevo ingreso', "/meetings/#{@meeting.id}/new_admissions/new", remote:true, class:'collection-item modal-close agreement-new'
+
+/Nuevo acuerdo
+#agreement_new.modal
+  #preloader-new-agreement.preloader-wrapper.big.active
+    .spinner-layer.spinner-blue-only
+      .circle-clipper.left
+        .circle
+      .gap-patch
+        .circle
+      .circle-clipper.right
+        .circle
+  .modal-content
+

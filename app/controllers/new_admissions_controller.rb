@@ -41,6 +41,13 @@ class NewAdmissionsController < ApplicationController
     end
   end
 
+  def new
+    @meeting_id = params[:meeting_id]
+    @new_admission = NewAdmission.new
+    @students = Student.select("MAX(id) as id,first_name,last_name").where(:status=>[1,2,3,5,6]).group("first_name, last_name").order("first_name")
+    render layout:false
+  end
+
 
 
   private
