@@ -7,7 +7,7 @@ $(document)
     })
 
     .on('ajax:success', '.agreement-item', function (evt, data, status, xhr) {
-        $('#agreement-body').html(data)
+        $('#agreement-body').html(data);
     })
 
     .on('ajax:error', '.agreement-item', function (evt, data, status, xhr) {

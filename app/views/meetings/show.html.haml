@@ -44,6 +44,7 @@
     .collection
       =link_to 'Designación de sinodales', "/meetings/#{@meeting.id}/synod_designations/new", remote:true, class:'collection-item modal-close agreement-new'
       =link_to 'Nuevo ingreso', "/meetings/#{@meeting.id}/new_admissions/new", remote:true, class:'collection-item modal-close agreement-new'
+      =link_to 'Examen profesional', "/meetings/#{@meeting.id}/professional_exams/new", remote:true, class:'collection-item modal-close agreement-new'
 
 /Nuevo acuerdo
 #agreement_new.modal

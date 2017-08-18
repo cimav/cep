@@ -11,13 +11,18 @@ Rails.application.routes.draw do
   get '/meetings/:meeting_id/agreements/:agreement_id' => 'agreements#edit'
   get '/meetings/:meeting_id/synod_designations/new' => 'synod_designations#new'
   get '/meetings/:meeting_id/new_admissions/new' => 'new_admissions#new'
+  get '/meetings/:meeting_id/professional_exams/new' => 'professional_exams#new'
+
   post '/meetings/:meeting_id/synod_designations' => 'synod_designations#create'
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'
+  post '/meetings/:meeting_id/professional_exams' => 'professional_exams#create'
 
   resources 'users'
   resources 'meetings'
-  resources 'synod_designations', :except => [:new, :create]
-  resources 'new_admissions', :except => [:new, :create]
+  resources 'agreements', :only => [:show]
+  resources 'synod_designations', :except => [:new, :create, :show]
+  resources 'new_admissions', :except => [:new, :create, :show]
+  resources 'professional_exams', :except => [:new, :create, :show]
 
 
 end

@@ -6,3 +6,6 @@
     =render partial:'synod_designation/show', locals:{synod_designation: @agreement.agreeable}
   -elsif @agreement.agreeable_type.eql? "NewAdmission"
     =render partial:'new_admissions/show', locals:{new_admission: @agreement.agreeable}
+  -elsif @agreement.agreeable_type.eql? "ProfessionalExam"
+    =render partial:'professional_exams/show', locals:{new_admission: @agreement.agreeable}
+

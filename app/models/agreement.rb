@@ -10,6 +10,8 @@ class Agreement < ApplicationRecord
         "Nuevo ingreso"
       when "SynodDesignation"
         "Designación de sinodales"
+      when "ProfessionalExam"
+        "Examen profesional"
     end
   end
 

@@ -1,0 +1,27 @@
+= form_for agreeable,html:{remote:true, class:'alertas'} do |f|
+  .row.input-field
+
+    %label.active{:for => "description"} Descripción
+    =text_field_tag :description, agreeable.agreement.description
+  .row.input-field
+    %label.active{:for => "student_id"} Estudiante
+    =f.collection_select :student_id, @students, :id, :full_name,prompt: true
+
+  .row
+    -if !agreeable.exam_date.nil?
+      -datetime = agreeable.exam_date
+    -else
+      =label_tag :date, 'Seleccione fecha para examen', class:'active red-text'
+      -datetime = '0000-01-01 00:00:00'
+    -date = datetime.to_s.split(" ")[0].to_date.strftime("%d %B, %Y")
+    -time = datetime.to_s.split(" ")[1].to_time.strftime('%l:%M%P')
+    .input-field.col.s3
+      =text_field_tag :date,date, class: "datepicker"
+      =label_tag :date, 'Fecha', class:'active'
+
+    .input-field.col.s3
+      =text_field_tag :time,time, class: "timepicker", type:'time', id:'exam_time'
+      =label_tag :exam_time, 'Hora', class:'active'
+
+  .row
+    =f.submit 'listo',class:'btn'

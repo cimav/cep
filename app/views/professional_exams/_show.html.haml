@@ -35,7 +35,7 @@
         .card-title
           -if new_admission.student.gender.eql? 'F'
             %i.fa.fa-venus{"aria-hidden" => "true"}
-          -elsif new_admission.student.gender.eql? 'M'
+          -else new_admission.student.gender.eql? 'M'
             %i.fa.fa-mars{"aria-hidden" => "true"}
           =new_admission.student.full_name
         %p
