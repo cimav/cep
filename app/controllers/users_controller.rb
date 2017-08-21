@@ -30,6 +30,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    response = {}
+    respond_to do |format|
+      if is_admin?
+        user = User.find(params[:id])
+        if user.update(user_params)
+          response[:message]  = "Se actualizó al usuario: #{user.name}"
+          redirect_to users_path
+        else
+          response[:message] = "Error al actualizar usuario"
+          render :edit
+        end
+      else
+        response[:message] = "Sólo el administrador puede realizar esta acción"
+      end
+      format.json {render json:response}
+    end
+  end
+
   private
 
   def user_params

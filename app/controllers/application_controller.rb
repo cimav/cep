@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def is_admin
+  def is_admin?
     current_user.user_type == User::ADMIN
   end
 
@@ -36,7 +36,8 @@ class ApplicationController < ActionController::Base
     name = months[number - 1]
     return name
   end
+
   helper_method :current_user
   helper_method :get_month_name
-  helper_method :is_admin
+  helper_method :is_admin?
 end
