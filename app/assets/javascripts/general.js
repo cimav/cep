@@ -44,7 +44,6 @@ $(document).ready(function(){
     $('select').material_select();
     $('.modal').modal();
 
-    $(".alertas").delay(4000).fadeOut();
 
 
 });

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post '/meetings/:meeting_id/synod_designations' => 'synod_designations#create'
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'
   post '/meetings/:meeting_id/professional_exams' => 'professional_exams#create'
+  post '/agreements/:id/send_response' => 'agreements#send_response'
 
   resources 'users'
   resources 'meetings'

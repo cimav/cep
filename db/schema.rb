@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815204408) do
+ActiveRecord::Schema.define(version: 20170818213053) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20170815204408) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "user_type"
+    t.integer  "user_type"
     t.integer  "staff_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

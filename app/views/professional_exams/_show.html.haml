@@ -28,37 +28,47 @@
                   %i.fa.fa-check{"aria-hidden" => "true"}
                 %td
                   Me parece muy bien ;)
+        .card-action
+          %h4
+            Enviar respuesta
+          =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas'} do |f|
+            =f.text_field :comment
+            =f.submit 'Enviar', class:'btn'
   .col.l3
     .card.blue.white-text
       .card-content
 
         .card-title
-          -if new_admission.student.gender.eql? 'F'
+          -if professional_exam.student.gender.eql? 'F'
             %i.fa.fa-venus{"aria-hidden" => "true"}
-          -else new_admission.student.gender.eql? 'M'
+          -else professional_exam.student.gender.eql? 'M'
             %i.fa.fa-mars{"aria-hidden" => "true"}
-          =new_admission.student.full_name
+          =professional_exam.student.full_name
         %p
           %b
             Matrícula
-          =new_admission.student.card
+          =professional_exam.student.card
           %br
           %b
             Programa:
-          =new_admission.student.program.name
+          =professional_exam.student.program.name
           %br
           %b
             Estatus:
-          =new_admission.student.get_status
+          =professional_exam.student.get_status
           %br
           %b
             Campus
-          =new_admission.student.campus.name
+          =professional_exam.student.campus.name
           %br
           %b
             Fecha de inicio:
-          =new_admission.student.start_date
+          =professional_exam.student.start_date
       .card-action
         %a.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante"}
           %i.fa.fa-book{"aria-hidden"=>true}
-
+    .card.amber.darken-3.white-text
+      .card-content
+        .card-title
+          Fecha de examen:
+          =professional_exam.exam_date.strftime("%d %B, %Y")

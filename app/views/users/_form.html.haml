@@ -1,0 +1,11 @@
+=form_for @user, html:{remote:true, class:'alertas'} do |f|
+
+  .row.input-field
+    =f.text_field :name, class:'validate'
+    =f.label :name, 'Nombre Completo'
+  .row.input-field
+    =f.text_field :email, type:'email', class:'validate'
+    =f.label :email, 'email', "data-error"=>"Introduce un email válido", "data-success"=>"Correcto"
+  .row.input-field
+    =f.select :user_type, [['Administrador', User::ADMIN],['Miembro del CEP', User::CEP]]
+    =f.label :user_type, 'Tipo de usuario'

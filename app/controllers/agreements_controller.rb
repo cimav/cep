@@ -1,10 +1,12 @@
 class AgreementsController < ApplicationController
+
   def index
     @agreements = Agreement.all
   end
 
   def show
     @agreement = Agreement.find(params[:id])
+    @response = Response.new
   end
 
   def new
@@ -73,6 +75,30 @@ class AgreementsController < ApplicationController
       flash[:error] = "No se pudo actualizar"
       flash[:error] = agreement.errors.full_messages[0]
       redirect_to agreement.meeting
+    end
+
+  end
+
+  def send_response
+    agreement = Agreement.find(params[:id])
+    if agreement.status == Agreement::OPEN
+      user_response = Response.new
+      user_response.agreement_id = agreement.id
+      user_response.user_id = current_user.id
+      user_response.comment = params[:response][:comment]
+      user_response.answer = params[:response][:answer]
+
+      response = {}
+      respond_to do |format|
+
+        if user_response.save
+          response[:message] = 'Respuesta enviada'
+        else
+          response[:message] = 'Error al enviar respuesta'
+        end
+        response[:object] = user_response
+        format.json {render json: response}
+      end
     end
 
   end
