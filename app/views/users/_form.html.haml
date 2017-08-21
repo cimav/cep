@@ -9,3 +9,5 @@
   .row.input-field
     =f.select :user_type, [['Administrador', User::ADMIN],['Miembro del CEP', User::CEP]]
     =f.label :user_type, 'Tipo de usuario'
+  .row
+    =f.submit 'Guardar', class:'btn'
