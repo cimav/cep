@@ -28,12 +28,20 @@
                   %i.fa.fa-check{"aria-hidden" => "true"}
                 %td
                   Me parece muy bien ;)
-        .card-action
-          %h4
+      .card
+        .card-content
+          .card-title
             Enviar respuesta
-          =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas'} do |f|
-            =f.text_field :comment
-            =f.submit 'Enviar', class:'btn'
+          =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas redirect'} do |f|
+            .row
+              .col.l4.input-field
+                =f.select :answer, [['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]
+                =f.label :answer, 'Respuesta'
+              .col.l4.input-field
+                =f.text_field :comment
+                =f.label :comment, 'Comentarios', class:'active'
+              .col.l4.input-field.center
+                =f.submit 'Enviar', class:'btn brown'
   .col.l3
     .card.blue.white-text
       .card-content

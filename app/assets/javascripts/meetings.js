@@ -43,6 +43,12 @@ $(document)
         Materialize.toast(data.message, 4000)
         // se puede acceder al objeto  por ejemplo data.object.id
     })
+
+    .on("ajax:success","form.redirect", function(ev,data){
+        sleep(2000);
+        window.location.replace(data.redirect_url);
+        // Se direcciona a la url solicitada despues de 2 segundos
+    })
 ;
 
 

@@ -93,6 +93,7 @@ class AgreementsController < ApplicationController
 
         if user_response.save
           response[:message] = 'Respuesta enviada'
+          response[:redirect_url] = "/agreements/#{agreement.id}"
         else
           response[:message] = 'Error al enviar respuesta'
         end
