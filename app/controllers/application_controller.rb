@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin?
-    current_user.user_type == User::ADMIN
+    current_user.user_type == User::ADMIN || current_user.user_type == User::SUPER_USER
   end
 
   def get_month_name(number)

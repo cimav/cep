@@ -37,7 +37,6 @@ class UsersController < ApplicationController
         user = User.find(params[:id])
         if user.update(user_params)
           response[:message]  = "Se actualizó al usuario: #{user.name}"
-          redirect_to users_path
         else
           response[:message] = "Error al actualizar usuario"
           render :edit

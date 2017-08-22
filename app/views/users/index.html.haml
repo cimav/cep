@@ -12,9 +12,9 @@
         Miembros del CEP
       .collection
         -@ceps.each do |user|
-          =link_to user, class:'collection-item' do
+          =link_to edit_user_path(user.id), class:'collection-item' do
             =user.name
 
 .fixed-action-btn
-  %a.btn-floating.btn-large.red.tooltipped{href:'/users/new',"data-position" => "left", "data-tooltip" => "Nuevo usuario", "data-delay" => "50"}
+  %a.btn-floating.btn-large.red.tooltipped{href:'/users/new',"data-position" => "left", "data-tooltip" => "Nuevo usuario", "data-delay" => "100"}
     %i.fa.fa-plus{"aria-hidden" => "true"}
