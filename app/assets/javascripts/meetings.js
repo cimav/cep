@@ -40,15 +40,16 @@ $(document)
 
 //-------------función genérica para mostrar alertas
     .on("ajax:success","form.alertas", function(ev,data){
-        Materialize.toast(data.message, 4000)
+        Materialize.toast(data.message, 3000, "",function(){
+            if($("form.alertas").hasClass('redirect')){
+                // Si la forma tiene la clase 'redirect', se redirecciona al acabar el toast
+                window.location.replace(data.redirect_url);
+                }
+                }
+            );
         // se puede acceder al objeto  por ejemplo data.object.id
     })
 
-    .on("ajax:success","form.redirect", function(ev,data){
-        sleep(2000);
-        window.location.replace(data.redirect_url);
-        // Se direcciona a la url solicitada despues de 2 segundos
-    })
 ;
 
 
