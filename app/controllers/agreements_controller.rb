@@ -7,6 +7,7 @@ class AgreementsController < ApplicationController
   def show
     @agreement = Agreement.find(params[:id])
     @response = Response.new
+    @ceps = User.where(user_type:User::CEP)
   end
 
   def new

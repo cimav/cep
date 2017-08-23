@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170821213958) do
+ActiveRecord::Schema.define(version: 20170823175148) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20170821213958) do
     t.integer  "agreement_id"
     t.integer  "user_id"
     t.string   "comment"
-    t.string   "answer"
+    t.integer  "answer"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["agreement_id"], name: "index_responses_on_agreement_id", using: :btree

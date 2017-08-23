@@ -19,15 +19,28 @@
                 %th Voto
                 %th Comentarios
             %tbody
-              %tr
-                %td
-                  =image_tag "http://cimav.edu.mx/foto/teresa.mariscal/50", class:'circle responsive-img', alt:'*'
-                %td
-                  Teresa Mariscal
-                %td
-                  %i.fa.fa-check{"aria-hidden" => "true"}
-                %td
-                  Me parece muy bien ;)
+              -@ceps.each do |member|
+                %tr
+                  %td
+                    =image_tag "http://cimav.edu.mx/foto/#{member.email[/[^@]+/]}/50", class:'circle responsive-img', alt:'*'
+                  %td
+                    =member.name
+                  %td
+                    -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
+                    -if response.size > 0
+                      -if response.first.answer.eql? Response::ACCEPTED
+                        %i.fa.fa-check{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Aceptar"}
+                      -if response.first.answer.eql? Response::REJECTED
+                        %i.fa.fa-times{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
+                      -if response.first.answer.eql? Response::TO_COMMITTEE
+                        %i.fa.fa-exclamation-circle.tooltipped.orange-text.text-darken-4{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
+                    -else
+                      = "---"
+                  %td
+                    -if response.size >0
+                      =response.first.comment
+                    -else
+                      = "---"
       .card
         .card-content
           .card-title
