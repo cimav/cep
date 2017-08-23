@@ -35,7 +35,7 @@
           =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas redirect'} do |f|
             .row
               .col.l4.input-field
-                =f.select :answer, [['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]
+                =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --'}, {required:true}
                 =f.label :answer, 'Respuesta'
               .col.l4.input-field
                 =f.text_field :comment

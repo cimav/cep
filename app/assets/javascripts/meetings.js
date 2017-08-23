@@ -25,7 +25,7 @@ $(document)
 
     .on('ajax:beforeSend', '.agreement-new', function (evt, data, status, xhr) {
         $('#agreement_new .modal-content').html('');
-        $('#preloader-new-agreement').show();;
+        $('#preloader-new-agreement').show();
         $('#agreement_new').modal('open');
     })
 
@@ -40,13 +40,7 @@ $(document)
 
 //-------------función genérica para mostrar alertas
     .on("ajax:success","form.alertas", function(ev,data){
-        Materialize.toast(data.message, 3000, "",function(){
-            if($("form.alertas").hasClass('redirect')){
-                // Si la forma tiene la clase 'redirect', se redirecciona al acabar el toast
-                window.location.replace(data.redirect_url);
-                }
-                }
-            );
+        Materialize.toast(data.message, 4000);
         // se puede acceder al objeto  por ejemplo data.object.id
     })
 
