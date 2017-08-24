@@ -33,7 +33,7 @@
                       -if response.first.answer.eql? Response::REJECTED
                         %i.fa.fa-times{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
                       -if response.first.answer.eql? Response::TO_COMMITTEE
-                        %i.fa.fa-exclamation-circle.tooltipped.orange-text.text-darken-4{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
+                        %i.fa.fa-exclamation-circle.tooltipped.red-text.text-darken-2{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
                     -else
                       = "---"
                   %td
@@ -41,20 +41,23 @@
                       =response.first.comment
                     -else
                       = "---"
-      .card
-        .card-content
-          .card-title
-            Enviar respuesta
-          =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas redirect'} do |f|
-            .row
-              .col.l4.input-field
-                =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --'}, {required:true}
-                =f.label :answer, 'Respuesta'
-              .col.l4.input-field
-                =f.text_field :comment
-                =f.label :comment, 'Comentarios', class:'active'
-              .col.l4.input-field.center
-                =f.submit 'Enviar', class:'btn brown'
+      -if current_user.user_type == User::CEP
+        -if @agreement.status == Agreement::OPEN
+          -if Response.where(:user_id => current_user.id).where(:agreement_id => @agreement.id).size == 0
+            .card
+              .card-content
+                .card-title
+                  Enviar respuesta
+                =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas redirect'} do |f|
+                  .row
+                    .col.l4.input-field
+                      =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --'}, {required:true}
+                      =f.label :answer, 'Respuesta'
+                    .col.l4.input-field
+                      =f.text_field :comment
+                      =f.label :comment, 'Comentarios', class:'active'
+                    .col.l4.input-field.center
+                      =f.submit 'Enviar', class:'btn brown'
   .col.l3
     .card.blue.white-text
       .card-content
