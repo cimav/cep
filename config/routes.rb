@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources 'users'
   resources 'meetings'
-  resources 'agreements', :only => [:show]
+  resources 'agreements', :only => [:show,:index]
   resources 'synod_designations', :except => [:new, :create, :show]
   resources 'new_admissions', :except => [:new, :create, :show]
   resources 'professional_exams', :except => [:new, :create, :show]

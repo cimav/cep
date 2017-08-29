@@ -11,24 +11,24 @@
 
 
   %body
-    %header
-      .navbar-fixed
-        %nav
-          .nav-wrapper
-            %a.brand-logo.center{:href => "/"} CEP
-            %a.button-collapse.show-on-large{"data-activates" => "side-menu", :href => "#"}
-              %i.fa.fa-bars.fa-2x{"aria-hidden" => "true"}
-      %ul#side-menu.side-nav
-        %li
-          .center
-            =image_tag "http://cimav.edu.mx/foto/teresa.mariscal/200", class:'circle img-responsive', alt:'*'
-        %li
-          %a{href: "/meetings"} Sesiones
-        %li
-          %a{href: "/users"} Usuarios
-        .divider
-        %li
-          %a{href: "/logout"} Cerrar Sesión
+    %ul#side-menu.side-nav.fixed
+      %li
+        .center
+          =image_tag "http://cimav.edu.mx/foto/teresa.mariscal/200", class:'circle img-responsive', alt:'*'
+      %li
+        %a{href: "/meetings"} Sesiones
+      %li
+        %a{href: "/users"} Usuarios
+      .divider
+      %li
+        %a{href: "/logout"} Cerrar Sesión
+    .main
+      %header
+        .navbar-fixed
+          %nav
+            .nav-wrapper
+              %a.brand-logo{:href => "/"} CEP
 
 
-    = yield
+      = yield
+

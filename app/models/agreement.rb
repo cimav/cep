@@ -21,11 +21,11 @@ class Agreement < ApplicationRecord
   end
 
   def get_status
-    STATUS [self.status]
+    STATUS[self.status]
   end
 
   def get_decision
-    DECISIONS [self.decision]
+    DECISIONS[self.decision]
   end
 
   def get_type

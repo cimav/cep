@@ -1,6 +1,18 @@
-
-%h1.center
-  =@agreement.get_type
+.container
+  .row
+    %h1.center
+      =@agreement.get_type
+      .chip.amber
+        ="Acuerdo #{@agreement.get_status}"
+      -if @agreement.decision
+        -color = 'green'
+        -case @agreement.decision
+          -when Agreement::ACCEPTED
+            -color = 'green'
+          -when Agreement::REJECTED
+            -color = 'orange'
+        .chip{class:color}
+          ="#{@agreement.get_decision}"
 .row
   -if @agreement.agreeable_type.eql? "SynodDesignation"
     =render partial:'synod_designation/show', locals:{synod_designation: @agreement.agreeable}

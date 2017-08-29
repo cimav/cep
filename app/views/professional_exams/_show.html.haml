@@ -1,11 +1,7 @@
 
 .row
   .col.l9
-    .card
-      .card-content
-        .card-title
-          Descripción
-        =@agreement.description
+
     .row
       .card
         .card-content
@@ -59,6 +55,15 @@
                     .col.l4.input-field.center
                       =f.submit 'Enviar', class:'btn brown'
   .col.l3
+    .card.brown.lighten-1.white-text
+
+      .card-content
+        .card-title
+          =@agreement.get_type
+        Descripción:
+        %p
+          =@agreement.description
+
     .card.blue.white-text
       .card-content
 
