@@ -17,6 +17,20 @@ $navbar-color: #262626;
 .picker__date-display{
   background-color: #212121 !important;
 }
-.main, footer {
+header, main, footer {
   padding-left: 300px;
+}
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+.avatar {
+  display: inline-block;
+  height: 100%;
+}
+
+.avatar img {
+  vertical-align: middle
 }
