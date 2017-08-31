@@ -8,6 +8,7 @@ class AgreementsController < ApplicationController
     @agreement = Agreement.find(params[:id])
     @response = Response.new
     @ceps = User.where(user_type:User::CEP)
+    render layout:false
   end
 
   def new

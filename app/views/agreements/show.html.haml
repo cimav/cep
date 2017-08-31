@@ -3,7 +3,10 @@
     %h1.center
       =@agreement.get_type
       .chip.amber
-        ="Acuerdo #{@agreement.get_status}"
+        -if @agreement.status.eql? Agreement::OPEN
+          %i.fa.fa-lock{"aria-hidden"=>true}
+        -else
+          %i.fa.fa-unlock{"aria-hidden"=>true}
       -if @agreement.decision
         -color = 'green'
         -case @agreement.decision
@@ -15,8 +18,12 @@
           ="#{@agreement.get_decision}"
 .row
   -if @agreement.agreeable_type.eql? "SynodDesignation"
-    =render partial:'synod_designation/show', locals:{synod_designation: @agreement.agreeable}
+    =render partial:'synod_designations/show', locals:{synod_designation: @agreement.agreeable}
   -elsif @agreement.agreeable_type.eql? "NewAdmission"
     =render partial:'new_admissions/show', locals:{new_admission: @agreement.agreeable}
   -elsif @agreement.agreeable_type.eql? "ProfessionalExam"
     =render partial:'professional_exams/show', locals:{professional_exam: @agreement.agreeable}
+
+:javascript
+  $('select').material_select();
+  $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});

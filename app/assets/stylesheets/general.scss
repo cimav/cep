@@ -1,11 +1,39 @@
-$navbar-color: #262626;
+
+$color-menu: #222B37;
+.side-nav{
+}
 #side-menu{
-  img{
-    margin-top: 20px;
+  background-color: $color-menu;
+
+  li{
+    background-color: $color-menu;
+    color: white;
+
   }
+  a {
+    color: white;
+    font-weight: inherit;
+  }
+  li:hover, li.active{
+      //background-color: #eb5456;
+      border-left: 2px solid red;
+
+    li:hover, li.active{
+      //background-color: #20AAEA;
+      border-left: 2px solid #20AAEA;
+
+      li:hover, li.active{
+        background-color: #20AAEA;
+        //border-left: 2px solid darkgray;
+      }
+    }
+
+  }
+
 }
 .nav-wrapper{
-  background-color: $navbar-color;
+  background-color: white;
+
 }
 
 
@@ -18,7 +46,7 @@ $navbar-color: #262626;
   background-color: #212121 !important;
 }
 header, main, footer {
-  padding-left: 300px;
+  padding-left: 240px;
 }
 @media only screen and (max-width : 992px) {
   header, main, footer {

@@ -19,30 +19,61 @@
         %a{:href => "#!"} Ayuda
       %li.divider
       %li
-        %a{:href => "#!"} Cerrar sesión
+        %a{:href => "/logout"} Cerrar sesión
     %header
 
       %nav
         .nav-wrapper
-          .container
-            %a.brand-logo.center{:href => "/"} CEP
           %ul.right
             %li
               %a.avatar.dropdown-button{"data-activates" => "dropdownUser"}
                 =image_tag "http://cimav.edu.mx/foto/teresa.mariscal/50", class:'circle img-responsive', alt:'picture'
           %a.button-collapse.top-nav.full.hide-on-large-only{"data-activates" => "side-menu", :href => "#"}
-            %i.fa.fa-bars.fa-2x{"aria-hidden" => "true"}
+            %i.fa.fa-bars.fa-2x.black-text{"aria-hidden" => "true"}
       %ul#side-menu.side-nav.fixed
-        %li
+        %ul
           .center
-            =image_tag "http://cimav.edu.mx/foto/teresa.mariscal/200", class:'circle img-responsive', alt:'*'
-        %li
-          %a{href: "/meetings"} Sesiones
-        %li
-          %a{href: "/users"} Usuarios
+            %h1.white-text
+              CEP
+          %ul.collapsible.waves-effect
+            %li
+              .collapsible-header
+                %a
+                  Sesiones
+              .collapsible-body
+                %ul.collapsible
+                  -Meeting.all.each do |meeting|
+                    %li
+                      .collapsible-header
+                        %a
+
+                          =meeting.date.strftime("%B")
+                      .collapsible-body
+                        %ul.agreement-list
+                          -meeting.agreement.each do |agreement|
+                            %li
+                              =link_to agreement.get_type, agreement, remote:true, class:'ajax-item'
+
+          %li
+            %a{href: "/users", style:'left-padding: 16px; padding-left: 16px;'} Usuarios
 
 
 
     %main
-      = yield
+      #main-content
+        = yield
+      %br
+      %br
+      %br
+      %br
+      %br
+      #preloader-agreement.center
+        .preloader-wrapper.big.active
+          .spinner-layer.spinner-blue-only
+            .circle-clipper.left
+              .circle
+            .gap-patch
+              .circle
+            .circle-clipper.right
+              .circle
 

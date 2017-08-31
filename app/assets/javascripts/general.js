@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $(".button-collapse").sideNav({
-        menuWidth: 300, // Default is 300
+        menuWidth: 240, // Default is 300
         edge: 'left', // Choose the horizontal origin
         closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
         draggable: true, // Choose whether you can drag to open on touch screens,
@@ -63,6 +63,35 @@ $(document).ready(function(){
             stopPropagation: false // Stops event propagation
         }
     );
+    $('.collapsible').collapsible();
 
 
 });
+
+function setHash(hash) {
+    window.location.hash = hash
+}
+
+$(document)
+
+    .on('ajax:send', '.ajax-item', function (evt, data, status, xhr) {
+        $('#main-content').html('')
+        $('#preloader-agreement').show();
+    })
+
+    .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {
+        $('#main-content').html(data);
+        $(".agreement-list li").removeClass("active");
+        setHash('holiiii');
+        $(this).parent().addClass("active");
+    })
+
+    .on('ajax:error', '.ajax-item', function (evt, data, status, xhr) {
+        Materialize.toast("Error al cargar acuerdo", 4000)
+    })
+
+    .on('ajax:complete', '.ajax-item', function (evt, data, status, xhr) {
+        $('#preloader-agreement').hide();
+    })
+
+;

@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   def index
 
     if is_admin?
-      redirect_to meetings_path
+      render template: 'home/cep_index'
     else
       @agreements = Agreement.where(status: Agreement::OPEN)
       render template: 'home/cep_index'
