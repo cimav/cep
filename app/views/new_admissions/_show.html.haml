@@ -33,31 +33,31 @@
       .card-content
 
         .card-title
-          -if new_admission.student.gender.eql? 'F'
+          -if agreeable.student.gender.eql? 'F'
             %i.fa.fa-venus{"aria-hidden" => "true"}
-          -elsif new_admission.student.gender.eql? 'M'
+          -elsif agreeable.student.gender.eql? 'M'
             %i.fa.fa-mars{"aria-hidden" => "true"}
-          =new_admission.student.full_name
+          =agreeable.student.full_name
         %p
           %b
             Matrícula
-          =new_admission.student.card
+          =agreeable.student.card
           %br
           %b
             Programa:
-          =new_admission.student.program.name
+          =agreeable.student.program.name
           %br
           %b
             Estatus:
-          =new_admission.student.get_status
+          =agreeable.student.get_status
           %br
           %b
             Campus
-          =new_admission.student.campus.name
+          =agreeable.student.campus.name
           %br
           %b
             Fecha de inicio:
-          =new_admission.student.start_date
+          =agreeable.student.start_date
       .card-action
         %a.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante"}
           %i.fa.fa-book{"aria-hidden"=>true}

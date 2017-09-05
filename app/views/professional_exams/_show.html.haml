@@ -68,31 +68,31 @@
       .card-content
 
         .card-title
-          -if professional_exam.student.gender.eql? 'F'
+          -if agreeable.student.gender.eql? 'F'
             %i.fa.fa-venus{"aria-hidden" => "true"}
-          -else professional_exam.student.gender.eql? 'M'
+          -else agreeable.student.gender.eql? 'M'
             %i.fa.fa-mars{"aria-hidden" => "true"}
-          =professional_exam.student.full_name
+          =agreeable.student.full_name
         %p
           %b
             Matrícula
-          =professional_exam.student.card
+          =agreeable.student.card
           %br
           %b
             Programa:
-          =professional_exam.student.program.name
+          =agreeable.student.program.name
           %br
           %b
             Estatus:
-          =professional_exam.student.get_status
+          =agreeable.student.get_status
           %br
           %b
             Campus
-          =professional_exam.student.campus.name
+          =agreeable.student.campus.name
           %br
           %b
             Fecha de inicio:
-          =professional_exam.student.start_date
+          =agreeable.student.start_date
       .card-action
         %a.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante"}
           %i.fa.fa-book{"aria-hidden"=>true}
@@ -100,4 +100,4 @@
       .card-content
         .card-title
           Fecha de examen:
-          =professional_exam.exam_date.strftime("%d %B, %Y")
+          =agreeable.exam_date.strftime("%d %B, %Y")

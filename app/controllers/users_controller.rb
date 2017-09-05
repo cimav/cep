@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def index
     @admins = User.where(user_type:User::ADMIN)
     @ceps = User.where(user_type:User::CEP)
+    render layout: false
   end
 
   def new
