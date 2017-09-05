@@ -32,9 +32,11 @@ class SynodDesignationsController < ApplicationController
       synod_designation.agreement.update(description:params[:description])
 
       response[:message] = 'Acuerdo actualizado'
-
+      response[:redirect_url] = "agreements/#{synod_designation.agreement.id}"
     else
       response[:message] = 'Error al actualizar acuerdo'
+      #Se redirige al mismo acuerdo
+      response[:redirect_url] = "meetings/#{synod_designation.agreement.meeting.id}/agreements/#{synod_designation.agreement.id}"
     end
     response[:object] = synod_designation
     format.json {render json: response}

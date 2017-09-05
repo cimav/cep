@@ -69,7 +69,7 @@ $(document).ready(function(){
 });
 
 function setHash(hash) {
-    window.location.hash = hash
+    window.location.hash = "#!"+hash
 }
 var actual_url = '';
 function checkHash() {
@@ -99,7 +99,7 @@ $(document)
     .on('ajax:success', '.menu-item', function (evt, data, status, xhr) {
         $('#main-content').html(data);
         $(".agreement-list li").removeClass("active");
-        setHash("#!"+$(this).attr("url"));
+        setHash($(this).attr("url"));
         $(this).parent().addClass("active");
 
     })
@@ -124,7 +124,7 @@ $(document)
     .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {
         $('#main-content').html(data);
         $(".agreement-list li").removeClass("active");
-        setHash("#!"+$(this).attr("url"));
+        setHash($(this).attr("url"));
         $(this).parent().addClass("active");
         $('#preloader-agreement').hide();
 

@@ -32,6 +32,9 @@ $(document)
 //-------------------------------------
     .on("ajax:success","form.alertas", function(ev,data){
         Materialize.toast(data.message, 4000);
+        if($(this).hasClass("redirect")){
+            setHash(data.redirect_url)
+        }
 
         // se puede acceder al objeto  por ejemplo data.object.id
     })
