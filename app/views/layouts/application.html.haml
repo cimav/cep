@@ -53,6 +53,10 @@
                           -meeting.agreement.each do |agreement|
                             %li
                               =link_to agreement.get_type, agreement, remote:true, class:'menu-item', url:agreement_url(agreement).gsub(request.base_url+'/', '')
+                  %li
+                    %a.ajax-item{href: "/meetings", "data-remote"=>"true", url:"meetings"}
+                      Opciones
+                      %i.fa.fa-ellipsis-v.white-text{"aria-hidden" => "true"}
 
           %li
             %a.ajax-item{href: "/users", style:'left-padding: 16px; padding-left: 16px;', "data-remote"=>"true", url:"users"} Usuarios

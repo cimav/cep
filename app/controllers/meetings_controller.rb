@@ -1,7 +1,7 @@
 class MeetingsController < ApplicationController
   def index
     @meetings = Meeting.all.order(date: :desc)
-
+    render layout: false
   end
 
   def show
@@ -11,11 +11,13 @@ class MeetingsController < ApplicationController
     @date = datetime.split(" ")[0].to_date.strftime("%d %B, %Y")
 
     @time = datetime.split(" ")[1].to_time.strftime('%l:%M%P') rescue "" #hora con formato 12H
+    render layout: false
 
   end
 
   def new
     @meeting = Meeting.new
+    render layout: false
   end
 
   def create
@@ -25,10 +27,17 @@ class MeetingsController < ApplicationController
 
     meeting = Meeting.new(data)
     meeting.status = Meeting::OPENED
-    if meeting.save
-      redirect_to meeting
-    else
-      render plain: 'No se pudo crear la reunión'
+    response = {}
+    respond_to do |format|
+      if meeting.save
+        response[:message] = 'Sesión actualizada'
+        response[:redirect_url] = "meetings/#{meeting.id}"
+      else
+        response[:message] = 'Error al crear sesión'
+        response[:redirect_url] = "meetings/new"
+      end
+      response[:object] = meeting
+      format.json {render json: response}
     end
   end
 
@@ -45,6 +54,25 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.find(params[:id])
   end
 
+  def update
+    meeting = Meeting.find(params[:id])
+    data = {}
+    data = meeting_params
+    data[:date] = get_datetime(params)
+    response = {}
+
+    respond_to do |format|
+      if meeting.update(data)
+        response[:message] = 'Sesión actualizada'
+        response[:redirect_url] = "agreements/#{meeting.agreement.id}"
+      else
+        response[:message] = 'Error al actualizar sesión'
+        response[:redirect_url] = "meetings/#{meeting.agreement.meeting.id}/agreements/#{meeting.agreement.id}"
+      end
+      response[:object] = meeting
+      format.json {render json: response}
+    end
+  end
 
 
   private

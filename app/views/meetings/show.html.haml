@@ -1,6 +1,3 @@
-%br
-%br
-%br
 %h1
   Sesión numero
   =@meeting.id
@@ -14,21 +11,13 @@
       -@meeting.agreement.each do |agreement|
 
 
-        =link_to agreement.description, "/meetings/#{@meeting.id}/agreements/#{agreement.id}",remote:true, class:'collection-item agreement-item'
+        =link_to agreement.description, "/meetings/#{@meeting.id}/agreements/#{agreement.id}",remote:true, class:'collection-item agreement-item', url:"meetings/#{@meeting.id}/agreements/#{agreement.id}"
 
 
   .col.l10
 
     %h5.center Info del acuerdo
-    #preloader-agreement.center
-      .preloader-wrapper.big.active
-        .spinner-layer.spinner-blue-only
-          .circle-clipper.left
-            .circle
-          .gap-patch
-            .circle
-          .circle-clipper.right
-            .circle
+
     #agreement-body
 
 
@@ -48,13 +37,5 @@
 
 /Nuevo acuerdo
 #agreement_new.modal
-  #preloader-new-agreement.preloader-wrapper.big.active
-    .spinner-layer.spinner-blue-only
-      .circle-clipper.left
-        .circle
-      .gap-patch
-        .circle
-      .circle-clipper.right
-        .circle
   .modal-content
 
