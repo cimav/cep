@@ -10,4 +10,8 @@ class HomeController < ApplicationController
       render template: 'home/cep_index'
     end
   end
+
+  def menu_items
+    render layout:false
+  end
 end

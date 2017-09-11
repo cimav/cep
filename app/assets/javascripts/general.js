@@ -79,7 +79,6 @@ function checkHash() {
         if (url != actual_url) {
             $.get(url, function (data, status) {
                 $('#main-content').html(data);
-                console.log()
             });
             actual_url = url
         }
@@ -138,3 +137,34 @@ $(document)
     })
 
 ;
+$(document)
+
+    .on('ajax:beforeSend', '.ajax-item', function (evt, data, status, xhr) {
+        $('#preloader-agreement').show();
+        $('.tooltipped').tooltip('remove');
+    })
+
+    .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {
+        $('#main-content').html(data);
+        $(".agreement-list li").removeClass("active");
+        setHash($(this).attr("url"));
+        $(this).parent().addClass("active");
+        $('#preloader-agreement').hide();
+
+
+    })
+
+    .on('ajax:error', '.ajax-item', function (evt, data, status, xhr) {
+        Materialize.toast("Error al cargar elemento", 4000)
+        $('#preloader-agreement').hide();
+
+    })
+
+;
+function refreshMenu() {
+
+    url = "/menu-items";
+    $.get(url, function (data, status) {
+        $('#menu-items').html(data);
+    });
+}

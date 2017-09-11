@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get 'login' => 'login#index'
   get '/auth/:provider/callback' => 'sessions#create'
   get '/auth/failure' => 'sessions#failure'
-  get 'logout' => 'sessions#destroy'
+  get '/logout' => 'sessions#destroy'
+  get '/menu-items' => 'home#menu_items'
 
   #agreements
   get '/meetings/:meeting_id/agreements/:agreement_id' => 'agreements#edit'
