@@ -35,31 +35,49 @@
           .center
             %h1.white-text
               CEP
-          %ul.collapsible.waves-effect
+          %li.no-padding
+            %ul.collapsible.collapsible-accordion
+              %li
+                .collapsible-header
+                  %a
+                    %span
+                      Sesiones
+                    %span.right
+                      %i.fa.fa-bank.white-text{"aria-hidden" => "true"}
+                .collapsible-body
+                  %ul.collapsible
+                    -Meeting.all.each do |meeting|
+                      %li
+                        .collapsible-header
+                          =meeting.date.strftime("%B")
+
+
+
+                        .collapsible-body
+                          %ul.agreement-list
+                            -meeting.agreement.each do |agreement|
+                              %li
+                                =link_to agreement.get_type, agreement, remote:true, class:'menu-item', url:agreement_url(agreement).gsub(request.base_url+'/', '')
+                            %li
+                              %a.menu-item{href:"/meetings/#{meeting.id}/new_agreement", url:"meetings/#{meeting.id}/new_agreement", "data-remote"=>"true"}
+                                Nuevo acuerdo
+                                %i.fa.fa-plus.white-text{"aria-hidden" => "true"}
+
+
+          %ul.collapsible
             %li
               .collapsible-header
                 %a
-                  Sesiones
+                  Admin
+                  %i.fa.fa-cog.white-text{"aria-hidden" => "true"}
               .collapsible-body
-                %ul.collapsible
-                  -Meeting.all.each do |meeting|
-                    %li
-                      .collapsible-header
-                        %a
-
-                          =meeting.date.strftime("%B")
-                      .collapsible-body
-                        %ul.agreement-list
-                          -meeting.agreement.each do |agreement|
-                            %li
-                              =link_to agreement.get_type, agreement, remote:true, class:'menu-item', url:agreement_url(agreement).gsub(request.base_url+'/', '')
+                %ul
                   %li
                     %a.ajax-item{href: "/meetings", "data-remote"=>"true", url:"meetings"}
-                      Opciones
-                      %i.fa.fa-ellipsis-v.white-text{"aria-hidden" => "true"}
-
-          %li
-            %a.ajax-item{href: "/users", style:'left-padding: 16px; padding-left: 16px;', "data-remote"=>"true", url:"users"} Usuarios
+                      Sesiones
+                  %li
+                    %a.ajax-item{href: "/users", "data-remote"=>"true", url:"users"}
+                      Usuarios
 
 
 

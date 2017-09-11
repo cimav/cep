@@ -9,10 +9,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    render layout: false
   end
 
   def edit
     @user = User.find(params[:id])
+    render layout: false
   end
 
 
@@ -21,9 +23,10 @@ class UsersController < ApplicationController
     response = {}
     respond_to do |format|
       if user.save
-
+        response[:redirect_url] = "users"
         response[:message] = "Se creó exitosamente al usuario: #{user.name}"
       else
+        response[:redirect_url] = "users/new"
         response[:message] = "Error al crear usuario"
       end
       response[:object] = user
@@ -38,8 +41,10 @@ class UsersController < ApplicationController
         user = User.find(params[:id])
         if user.update(user_params)
           response[:message]  = "Se actualizó al usuario: #{user.name}"
+          response[:redirect_url] = "users"
         else
           response[:message] = "Error al actualizar usuario"
+          response[:redirect_url] = "users/#{user.id}"
           render :edit
         end
       else

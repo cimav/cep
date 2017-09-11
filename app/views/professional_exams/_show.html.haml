@@ -100,4 +100,4 @@
       .card-content
         .card-title
           Fecha de examen:
-          =agreeable.exam_date.strftime("%d %B, %Y")
+          =agreeable.exam_date.strftime("%d %B, %Y") rescue "No se ha agendado"

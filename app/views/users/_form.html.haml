@@ -1,4 +1,4 @@
-=form_for @user, html:{remote:true, class:'alertas'} do |f|
+=form_for @user, html:{remote:true, class:'alertas redirect'} do |f|
 
   .row.input-field
     =f.text_field :name, class:'validate'
@@ -11,3 +11,7 @@
     =f.label :user_type, 'Tipo de usuario'
   .row
     =f.submit 'Guardar', class:'btn'
+
+:javascript
+  Materialize.updateTextFields();
+  $('select').material_select();

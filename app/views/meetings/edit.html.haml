@@ -1,21 +1,66 @@
-.row
-  =form_for @meeting do |f|
-    .row
-      .input-field.col.l3
-        %h5 Tipo de reunión
-        .row
-          =f.radio_button :meeting_type, Meeting::ORDINARY, checked:'checked'
-          =f.label :meeting_type, 'Ordinaria', value:Meeting::ORDINARY
-        .row
-          =f.radio_button :meeting_type, Meeting::EXTRAORDINARY
-          =f.label :meeting_type, 'Extraordinaria', value:Meeting::EXTRAORDINARY
-      .input-field.col.l3
+.container
+  .row
+    =form_for @meeting, html:{remote:true, class:'alertas redirect'} do |f|
+      .row
+        .input-field.col.l4
+          %h5 Tipo de reunión
+          .row
+            =f.radio_button :meeting_type, Meeting::ORDINARY, checked:'checked'
+            =f.label :meeting_type, 'Ordinaria', value:Meeting::ORDINARY
+          .row
+            =f.radio_button :meeting_type, Meeting::EXTRAORDINARY
+            =f.label :meeting_type, 'Extraordinaria', value:Meeting::EXTRAORDINARY
+        .input-field.col.l4
 
-        %h5 Fecha
-        =text_field_tag :date , @date, class: "datepicker",placeholder:'Selecciona la fecha de la reunión'
+          %h5 Fecha
+          =text_field_tag :date , @date, class: "datepicker",placeholder:'Selecciona la fecha de la reunión'
 
-      .input-field.col.l3
-        %h5 Hora
-        =text_field_tag :time,@time, class: "timepicker",placeholder:'Selecciona la hora de la reunión',:type => "time"
-      .input-field.col.l3
-        =f.submit 'Actualizar reunión', class:'btn'
+        .input-field.col.l4
+          %h5 Hora
+          =text_field_tag :time,@time, class: "timepicker",placeholder:'Selecciona la hora de la reunión',:type => "time"
+      .row
+        .input-field
+          =f.submit 'Actualizar reunión', class:'btn'
+
+:javascript
+   $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 9, // Creates a dropdown of 15 years to control year
+
+        // The title label to use for the month nav buttons
+        labelMonthNext: 'Mes siguiente',
+        labelMonthPrev: 'Mes anterior',
+
+        // The title label to use for the dropdown selectors
+        labelMonthSelect: 'Selecciona un mes',
+        labelYearSelect: 'Selecciona un año',
+
+        // Months and weekdays
+        monthsFull: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ],
+        monthsShort: [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
+        weekdaysFull: [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado' ],
+        weekdaysShort: [ 'Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab' ],
+
+        // Materialize modified
+        weekdaysLetter: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+
+        // Today and clear
+        today: 'Hoy',
+        clear: 'Limpiar',
+        close: 'Cerrar',
+        defaultDate: '1994-07-07'
+
+  });
+
+  $('.timepicker').pickatime({
+    default: 'now', // Set default time
+    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+    twelvehour: true, // Use AM/PM or 24-hour format
+    donetext: 'OK', // text for done-button
+    cleartext: 'Clear', // text for clear-button
+    canceltext: 'Cancel', // Text for cancel-button
+    autoclose: false, // automatic close timepicker
+    ampmclickable: true, // make AM PM clickable
+    aftershow: function(){} //Function for after opening timepicker
+  });
+  $('select').material_select();

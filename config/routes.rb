@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/meetings/:meeting_id/synod_designations/new' => 'synod_designations#new'
   get '/meetings/:meeting_id/new_admissions/new' => 'new_admissions#new'
   get '/meetings/:meeting_id/professional_exams/new' => 'professional_exams#new'
+  get '/meetings/:id/new_agreement' => 'meetings#new_agreement'
 
   post '/meetings/:meeting_id/synod_designations' => 'synod_designations#create'
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'

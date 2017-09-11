@@ -2,7 +2,7 @@
   %h1 Reuniones
   .collection
     -@meetings.each do |meeting|
-      =link_to meeting, class:'collection-item avatar ajax-item', remote:true, url:"meetings/#{meeting.id}" do
+      =link_to "/meetings/#{meeting.id}/edit", class:'collection-item avatar ajax-item', remote:true, url:"meetings/#{meeting.id}/edit" do
         -if meeting.status == Meeting::OPENED
           %i.fa.fa-unlock.circle.blue{"aria-hidden" => "true"}
         -else
@@ -26,3 +26,6 @@
   %a.btn-floating.btn-large.red.tooltipped.ajax-item{href:'/meetings/new',"data-position" => "left", "data-tooltip" => "Nueva reunión", "data-delay" => "50", "data-remote"=>"true", url:'meetings/new'}
     %i.fa.fa-plus{"aria-hidden" => "true"}
 
+
+:javascript
+  $('.tooltipped').tooltip({delay: 50});

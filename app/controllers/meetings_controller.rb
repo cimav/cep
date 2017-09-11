@@ -52,26 +52,36 @@ class MeetingsController < ApplicationController
 
   def edit
     @meeting = Meeting.find(params[:id])
+    datetime = @meeting.date.to_s()
+    @date = datetime.split(" ")[0].to_date.strftime("%d %B, %Y")
+
+    @time = datetime.split(" ")[1].to_time.strftime('%l:%M%P') rescue "" #hora con formato 12H
+    render layout:false
   end
 
   def update
-    meeting = Meeting.find(params[:id])
     data = {}
     data = meeting_params
     data[:date] = get_datetime(params)
+    meeting = Meeting.find(params[:id])
     response = {}
 
     respond_to do |format|
       if meeting.update(data)
         response[:message] = 'Sesión actualizada'
-        response[:redirect_url] = "agreements/#{meeting.agreement.id}"
+        response[:redirect_url] = "meetings/#{meeting.id}"
       else
         response[:message] = 'Error al actualizar sesión'
-        response[:redirect_url] = "meetings/#{meeting.agreement.meeting.id}/agreements/#{meeting.agreement.id}"
+        response[:redirect_url] = "meetings/#{meeting.id}/edit"
       end
       response[:object] = meeting
       format.json {render json: response}
     end
+  end
+
+  def new_agreement
+    @meeting = Meeting.find(params[:id])
+    render layout:false
   end
 
 
@@ -82,7 +92,7 @@ class MeetingsController < ApplicationController
   end
 
   def get_datetime(params)
-    date    = params[:meeting][:date]
+    date    = params[:date]
     time    = params[:time]
     return "#{date} #{time}"
   end

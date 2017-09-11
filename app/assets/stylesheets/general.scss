@@ -29,7 +29,11 @@ $color-menu: #222B37;
     }
 
   }
-
+.collapsible-header{
+  i{
+    font-size: 100%;
+  }
+}
 }
 .nav-wrapper{
   background-color: white;

@@ -5,24 +5,30 @@ class ProfessionalExamsController < ApplicationController
     data = professional_exam_params
     data[:exam_date] = get_datetime(params)
     professional_exam = ProfessionalExam.new(data)
-    if professional_exam.save
+    response = {}
 
-      agreement = professional_exam.build_agreement
-      agreement.description = params[:description]
-      agreement.meeting_id = params[:meeting_id]
+    respond_to do |format|
       if professional_exam.save
-        flash[:success] = "Acuerdo creado"
+
+        agreement = professional_exam.build_agreement
+        agreement.description = params[:description]
+        agreement.meeting_id = params[:meeting_id]
+        if professional_exam.save
+          response[:message] = "Acuerdo creado"
+          response[:redirect_url] = "agreements/#{agreement.id}"
+        else
+          response[:message] = "Error al registrar examen de grado"
+          response[:redirect_url] = "meetings/#{agreement.meeting_id}/professional_exams/new"
+        end
+
       else
-        flash[:error] = "Error al crear acuerdo"
-        flash[:error] = agreement.errors.full_messages[0]
+        response[:message] = "Error al crear acuerdo"
+        response[:errors] = professional_exam.errors.full_messages
+        response[:redirect_url] = "meetings/#{params[:meeting_id]}/professional_exams/new"
       end
-
-    else
-      flash[:error] = "Error al crear acuerdo"
-      flash[:error] = professional_exam.errors.full_messages[0]
-
+      format.json {render json: response}
     end
-    redirect_to Meeting.find(params[:meeting_id])
+
 
   end
 
