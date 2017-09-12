@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $(".button-collapse").sideNav({
         menuWidth: 240, // Default is 300
         edge: 'left', // Choose the horizontal origin

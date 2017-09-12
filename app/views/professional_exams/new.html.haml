@@ -1,7 +1,7 @@
 .container
   .row
     %h1 Examen de grado
-  = form_for @professional_exam, html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/professional_exams"   do |f|
+  = form_for @professional_exam, html:{remote:true, class:'alertas redirect refresh-menu'}, url:"/meetings/#{@meeting_id}/professional_exams"   do |f|
     .row.input-field
 
       %label.active{:for => "description"} Descripción

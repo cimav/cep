@@ -11,7 +11,7 @@
         %ul.collapsible
           -Meeting.all.each do |meeting|
             %li
-              .collapsible-header
+              .collapsible-header.meeting-item{url:"meetings/#{meeting.id}"}
                 =meeting.date.strftime("%B")
 
 
@@ -25,6 +25,10 @@
                     %a.menu-item{href:"/meetings/#{meeting.id}/new_agreement", url:"meetings/#{meeting.id}/new_agreement", "data-remote"=>"true"}
                       Nuevo acuerdo
                       %i.fa.fa-plus.white-text{"aria-hidden" => "true"}
+          %li
+            %a.menu-item{href:"/meetings/new", url:"meetings/new", "data-remote"=>"true"}
+              Nueva sesión
+              %i.fa.fa-plus.white-text{"aria-hidden" => "true"}
 
 
 %ul.collapsible
@@ -44,3 +48,10 @@
 
 :javascript
   $('.collapsible').collapsible();
+  $(".meeting-item").on( "click", function() {
+    url = $(this).attr("url");
+    $.get(url, function (data, status) {
+        $('#main-content').html(data);
+    });
+    setHash(url);
+  });
