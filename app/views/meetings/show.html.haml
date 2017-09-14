@@ -30,10 +30,10 @@
           .card-title
             Tipos de acuerdos
           %canvas#typesChart{:height => "400", :width => "400"}
-
-.fixed-action-btn
-  %a.btn-floating.btn-large.red.tooltipped.ajax-item{href:"/meetings/#{@meeting.id}/new_agreement","data-position" => "left", "data-tooltip" => "Nuevo acuerdo", "data-delay" => "100", url:"meetings/#{@meeting.id}/new_agreement", "data-remote"=>"true"}
-    %i.fa.fa-plus{"aria-hidden" => "true"}
+-if is_admin?
+  .fixed-action-btn
+    %a.btn-floating.btn-large.red.tooltipped.ajax-item{href:"/meetings/#{@meeting.id}/new_agreement","data-position" => "left", "data-tooltip" => "Nuevo acuerdo", "data-delay" => "100", url:"meetings/#{@meeting.id}/new_agreement", "data-remote"=>"true"}
+      %i.fa.fa-plus{"aria-hidden" => "true"}
 :javascript
 
   var completedChart = document.getElementById("completedChart");

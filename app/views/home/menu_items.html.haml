@@ -11,7 +11,7 @@
         -Meeting.all.each do |meeting|
           %li
             .collapsible-header.meeting-item{url:"meetings/#{meeting.id}"}
-              =I18n.l(meeting.date, format: '%B').capitalize
+              =I18n.l(meeting.date, format: '%B %Y').capitalize
 
 
 
@@ -20,25 +20,26 @@
                 -meeting.agreement.each do |agreement|
                   %li
                     =link_to agreement.get_type, agreement, remote:true, class:'menu-item', url:agreement_url(agreement).gsub(request.base_url+'/', '')
-        %li
-          %a.menu-item{href:"/meetings/new", url:"meetings/new", "data-remote"=>"true"}
-            Nueva sesión
-            %i.fa.fa-plus.white-text{"aria-hidden" => "true"}
+        -if is_admin?
+          %li
+            %a.menu-item{href:"/meetings/new", url:"meetings/new", "data-remote"=>"true"}
+              Nueva sesión
+              %i.fa.fa-plus.white-text{"aria-hidden" => "true"}
 
-
-%ul.collapsible
-  %li
-    .collapsible-header
-      %a
-        %span
-          Admin
-        %span.right
-          %i.fa.fa-cog.white-text{"aria-hidden" => "true"}
-    .collapsible-body
-      %ul
-        %li
-          %a.ajax-item{href: "/users", "data-remote"=>"true", url:"users"}
-            Usuarios
+-if is_admin?
+  %ul.collapsible
+    %li
+      .collapsible-header
+        %a
+          %span
+            Admin
+          %span.right
+            %i.fa.fa-cog.white-text{"aria-hidden" => "true"}
+      .collapsible-body
+        %ul
+          %li
+            %a.ajax-item{href: "/users", "data-remote"=>"true", url:"users"}
+              Usuarios
 
 :javascript
   $('.collapsible').collapsible();

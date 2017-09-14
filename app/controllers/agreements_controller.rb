@@ -98,14 +98,16 @@ class AgreementsController < ApplicationController
             response[:message] = 'Respuesta enviada'
           else
             response[:message] = 'Error al enviar respuesta'
+
           end
 
       else
         response[:message] = 'La votación ya se ha cerrado'
       end
-      response[:redirect_url] = "/agreements/#{agreement.id}"
-      response[:object] = user_response
+      response[:redirect_url] = "agreements/#{agreement.id}"
+      response[:errors] = agreement.errors.full_messages
       format.json {render json: response}
+
     end
 
   end

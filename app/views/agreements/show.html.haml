@@ -3,7 +3,7 @@
     %h1.center
       =@agreement.get_type
       .chip.amber
-        -if @agreement.status.eql? Agreement::OPEN
+        -if @agreement.status.eql? Agreement::CLOSE
           %i.fa.fa-lock{"aria-hidden"=>true}
         -else
           %i.fa.fa-unlock{"aria-hidden"=>true}
