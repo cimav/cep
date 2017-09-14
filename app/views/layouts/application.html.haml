@@ -29,7 +29,7 @@
           %ul.right
             %li
               %a.avatar.dropdown-button{"data-activates" => "dropdownUser"}
-                =image_tag "http://cimav.edu.mx/foto/teresa.mariscal/50", class:'circle img-responsive', alt:'picture'
+                =image_tag "http://cimav.edu.mx/foto/#{current_user.email[/[^@]+/]}/50", class:'circle img-responsive', alt:'picture'
           %a.button-collapse.top-nav.full.hide-on-large-only{"data-activates" => "side-menu", :href => "#"}
             %i.fa.fa-bars.fa-2x.black-text{"aria-hidden" => "true"}
       %ul#side-menu.side-nav.fixed
