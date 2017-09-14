@@ -87,7 +87,7 @@ function checkHash() {
         console.log("Error al validar hash");
     }
 }
-setInterval(checkHash,1000);
+setInterval(checkHash,600);
 
 $(document)
 

@@ -34,9 +34,8 @@ $(document)
         if($(this).hasClass("redirect")){
             setHash(data.redirect_url)
         }
-        if($(this).hasClass("refresh-menu")){
             refreshMenu();
-        }
+
 
         Materialize.toast(data.message, 4000);
         for (i = 0; i<data.errors.length;i++) {

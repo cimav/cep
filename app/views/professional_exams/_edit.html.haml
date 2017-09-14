@@ -1,4 +1,4 @@
-= form_for agreeable,html:{remote:true, class:'alertas'} do |f|
+= form_for agreeable,html:{remote:true, class:'alertas redirect'} do |f|
   .row.input-field
 
     %label.active{:for => "description"} Descripción
@@ -20,7 +20,7 @@
       =label_tag :date, 'Fecha', class:'active'
 
     .input-field.col.s3
-      =text_field_tag :time,time, class: "timepicker", type:'time', id:'exam_time'
+      =text_field_tag :time,time, class: "timepicker", :type => "text", id:'exam_time'
       =label_tag :exam_time, 'Hora', class:'active'
 
   .row

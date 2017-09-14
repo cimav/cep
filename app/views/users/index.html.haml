@@ -18,3 +18,6 @@
 .fixed-action-btn
   %a.btn-floating.btn-large.red.tooltipped.ajax-item{href:'/users/new',"data-position" => "left", "data-tooltip" => "Nuevo usuario", "data-delay" => "100", url:"users/new", "data-remote"=>"true"}
     %i.fa.fa-plus{"aria-hidden" => "true"}
+
+:javascript
+  $('.tooltipped').tooltip({delay: 50});

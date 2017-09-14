@@ -1,7 +1,7 @@
 .container
   .row
     %h1 Examen de grado
-  = form_for @professional_exam, html:{remote:true, class:'alertas redirect refresh-menu'}, url:"/meetings/#{@meeting_id}/professional_exams"   do |f|
+  = form_for @professional_exam, html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/professional_exams"   do |f|
     .row.input-field
 
       %label.active{:for => "description"} Descripción
@@ -17,7 +17,7 @@
         =label_tag :date, 'Fecha'
 
       .input-field.col.s3
-        =text_field_tag :time,'', class: "timepicker", type:'time', id:'exam_time'
+        =text_field_tag :time,'', class: "timepicker", id:'exam_time',:type => "text"
         =label_tag :exam_time, 'Hora'
 
     .row
