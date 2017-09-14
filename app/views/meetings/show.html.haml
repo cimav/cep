@@ -45,7 +45,7 @@
     ],
     datasets: [
       {
-        data: [#{@meeting.agreement.size}, 86.2],
+        data: [#{@meeting.agreement.where(status: Agreement::OPEN).size}, #{@meeting.agreement.where(status: Agreement::CLOSE).size}],
         backgroundColor: [
           "#FF6384",
 
@@ -63,12 +63,11 @@
 
   var oilData = {
     labels: [
-      "Resueltos",
-      "Pendientes"
+      #{raw @agreement_type_name}.replace(/&quot;/g,'"')
     ],
     datasets: [
       {
-        data: [133.3, 86.2],
+        data: [#{@agreement_type_value}],
         backgroundColor: [
           "#FF6384",
 
