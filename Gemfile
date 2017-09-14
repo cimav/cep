@@ -17,6 +17,7 @@ gem 'omniauth-google-oauth2'
 gem 'prawn'
 gem 'carrierwave', '~> 1.0'
 gem 'font-awesome-sass'
+gem 'materialize-sass', '~> 0.99.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
