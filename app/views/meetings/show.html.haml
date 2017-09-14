@@ -1,41 +1,85 @@
-%h1
-  Sesión numero
-  =@meeting.id
-%br
-.row
+.container
+  .row
+    %h1
+      Sesión
+      =@meeting.get_type.downcase
 
+  .row
+    .col.l4
 
-  .col.l2
-    %h5.center Acuerdos
-    .collection
-      -@meeting.agreement.each do |agreement|
-
-
-        =link_to agreement.description, "/meetings/#{@meeting.id}/agreements/#{agreement.id}",remote:true, class:'collection-item agreement-item', url:"meetings/#{@meeting.id}/agreements/#{agreement.id}"
-
-
-  .col.l10
-
-    %h5.center Info del acuerdo
-
-    #agreement-body
+      .card.blue.darken-3.white-text
+        .card-content
+          .card-title
+            =I18n.l(@meeting.date, format: '%B').capitalize
+            =@meeting.date.strftime("%Y")
+          =I18n.l(@meeting.date, format: '%A').capitalize
+          =I18n.l(@meeting.date, format: '%d')
+          %br
+          =I18n.l(@meeting.date, format: '%l:%M %P')
 
 
 
-.fixed-action-btn
-  %a.btn-floating.btn-large.red.tooltipped{href:'#agreement_types', "data-position"=>'left', "data-delay"=>"50", "data-tooltip"=>"Nuevo acuerdo"}
-    %i.fa.fa-plus{"aria-hidden" => "true"}
+    .col.l4
+      .card
+        .card-content
+          .card-title
+            Acuerdos totales:
+            =@meeting.agreement.size
+          %canvas#completedChart{:height => "400", :width => "400"}
+    .col.l4
+      .card
+        .card-content
+          .card-title
+            Tipos de acuerdos
+          %canvas#typesChart{:height => "400", :width => "400"}
 
-/opciones
-#agreement_types.modal
-  .modal-content
 
-    .collection
-      =link_to 'Designación de sinodales', "/meetings/#{@meeting.id}/synod_designations/new", remote:true, class:'collection-item modal-close agreement-new'
-      =link_to 'Nuevo ingreso', "/meetings/#{@meeting.id}/new_admissions/new", remote:true, class:'collection-item modal-close agreement-new'
-      =link_to 'Examen profesional', "/meetings/#{@meeting.id}/professional_exams/new", remote:true, class:'collection-item modal-close agreement-new'
+:javascript
 
-/Nuevo acuerdo
-#agreement_new.modal
-  .modal-content
+  var completedChart = document.getElementById("completedChart");
+
+  var oilData = {
+    labels: [
+      "Pendientes",
+      "Resueltos"
+    ],
+    datasets: [
+      {
+        data: [#{@meeting.agreement.size}, 86.2],
+        backgroundColor: [
+          "#FF6384",
+
+          "#66aa00"
+        ]
+      }]
+  };
+
+  var pieChart = new Chart(completedChart, {
+    type: 'pie',
+    data: oilData
+  });
+
+  var typesChart = document.getElementById("typesChart");
+
+  var oilData = {
+    labels: [
+      "Resueltos",
+      "Pendientes"
+    ],
+    datasets: [
+      {
+        data: [133.3, 86.2],
+        backgroundColor: [
+          "#FF6384",
+
+          "#6384FF"
+        ]
+      }]
+  };
+
+  var doughnutChart = new Chart(typesChart, {
+    type: 'doughnut',
+    data: oilData
+  });
+
 
