@@ -1,5 +1,7 @@
 class AgreementsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token
+
   def index
     @agreements = Agreement.all
   end
@@ -109,7 +111,24 @@ class AgreementsController < ApplicationController
       format.json {render json: response}
 
     end
+  end
 
+  def upload_file
+    agreement = Agreement.find(params[:id])
+    file = AgreementFile.new(name:params[:file])
+    file.agreement = agreement
+    response = {}
+    respond_to do |format|
+      if file.save
+        response[:message] = 'Documento subido'
+      else
+        response[:message] = 'Error al subir documento'
+      end
+      response[:redirect_url] = "agreements/#{agreement.id}"
+      response[:errors] = file.errors.full_messages
+      format.json {render json: response}
+
+    end
   end
 
 
@@ -118,5 +137,10 @@ class AgreementsController < ApplicationController
   def agreement_params
     params.require(:agreement).permit(:meeting_id, :status, :agreement_type, :description)
   end
+
+  def file_params
+    params.require(:agreement_file).permit(:name, :file_type)
+  end
+
 
 end

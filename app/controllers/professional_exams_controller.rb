@@ -44,9 +44,12 @@ class ProfessionalExamsController < ApplicationController
         professional_exam.agreement.update(description:params[:description])
 
         response[:message] = 'Acuerdo actualizado'
+        response[:redirect_url] = "agreements/#{professional_exam.agreement.id}"
 
       else
         response[:message] = 'Error al actualizar acuerdo'
+        response[:redirect_url] = "agreements/#{professional_exam.agreement.id}"
+
       end
       response[:object] = professional_exam
       format.json {render json: response}
