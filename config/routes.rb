@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/meetings/:meeting_id/professional_exams/new' => 'professional_exams#new'
   get '/meetings/:id/new_agreement' => 'meetings#new_agreement'
   get '/agreements/:id/files' => 'agreements#agreement_files'
+  get '/agreement_files/:id' => 'agreements#display_agreement_file'
 
 
   post '/meetings/:meeting_id/synod_designations' => 'synod_designations#create'

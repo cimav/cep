@@ -96,7 +96,7 @@
             Fecha de inicio:
           =agreeable.student.start_date
       .card-action
-        %a.btn-floating.tooltipped.purple.modal-trigger{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Documentos", href: "#modal1"}
+        %a.btn-floating.tooltipped.purple.modal-trigger{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Documentos", href: "#modalDocumentos"}
           %i.fa.fa-folder{"aria-hidden"=>true}
         %a.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante"}
           %i.fa.fa-book{"aria-hidden"=>true}
@@ -105,7 +105,7 @@
         .card-title
           Fecha de examen:
           =agreeable.exam_date.strftime("%d %B, %Y") rescue "No se ha agendado"
-#modal1.modal.bottom-sheet
+#modalDocumentos.modal.bottom-sheet
   .modal-content
     %h4 Documentos
     #agreement_files

@@ -150,6 +150,11 @@ class AgreementsController < ApplicationController
     end
   end
 
+  def display_agreement_file
+    file = AgreementFile.find(params[:id]).name
+    send_file file.to_s, disposition:'inline'
+  end
+
 
   private
 
