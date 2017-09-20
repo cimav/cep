@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918175334) do
+ActiveRecord::Schema.define(version: 20170920223102) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "agreement_id"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20170918175334) do
     t.integer  "status"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "id_key"
+    t.integer  "consecutive"
   end
 
   create_table "new_admissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

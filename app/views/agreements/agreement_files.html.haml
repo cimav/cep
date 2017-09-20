@@ -1,9 +1,14 @@
-%ul.collection
-  -@files.each do |file|
-    %li.collection-item
-      %div
-        =link_to "/agreement_files/#{file.id}" ,target: :_blank do
-          =file.name
-        -if is_admin?
-          =link_to "/agreement_files/#{file.id}", class:'secondary-content delete_file', method:'delete', agreement_id: file.agreement_id, remote:true do
-            %i.fa.fa-close{"aria-hidden" => "true"}
+
+-if @files.size>0
+  %ul.collection
+    -@files.each do |file|
+      %li.collection-item
+        %div
+          =link_to "/agreement_files/#{file.id}" ,target: :_blank do
+            =file.name
+          -if is_admin?
+            =link_to "/agreement_files/#{file.id}", class:'secondary-content delete_file', method:'delete', agreement_id: file.agreement_id, remote:true do
+              %i.fa.fa-close{"aria-hidden" => "true"}
+-else
+  %blockquote
+    No hay documentos

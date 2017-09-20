@@ -34,6 +34,9 @@ $(document)
         if($(this).hasClass("redirect")){
             setHash(data.redirect_url)
         }
+        if($(this).hasClass("refresh")){
+            location.reload();
+        }
             refreshMenu();
 
 
