@@ -37,6 +37,8 @@
                       =response.first.comment
                     -else
                       = "---"
+
+
       -if current_user.user_type == User::CEP
         -if @agreement.status == Agreement::OPEN
           -if Response.where(:user_id => current_user.id).where(:agreement_id => @agreement.id).size == 0
@@ -94,6 +96,8 @@
             Fecha de inicio:
           =agreeable.student.start_date
       .card-action
+        %a.btn-floating.tooltipped.purple.modal-trigger{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Documentos", href: "#modal1"}
+          %i.fa.fa-folder{"aria-hidden"=>true}
         %a.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante"}
           %i.fa.fa-book{"aria-hidden"=>true}
     .card.amber.darken-3.white-text
@@ -101,3 +105,13 @@
         .card-title
           Fecha de examen:
           =agreeable.exam_date.strftime("%d %B, %Y") rescue "No se ha agendado"
+#modal1.modal.bottom-sheet
+  .modal-content
+    %h4 Documentos
+    #agreement_files
+  .modal-footer
+    %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:href => "#!"} Agree
+
+
+:javascript
+  refreshFiles(#{agreeable.agreement.id});
