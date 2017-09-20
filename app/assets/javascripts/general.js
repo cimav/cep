@@ -169,3 +169,11 @@ function refreshMenu() {
         $('#menu-items').html(data);
     });
 }
+
+function refreshFiles(agreement_id) {
+
+    url = "/agreements/"+agreement_id+"/files";
+    $.get(url, function (data, status) {
+        $('#agreement_files').html(data);
+    });
+}

@@ -131,6 +131,25 @@ class AgreementsController < ApplicationController
     end
   end
 
+  def agreement_files
+    @files = AgreementFile.where(agreement_id: params[:id])
+    render layout:false
+  end
+
+  def delete_file
+    file = AgreementFile.find(params[:id])
+    response = {}
+    respond_to do |format|
+      if file.destroy
+        response[:message] = 'Documento eliminado'
+      else
+        response[:message] = 'Error al eliminar documento'
+      end
+      response[:errors] = file.errors.full_messages
+      format.json {render json: response}
+    end
+  end
+
 
   private
 

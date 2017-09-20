@@ -14,12 +14,15 @@ Rails.application.routes.draw do
   get '/meetings/:meeting_id/new_admissions/new' => 'new_admissions#new'
   get '/meetings/:meeting_id/professional_exams/new' => 'professional_exams#new'
   get '/meetings/:id/new_agreement' => 'meetings#new_agreement'
+  get '/agreements/:id/files' => 'agreements#agreement_files'
+
 
   post '/meetings/:meeting_id/synod_designations' => 'synod_designations#create'
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'
   post '/meetings/:meeting_id/professional_exams' => 'professional_exams#create'
   post '/agreements/:id/send_response' => 'agreements#send_response'
   post '/agreements/:id/upload_file' => 'agreements#upload_file'
+  delete '/agreement_files/:id' => 'agreements#delete_file'
 
   resources 'users'
   resources 'meetings'

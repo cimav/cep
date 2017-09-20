@@ -1,0 +1,10 @@
+
+
+
+%ul.collection
+  -@files.each do |file|
+    %li.collection-item
+      %div
+        =file.name
+        =link_to "/agreement_files/#{file.id}", class:'secondary-content delete_file', method:'delete', agreement_id: file.agreement_id, remote:true do
+          %i.fa.fa-close{"aria-hidden" => "true"}
