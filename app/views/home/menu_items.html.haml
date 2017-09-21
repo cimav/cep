@@ -11,7 +11,7 @@
         -Meeting.all.each do |meeting|
           %li
             .collapsible-header.meeting-item{url:"meetings/#{meeting.id}"}
-              =I18n.l(meeting.date, format: '%B %Y').capitalize
+              =meeting.id_key
 
 
 
