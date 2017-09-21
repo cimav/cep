@@ -2,6 +2,8 @@ class Agreement < ApplicationRecord
   belongs_to :meeting
   has_many :agreement_file
   belongs_to :agreeable, polymorphic: true
+  after_create :set_id_key
+  before_destroy :delete_agreeable
 
   ACCEPTED = 1
   REJECTED = 2
@@ -37,5 +39,26 @@ class Agreement < ApplicationRecord
       when "ProfessionalExam"
         "Examen profesional"
     end
+  end
+
+  def set_id_key
+    # Asignar número consecutivo
+    last_consecutive = Agreement.where(meeting_id: self.meeting_id).maximum("consecutive")
+    if last_consecutive.nil?
+      consecutive = 1
+    else
+      consecutive = last_consecutive + 1
+    end
+
+    # Asignar folio
+      id_key = "#{self.meeting.id_key}/#{sprintf '%03d', consecutive}"
+
+    self.consecutive = consecutive
+    self.id_key = id_key
+    self.save
+  end
+
+  def delete_agreeable
+    self.agreeable.destroy
   end
 end
