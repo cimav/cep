@@ -40,12 +40,13 @@ class MeetingsController < ApplicationController
     response = {}
     respond_to do |format|
       if meeting.save
-        response[:message] = 'Sesión actualizada'
+        response[:message] = 'Sesión creada'
         response[:redirect_url] = "meetings/#{meeting.id}"
       else
         response[:message] = 'Error al crear sesión'
         response[:redirect_url] = "meetings/new"
       end
+      response[:errors] = meeting.errors.full_messages
       response[:object] = meeting
       format.json {render json: response}
     end

@@ -2,7 +2,8 @@
   .row
     %h1
       Sesión
-      =@meeting.get_type.downcase
+      %span.black-text.text-darken-4
+        =@meeting.id_key
 
   .row
     .col.l4
