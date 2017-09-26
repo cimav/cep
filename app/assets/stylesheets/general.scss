@@ -3,31 +3,37 @@ $color-menu: #21272e;
 .side-nav{
 }
 #side-menu{
+  ul.collection{
+    line-height: 0;
+  }
+  .collection .collection-item.avatar{
+    padding-top: 7px;
+    padding-bottom: 7px;
+    min-height: 0;
+
+    .row{
+      margin-bottom: 0px;
+    }
+  }
   background-color: $color-menu;
 
   li{
+
     background-color: $color-menu;
     color: white;
+    :hover{
+      background-color: #2777af;
+    }
+  .collection {
+    li.collection-item.avatar {
+      width: 100%;
+    }
+  }
 
   }
   a {
     color: white;
     font-weight: inherit;
-
-  }
-  li:hover, li.active{
-      //background-color: #eb5456;
-      border-left: 2px solid red;
-
-    li:hover, li.active{
-      //background-color: #20AAEA;
-      border-left: 2px solid #20AAEA;
-
-      li:hover, li.active{
-        background-color: #20AAEA;
-        //border-left: 2px solid darkgray;
-      }
-    }
 
   }
 .collapsible-header{

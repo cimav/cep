@@ -3,7 +3,7 @@ class Agreement < ApplicationRecord
   has_many :agreement_file
   belongs_to :agreeable, polymorphic: true
   after_create :set_id_key
-  before_destroy :delete_agreeable
+
 
   ACCEPTED = 1
   REJECTED = 2
@@ -37,7 +37,7 @@ class Agreement < ApplicationRecord
       when "SynodDesignation"
         "Designación de sinodales"
       when "ProfessionalExam"
-        "Examen profesional"
+        "Examen de grado"
     end
   end
 
@@ -51,7 +51,7 @@ class Agreement < ApplicationRecord
     end
 
     # Asignar folio
-      id_key = "#{self.meeting.id_key}/#{sprintf '%03d', consecutive}"
+      id_key = "#{self.meeting.id_key}/A#{sprintf '%03d', consecutive}"
 
     self.consecutive = consecutive
     self.id_key = id_key

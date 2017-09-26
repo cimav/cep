@@ -19,7 +19,19 @@
               %ul.agreement-list
                 -meeting.agreement.each do |agreement|
                   %li
-                    =link_to agreement.get_type, agreement, remote:true, class:'menu-item', url:agreement_url(agreement).gsub(request.base_url+'/', '')
+                    /=link_to agreement, remote:true, class:'menu-item', url:agreement_url(agreement).gsub(request.base_url+'/', '') do
+                    %ul.collection
+                      %li.collection-item.avatar
+
+                        .row
+                          =link_to agreement, remote:true, url:"agreements/#{agreement.id}", class:'menu-item' do
+                            .col.l3
+                              %i.fa.fa-list.circle.blue{"aria-hidden"=>true}
+                            .col.l9
+                              %span.title
+                                =agreement.id_key
+                              %p
+                                =agreement.get_type
         -if is_admin?
           %li
             %a.menu-item{href:"/meetings/new", url:"meetings/new", "data-remote"=>"true"}
