@@ -1,5 +1,5 @@
 class Meeting < ApplicationRecord
-  has_many :agreement
+  has_many :agreement, dependent: :destroy
   after_create :set_id_key
 
   ORDINARY = 1
