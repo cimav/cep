@@ -1,6 +1,7 @@
 class Agreement < ApplicationRecord
   belongs_to :meeting
   has_many :agreement_file
+  has_many :responses
   belongs_to :agreeable, polymorphic: true
   after_create :set_id_key
 
