@@ -19,12 +19,12 @@
               %ul.agreement-list
                 -meeting.agreement.each do |agreement|
                   %li
-                    /=link_to agreement, remote:true, class:'menu-item', url:agreement_url(agreement).gsub(request.base_url+'/', '') do
                     %ul.collection
-                      %li.collection-item.avatar
+                      =link_to agreement, remote:true, url:"agreements/#{agreement.id}", class:'menu-item' do
+                        %li.collection-item.avatar
 
-                        .row
-                          =link_to agreement, remote:true, url:"agreements/#{agreement.id}", class:'menu-item' do
+                          .row
+
                             .col.l3
                               %i.fa.fa-list.circle.blue{"aria-hidden"=>true}
                             .col.l9

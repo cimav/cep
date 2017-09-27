@@ -6,29 +6,40 @@ $color-menu: #21272e;
   ul.collection{
     line-height: 0;
   }
-  .collection .collection-item.avatar{
-    padding-top: 7px;
-    padding-bottom: 7px;
-    min-height: 0;
+  .collection {
+    a{
+      padding: 0 0 0 0;
+    }
+    .collection-item.avatar {
+      padding-top: 7px;
+      padding-bottom: 7px;
+      min-height: 0;
 
-    .row{
-      margin-bottom: 0px;
+      .row {
+        margin-bottom: 0px;
+      }
     }
   }
   background-color: $color-menu;
-
   li{
-
+    width: 100%;
     background-color: $color-menu;
-    color: white;
-    :hover{
-      background-color: #2777af;
-    }
-  .collection {
-    li.collection-item.avatar {
-      width: 100%;
-    }
+    color:white;
   }
+
+  lli:hover, li.active{
+    //background-color: #eb5456;
+    border-left: 2px solid red;
+
+    li:hover, li.active{
+      //background-color: #20AAEA;
+      border-left: 2px solid #20AAEA;
+
+      li:hover, li.active{
+        background-color: #20AAEA;
+        //border-left: 2px solid darkgray;
+      }
+    }
 
   }
   a {

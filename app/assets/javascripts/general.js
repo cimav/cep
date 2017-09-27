@@ -100,7 +100,7 @@ $(document)
         $('#main-content').html(data);
         $(".agreement-list li").removeClass("active");
         setHash($(this).attr("url"));
-        $(this).parent().addClass("active");
+        $(this).children('li').addClass("active");
 
     })
 
