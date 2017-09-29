@@ -44,8 +44,12 @@ class AgreementsController < ApplicationController
     agreement = Agreement.find(params[:id])
     respond_to do |format|
       if is_admin?
-
-
+        agreement.status = Agreement::DELETED
+        if agreement.save
+          response[:message] = 'Acuerdo eliminado'
+        else
+          response[:message] = 'Error al eliminar acuerdo'
+        end
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'
       end
