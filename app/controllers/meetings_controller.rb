@@ -1,4 +1,6 @@
 class MeetingsController < ApplicationController
+  before_action :auth_required
+
   def index
     @meetings = Meeting.all.order(date: :desc)
     render layout: false

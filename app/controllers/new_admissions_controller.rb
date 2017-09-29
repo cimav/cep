@@ -1,4 +1,5 @@
 class NewAdmissionsController < ApplicationController
+  before_action :auth_required
 
   def create
     new_admission = NewAdmission.new(new_admission_params)

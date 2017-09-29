@@ -1,4 +1,5 @@
 class ProfessionalExamsController < ApplicationController
+  before_action :auth_required
 
   def create
     data = {}

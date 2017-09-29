@@ -1,4 +1,5 @@
 class SynodDesignationsController < ApplicationController
+  before_action :auth_required
 
   def create
     synod_designation = SynodDesignation.new(synod_designation_params)

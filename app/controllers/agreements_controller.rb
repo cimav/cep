@@ -1,6 +1,8 @@
 class AgreementsController < ApplicationController
+  before_action :auth_required
 
   skip_before_action :verify_authenticity_token
+  before_action
 
   def index
     @agreements = Agreement.all
