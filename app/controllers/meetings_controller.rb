@@ -41,13 +41,19 @@ class MeetingsController < ApplicationController
     meeting.status = Meeting::OPENED
     response = {}
     respond_to do |format|
-      if meeting.save
-        response[:message] = 'Sesión creada'
-        response[:redirect_url] = "meetings/#{meeting.id}"
+      if is_admin?
+        if meeting.save
+          response[:message] = 'Sesión creada'
+          response[:redirect_url] = "meetings/#{meeting.id}"
+        else
+          response[:message] = 'Error al crear sesión'
+          response[:redirect_url] = "meetings/new"
+        end
       else
-        response[:message] = 'Error al crear sesión'
-        response[:redirect_url] = "meetings/new"
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+        response[:redirect_url] = ""
       end
+
       response[:errors] = meeting.errors.full_messages
       response[:object] = meeting
       format.json {render json: response}
@@ -55,6 +61,7 @@ class MeetingsController < ApplicationController
   end
 
   def delete
+
     meeting = Meeting.find(params[:id])
     if meeting.destroy
       redirect_to meetings_index_path
@@ -80,13 +87,19 @@ class MeetingsController < ApplicationController
     response = {}
 
     respond_to do |format|
-      if meeting.update(data)
-        response[:message] = 'Sesión actualizada'
-        response[:redirect_url] = "meetings/#{meeting.id}"
+      if is_admin?
+        if meeting.update(data)
+          response[:message] = 'Sesión actualizada'
+          response[:redirect_url] = "meetings/#{meeting.id}"
+        else
+          response[:message] = 'Error al actualizar sesión'
+          response[:redirect_url] = "meetings/#{meeting.id}/edit"
+        end
       else
-        response[:message] = 'Error al actualizar sesión'
-        response[:redirect_url] = "meetings/#{meeting.id}/edit"
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+        response[:redirect_url] = ""
       end
+
       response[:object] = meeting
       format.json {render json: response}
     end

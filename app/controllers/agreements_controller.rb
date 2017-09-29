@@ -25,7 +25,7 @@ class AgreementsController < ApplicationController
     if agreement.save
       case agreement.agreeable_type
         when Agreement::SYNOD_DESINGATION
-          synod_designation = agreem  ent.build_synod_designation
+          synod_designation = agreement.build_synod_designation
           synod_designation.student_id = params[:student_id]
           if agreement.save
             flash[:success] = "Acuerdo creado"
@@ -42,12 +42,17 @@ class AgreementsController < ApplicationController
 
   def destroy
     agreement = Agreement.find(params[:id])
-    if agreement.agreeable.destroy
-      flash[:notice] = "Se eliminó el acuerdo"
-    else
-      flash[:error] = 'No se pudo eliminar el acuerdo'
+    respond_to do |format|
+      if is_admin?
+
+
+      else
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+      end
+      response[:redirect_url] = "agreements/#{agreement.id}"
+      response[:errors] = agreement.errors.full_messages
+      format.json {render json: response}
     end
-    redirect_to agreement.meeting
   end
 
   def edit
@@ -121,11 +126,16 @@ class AgreementsController < ApplicationController
     file.agreement = agreement
     response = {}
     respond_to do |format|
-      if file.save
-        response[:message] = 'Documento subido'
+      if is_admin?
+        if file.save
+          response[:message] = 'Documento subido'
+        else
+          response[:message] = 'Error al subir documento'
+        end
       else
-        response[:message] = 'Error al subir documento'
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
       end
+
       response[:redirect_url] = "agreements/#{agreement.id}"
       response[:errors] = file.errors.full_messages
       format.json {render json: response}
@@ -142,11 +152,16 @@ class AgreementsController < ApplicationController
     file = AgreementFile.find(params[:id])
     response = {}
     respond_to do |format|
-      if file.destroy
-        response[:message] = 'Documento eliminado'
+      if is_admin?
+        if file.destroy
+          response[:message] = 'Documento eliminado'
+        else
+          response[:message] = 'Error al eliminar documento'
+        end
       else
-        response[:message] = 'Error al eliminar documento'
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
       end
+
       response[:errors] = file.errors.full_messages
       format.json {render json: response}
     end

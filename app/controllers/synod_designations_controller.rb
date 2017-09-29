@@ -29,16 +29,22 @@ class SynodDesignationsController < ApplicationController
     response = {}
 
     respond_to do |format|
-    if synod_designation.update(synod_designation_params)
-      synod_designation.agreement.update(description:params[:description])
+      if is_admin?
+        if synod_designation.update(synod_designation_params)
+          synod_designation.agreement.update(description:params[:description])
 
-      response[:message] = 'Acuerdo actualizado'
-      response[:redirect_url] = "agreements/#{synod_designation.agreement.id}"
-    else
-      response[:message] = 'Error al actualizar acuerdo'
-      #Se redirige al mismo acuerdo
-      response[:redirect_url] = "meetings/#{synod_designation.agreement.meeting.id}/agreements/#{synod_designation.agreement.id}"
-    end
+          response[:message] = 'Acuerdo actualizado'
+          response[:redirect_url] = "agreements/#{synod_designation.agreement.id}"
+        else
+          response[:message] = 'Error al actualizar acuerdo'
+          #Se redirige al mismo acuerdo
+          response[:redirect_url] = "meetings/#{synod_designation.agreement.meeting.id}/agreements/#{synod_designation.agreement.id}"
+        end
+      else
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+        response[:redirect_url] = ""
+      end
+
     response[:object] = synod_designation
     format.json {render json: response}
     end

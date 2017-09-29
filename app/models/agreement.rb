@@ -13,7 +13,7 @@ class Agreement < ApplicationRecord
 
   OPEN = 1
   CLOSE = 2
-  TO_COMMITTEE = 3
+  DELETED = 5
 
 
   STATUS = {OPEN=>'Abierto', CLOSE=>'Cerrado', TO_COMMITTEE=> 'Enviado a comité'}

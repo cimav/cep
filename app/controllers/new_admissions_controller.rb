@@ -29,14 +29,20 @@ class NewAdmissionsController < ApplicationController
     response = {}
 
     respond_to do |format|
-      if new_admission.update(new_admission_params)
-        new_admission.agreement.update(description:params[:description])
+      if is_admin?
+        if new_admission.update(new_admission_params)
+          new_admission.agreement.update(description:params[:description])
 
-        response[:message] = 'Acuerdo actualizado'
+          response[:message] = 'Acuerdo actualizado'
 
+        else
+          response[:message] = 'Error al actualizar acuerdo'
+        end
       else
-        response[:message] = 'Error al actualizar acuerdo'
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+        response[:redirect_url] = ""
       end
+
       response[:object] = new_admission
       format.json {render json: response}
     end

@@ -9,24 +9,30 @@ class ProfessionalExamsController < ApplicationController
     response = {}
 
     respond_to do |format|
-      if professional_exam.save
-
-        agreement = professional_exam.build_agreement
-        agreement.description = params[:description]
-        agreement.meeting_id = params[:meeting_id]
+      if is_admin?
         if professional_exam.save
-          response[:message] = "Acuerdo creado"
-          response[:redirect_url] = "agreements/#{agreement.id}"
-        else
-          response[:message] = "Error al registrar examen de grado"
-          response[:redirect_url] = "meetings/#{agreement.meeting_id}/professional_exams/new"
-        end
 
+          agreement = professional_exam.build_agreement
+          agreement.description = params[:description]
+          agreement.meeting_id = params[:meeting_id]
+          if professional_exam.save
+            response[:message] = "Acuerdo creado"
+            response[:redirect_url] = "agreements/#{agreement.id}"
+          else
+            response[:message] = "Error al registrar examen de grado"
+            response[:redirect_url] = "meetings/#{agreement.meeting_id}/professional_exams/new"
+          end
+
+        else
+          response[:message] = "Error al crear acuerdo"
+          response[:errors] = professional_exam.errors.full_messages
+          response[:redirect_url] = "meetings/#{params[:meeting_id]}/professional_exams/new"
+        end
       else
-        response[:message] = "Error al crear acuerdo"
-        response[:errors] = professional_exam.errors.full_messages
-        response[:redirect_url] = "meetings/#{params[:meeting_id]}/professional_exams/new"
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+        response[:redirect_url] = ""
       end
+
       format.json {render json: response}
     end
 
@@ -41,17 +47,23 @@ class ProfessionalExamsController < ApplicationController
       data = {}
       data = professional_exam_params
       data[:exam_date] = get_datetime(params)
-      if professional_exam.update(data)
-        professional_exam.agreement.update(description:params[:description])
+      if is_admin?
+        if professional_exam.update(data)
+          professional_exam.agreement.update(description:params[:description])
 
-        response[:message] = 'Acuerdo actualizado'
-        response[:redirect_url] = "agreements/#{professional_exam.agreement.id}"
+          response[:message] = 'Acuerdo actualizado'
+          response[:redirect_url] = "agreements/#{professional_exam.agreement.id}"
 
+        else
+          response[:message] = 'Error al actualizar acuerdo'
+          response[:redirect_url] = "agreements/#{professional_exam.agreement.id}"
+
+        end
       else
-        response[:message] = 'Error al actualizar acuerdo'
-        response[:redirect_url] = "agreements/#{professional_exam.agreement.id}"
-
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+        response[:redirect_url] = ""
       end
+
       response[:object] = professional_exam
       format.json {render json: response}
     end
