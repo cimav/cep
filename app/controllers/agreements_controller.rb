@@ -53,7 +53,7 @@ class AgreementsController < ApplicationController
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'
       end
-      response[:redirect_url] = "agreements/#{agreement.id}"
+      response[:redirect_url] = "meetings/#{agreement.meeting_id}"
       response[:errors] = agreement.errors.full_messages
       format.json {render json: response}
     end

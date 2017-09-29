@@ -9,8 +9,9 @@ class Meeting < ApplicationRecord
 
   OPENED = 1
   CLOSED = 2
+  DELETED = 5
 
-  MEETING_STATUS = {OPENED => 'Abierta', CLOSED => 'Cerrada'}
+  MEETING_STATUS = {OPENED => 'Abierta', CLOSED => 'Cerrada', DELETED => 'Eliminada'}
 
   def get_type
     MEETING_TYPES[self.meeting_type]

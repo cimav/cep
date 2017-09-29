@@ -16,7 +16,7 @@ class Agreement < ApplicationRecord
   DELETED = 5
 
 
-  STATUS = {OPEN=>'Abierto', CLOSE=>'Cerrado', TO_COMMITTEE=> 'Enviado a comité'}
+  STATUS = {OPEN=>'Abierto', CLOSE=>'Cerrado', TO_COMMITTEE=> 'Enviado a comité', DELETED =>'Eliminado'}
   DECISIONS = {ACCEPTED =>'Aceptado', REJECTED => 'Rechazado', TO_COMMITTEE => 'Resolver en comité'}
 
   before_create do
