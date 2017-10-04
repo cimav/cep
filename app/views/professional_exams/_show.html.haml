@@ -95,9 +95,9 @@
             Fecha de inicio:
           =agreeable.student.start_date
       .card-action
-        %a.btn-floating.tooltipped.purple.modal-trigger{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Documentos", href: "#modalDocumentos"}
+        %a#documentos-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Documentos", "data-remote"=>"true", href:"/agreements/#{agreeable.agreement.id}/files"}
           %i.fa.fa-folder{"aria-hidden"=>true}
-        %a.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante"}
+        %a#expediente-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante", "data-remote"=>"true", href:"#"}
           %i.fa.fa-book{"aria-hidden"=>true}
     .card.amber.darken-3.white-text
       .card-content
@@ -109,8 +109,14 @@
     %h4 Documentos
     #agreement_files
   .modal-footer
-    %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:href => "#!"} Agree
+    %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cerrar
+
+#modalExpediente.modal
+  .modal-content
+    %h4 Expediente del estudiante
+    #expediente
+  .modal-footer
+    %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cerrar
 
 
-:javascript
-  refreshFiles(#{agreeable.agreement.id});
+

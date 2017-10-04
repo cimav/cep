@@ -1,5 +1,4 @@
 class MeetingsController < ApplicationController
-  before_action :auth_required
 
   def index
     @meetings = Meeting.all.order(date: :desc)
@@ -19,8 +18,6 @@ class MeetingsController < ApplicationController
     end
     @agreement_type_name = @agreement_type_name[0...@agreement_type_name.length-1]
     @agreement_type_value = @agreement_type_value[0...@agreement_type_value.length-1]
-    puts @agreement_type_name
-    puts @agreement_type_value
 
 
     render layout: false

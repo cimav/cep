@@ -6,26 +6,50 @@ $(document)
 
 
 //------------------------------------------------
-//Carga el new de cada tipo de acuerdo en un modal
+//Carga los documentos de acuerdo en un modal
 //------------------------------------------------
-    .on('ajax:success', '.agreement-new', function (evt, data, status, xhr) {
-        $('#agreement_new .modal-content').html(data);
+    .on('ajax:success', '#documentos-trigger', function (evt, data, status, xhr) {
+        $('#modalDocumentos #agreement_files').html(data);
     })
 
-    .on('ajax:beforeSend', '.agreement-new', function (evt, data, status, xhr) {
-        $('#agreement_new .modal-content').html('');
+    .on('ajax:beforeSend', '#documentos-trigger', function (evt, data, status, xhr) {
+        $('modalDocumentos #agreement_files').html('');
         $('#preloader-new-agreement').show();
-        $('#agreement_new').modal('open');
+        $('#modalDocumentos').modal('open');
     })
 
-    .on('ajax:complete', '.agreement-new', function (evt, data, status, xhr) {
+    .on('ajax:complete', '#documentos-trigger', function (evt, data, status, xhr) {
         $('#preloader-new-agreement').hide();
     })
 
-    .on('ajax:error', '.agreement-new', function (evt, data, status, xhr) {
-        Materialize.toast("Error al crear acuerdo", 4000)
-        $('#agreement_new').modal('close');
+    .on('ajax:error', '#documentos-trigger', function (evt, data, status, xhr) {
+        Materialize.toast("Error al mostrar documentos", 4000)
+        $('#modalDocumentos').modal('close');
     })
+
+
+//------------------------------------------------
+//Carga el expediente del estudiante en un modal
+//------------------------------------------------
+    .on('ajax:success', '#expediente-trigger', function (evt, data, status, xhr) {
+        $('#modalExpediente #expediente').html(data);
+    })
+
+    .on('ajax:beforeSend', '#expediente-trigger', function (evt, data, status, xhr) {
+        $('modalExpediente #expediente').html('');
+        $('#preloader-new-agreement').show();
+        $('#modalExpediente').modal('open');
+    })
+
+    .on('ajax:complete', '#expediente-trigger', function (evt, data, status, xhr) {
+        $('#preloader-new-agreement').hide();
+    })
+
+    .on('ajax:error', '#expediente-trigger', function (evt, data, status, xhr) {
+        Materialize.toast("Error al mostrar documentos", 4000)
+        $('#modalExpediente').modal('close');
+    })
+
 
 //-------------------------------------
 //función genérica para mostrar alertas
