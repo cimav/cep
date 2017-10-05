@@ -176,6 +176,10 @@ class AgreementsController < ApplicationController
     send_file file.to_s, disposition:'inline'
   end
 
+  def student_record
+    render layout:false
+  end
+
 
   private
 

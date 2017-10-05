@@ -13,13 +13,13 @@ $(document)
     })
 
     .on('ajax:beforeSend', '#documentos-trigger', function (evt, data, status, xhr) {
-        $('modalDocumentos #agreement_files').html('');
-        $('#preloader-new-agreement').show();
+        $('#modalDocumentos #agreement_files').html('');
+        $('#preloader-documentos').show();
         $('#modalDocumentos').modal('open');
     })
 
     .on('ajax:complete', '#documentos-trigger', function (evt, data, status, xhr) {
-        $('#preloader-new-agreement').hide();
+        $('#preloader-documentos').hide();
     })
 
     .on('ajax:error', '#documentos-trigger', function (evt, data, status, xhr) {
@@ -36,13 +36,13 @@ $(document)
     })
 
     .on('ajax:beforeSend', '#expediente-trigger', function (evt, data, status, xhr) {
-        $('modalExpediente #expediente').html('');
-        $('#preloader-new-agreement').show();
+        $('#modalExpediente #expediente').html('');
+        $('#preloader-expediente').show();
         $('#modalExpediente').modal('open');
     })
 
     .on('ajax:complete', '#expediente-trigger', function (evt, data, status, xhr) {
-        $('#preloader-new-agreement').hide();
+        $('#preloader-expediente').hide();
     })
 
     .on('ajax:error', '#expediente-trigger', function (evt, data, status, xhr) {

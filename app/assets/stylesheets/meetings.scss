@@ -2,20 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#agreement_types{
-
-}
-
-#preloader-agreement{
-  margin-top: 6em;
-  display: none;
-}
-#preloader-agreement{
+#preloader-agreement, #preloader-expediente, #preloader-documentos{
   margin-top: 6em;
   display: none;
 }
 
-#preloader-new-agreement{
-  margin-top: 6em;
-  display: none;
-}
