@@ -177,6 +177,7 @@ class AgreementsController < ApplicationController
   end
 
   def student_record
+    @student = Student.find(params[:student_id])
     render layout:false
   end
 

@@ -1,0 +1,2 @@
+class TermStudent < RemoteModels
+end
