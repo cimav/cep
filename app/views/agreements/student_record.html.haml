@@ -6,6 +6,7 @@
       =@student.full_name
     %b Promedio:
     =@student.get_average
+    %br
     %b Director:
     =Staff.find(@student.supervisor).full_name
 
