@@ -78,13 +78,16 @@
 
         .row
           .larger-text.bold
-            =@student.thesis.title
+            -if @student.thesis.title.nil?
+              Sin título
+            -else
+              @student.thesis.title
         .row
           %b Estatus:
-          =@student.thesis.status_type
+          =@student.thesis.status_type rescue ""
           %br
           %b Fecha de defensa:
-          =@student.thesis.defence_date.strftime("%d %B %Y  %H:%M")
+          =@student.thesis.defence_date.strftime("%d %B %Y  %H:%M") rescue ""
 
         .row
           %b Sinodales:
