@@ -13,7 +13,7 @@
       %br
       %b
         Fecha de inicio:
-      =@student.start_date
+      =@student.start_date.strftime("%d %b %Y") rescue ""
       %br
       %b
         Estatus:
@@ -30,11 +30,11 @@
       %li.tab.col.s3
         %a{:href => "#test2"} Tesis
       %li.tab.col.s3
-        %a{:href => "#test3"} Test 3
+        %a{:href => "#test3"} Avances
       %li.tab.col.s3
         %a{:href => "#test4"} Test 4
 
-  / Kardex
+  ////////////////////////////////////////////////////////////////////////////// Kardex
   #test1.col.s12
     .card-panel
 
@@ -65,51 +65,50 @@
                         =tcs.grade
                     -else
                       =tcs.grade
-
-      %br
-      %br
-      %b.blue-grey-text
-        Promedio:
-        =@student.get_average
-  / Tesis
+      .section
+        %b.blue-grey-text
+          Promedio:
+          =@student.get_average
+  /////////////////////////////////////////////////////////////////////////// Tesis
   #test2.col.s12
     .card-panel
-      .tesis
+      .section
 
-        .row
-          .larger-text.bold
-            -if @student.thesis.title.nil?
-              Sin título
-            -else
-              @student.thesis.title
-        .row
-          %b Estatus:
-          =@student.thesis.status_type rescue ""
-          %br
-          %b Fecha de defensa:
-          =@student.thesis.defence_date.strftime("%d %B %Y  %H:%M") rescue ""
-
-        .row
-          %b Sinodales:
-          %br
-          -if !@student.thesis.examiner1.nil?
-            =Staff.find(@student.thesis.examiner1).full_name
-          %br
-          -if !@student.thesis.examiner2.nil?
-            =Staff.find(@student.thesis.examiner2).full_name
-          %br
-          -if !@student.thesis.examiner3.nil?
-            =Staff.find(@student.thesis.examiner3).full_name
-          %br
-          -if !@student.thesis.examiner4.nil?
-            =Staff.find(@student.thesis.examiner4).full_name
-          %br
-          -if !@student.thesis.examiner5.nil?
-            =Staff.find(@student.thesis.examiner5).full_name
+        .larger-text.bold
+          -if @student.thesis.title.nil?
+            Sin título
+          -else
+            @student.thesis.title
+      .section
+        %b Estatus:
+        =@student.thesis.status_type rescue ""
+        %br
+        %b Fecha de defensa:
+        =@student.thesis.defence_date.strftime("%d %b %Y  %H:%M") rescue ""
+      .section
+        %b Sinodales:
+        %br
+        -if !@student.thesis.examiner1.nil?
+          =Staff.find(@student.thesis.examiner1).full_name
+        %br
+        -if !@student.thesis.examiner2.nil?
+          =Staff.find(@student.thesis.examiner2).full_name
+        %br
+        -if !@student.thesis.examiner3.nil?
+          =Staff.find(@student.thesis.examiner3).full_name
+        %br
+        -if !@student.thesis.examiner4.nil?
+          =Staff.find(@student.thesis.examiner4).full_name
+        %br
+        -if !@student.thesis.examiner5.nil?
+          =Staff.find(@student.thesis.examiner5).full_name
 
 
+  /////////////////////////////////////////////////////////////////////// Avances
+  #test3.col.s12
+    .card-panel
 
-  #test3.col.s12 Test 3
+
   #test4.col.s12 Test 4
 
 :javascript
