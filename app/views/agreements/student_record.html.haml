@@ -2,31 +2,110 @@
   .col.l2
     %img#imagen-expediente.responsive-img.circle{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{@student.id}"}
   .col.l10
-    %h5
-      =@student.full_name
-    %b Promedio:
-    =@student.get_average
-    %br
-    %b Director:
-    =Staff.find(@student.supervisor).full_name
-
+    .row
+      %h5
+        =@student.full_name
+      %b Programa:
+      =@student.program.name
+      %br
+      %b Director:
+      =Staff.find(@student.supervisor).full_name
+      %br
+      %b
+        Fecha de inicio:
+      =@student.start_date
+      %br
+      %b
+        Estatus:
+      =@student.get_status
+      %br
+      %b
+        Campus:
+      =@student.campus.name
 .row
   .col.s12
     %ul.tabs
       %li.tab.col.s3
         %a.activet{:href => "#test1"} Calificaciones
       %li.tab.col.s3
-        %a{:href => "#test2"} Test 2
+        %a{:href => "#test2"} Tesis
       %li.tab.col.s3
         %a{:href => "#test3"} Test 3
       %li.tab.col.s3
         %a{:href => "#test4"} Test 4
+
+  / Kardex
   #test1.col.s12
     .card-panel
-      blabla
+
+      %table.striped
+        %thead
+          %tr
+            %th
+              Ciclo
+            %th
+              Materia
+            %th
+              Calificación
+        %tbody
+          -@student.term_students.each do |ts|
+            -ts.term_course_student.where(:status => TermCourseStudent::ACTIVE).each do |tcs|
+              %tr
+                %td
+                  =tcs.term_course.term.name
+                %td
+                  =tcs.term_course.course.name
+                %td
+                  -if tcs.grade.nil? && (tcs.term_course.term.status == Term::PROGRESS || tcs.term_course.term.status == Term::OPEN)
+                    .grey-text
+                      Cursando
+                  -else
+                    -if tcs.grade <70
+                      .red-text
+                        =tcs.grade
+                    -else
+                      =tcs.grade
+
       %br
-      blabla
+      %br
+      %b.blue-grey-text
+        Promedio:
+        =@student.get_average
+  / Tesis
   #test2.col.s12
+    .card-panel
+      .tesis
+
+        .row
+          .larger-text.bold
+            =@student.thesis.title
+        .row
+          %b Estatus:
+          =@student.thesis.status_type
+          %br
+          %b Fecha de defensa:
+          =@student.thesis.defence_date.strftime("%d %B %Y  %H:%M")
+
+        .row
+          %b Sinodales:
+          %br
+          -if !@student.thesis.examiner1.nil?
+            =Staff.find(@student.thesis.examiner1).full_name
+          %br
+          -if !@student.thesis.examiner2.nil?
+            =Staff.find(@student.thesis.examiner2).full_name
+          %br
+          -if !@student.thesis.examiner3.nil?
+            =Staff.find(@student.thesis.examiner3).full_name
+          %br
+          -if !@student.thesis.examiner4.nil?
+            =Staff.find(@student.thesis.examiner4).full_name
+          %br
+          -if !@student.thesis.examiner5.nil?
+            =Staff.find(@student.thesis.examiner5).full_name
+
+
+
   #test3.col.s12 Test 3
   #test4.col.s12 Test 4
 

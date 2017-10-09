@@ -35,7 +35,13 @@ $color-menu: #21272e;
       //background-color: #20AAEA;
       border-left: 2px solid #20AAEA;
 
-      li:hover, li.active{
+      li:hover{
+        background-color: #125b7c;
+        border-left: inherit;
+        //border-left: 2px solid darkgray;
+      }
+      li.active{
+        border-left: inherit;
         background-color: #20AAEA;
         //border-left: 2px solid darkgray;
       }
@@ -86,4 +92,8 @@ header, main, footer {
 }
 .container{
   padding-top: 15px;
+}
+
+.larger-text{
+  font-size: larger;
 }

@@ -2,6 +2,7 @@ class Student < RemoteModels
   belongs_to :program
   belongs_to :campus
   has_many :term_students
+  has_one :thesis
 
   def full_name
     "#{self.first_name} #{self.last_name}"
