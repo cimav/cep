@@ -4,6 +4,8 @@ class Student < RemoteModels
   has_many :term_students
   has_one :thesis
   has_many :advance
+  has_many :professional_exams
+  has_many :new_admissions
 
   def full_name
     "#{self.first_name} #{self.last_name}"

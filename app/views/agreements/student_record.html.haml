@@ -32,7 +32,7 @@
       %li.tab.col.s3
         %a{:href => "#test3"} Avances
       %li.tab.col.s3
-        %a{:href => "#test4"} Test 4
+        %a{:href => "#test4"} CEP
 
   ////////////////////////////////////////////////////////////////////////////// Kardex
   #test1.col.s12
@@ -106,41 +106,55 @@
 
   /////////////////////////////////////////////////////////////////////// Avances
   #test3.col.s12
-    -@student.advance.each do |advance|
-      .divider
+    -if @student.advance.size >0
+      -@student.advance.each do |advance|
+
+        .card-panel
+          .larger-text
+            =advance.get_type
+            =advance.advance_date.strftime("%b %Y") rescue "Sin fecha programada"
+          %b Título:
+          =advance.title
+          %br
+          %b Fecha de presentación:
+          =advance.advance_date.strftime("%d %b %Y  %H:%M") rescue ""
+          %br
+          .section
+            %b Comité tutoral:
+            %br
+            -if !advance.tutor1.nil?
+              =Staff.find(advance.tutor1).full_name
+            %br
+            -if !advance.tutor2.nil?
+              =Staff.find(advance.tutor2).full_name
+            %br
+            -if !advance.tutor3.nil?
+              =Staff.find(advance.tutor3).full_name
+            %br
+            -if !advance.tutor4.nil?
+              =Staff.find(advance.tutor4).full_name
+            %br
+            -if !advance.tutor5.nil?
+              =Staff.find(advance.tutor5).full_name
+          .section
+            %b Notas:
+            %br
+            =advance.notes.gsub(/\n/, '<br/>').html_safe
+        .divider
+    -else
       .card-panel
         .larger-text
-          =advance.get_type
-          =advance.advance_date.strftime("%b %Y") rescue "Sin fecha programada"
-        %b Título:
-        =advance.title
-        %br
-        %b Fecha de presentación:
-        =advance.advance_date.strftime("%d %b %Y  %H:%M") rescue ""
-        %br
-        .section
-          %b Comité tutoral:
-          %br
-          -if !advance.tutor1.nil?
-            =Staff.find(advance.tutor1).full_name
-          %br
-          -if !advance.tutor2.nil?
-            =Staff.find(advance.tutor2).full_name
-          %br
-          -if !advance.tutor3.nil?
-            =Staff.find(advance.tutor3).full_name
-          %br
-          -if !advance.tutor4.nil?
-            =Staff.find(advance.tutor4).full_name
-          %br
-          -if !advance.tutor5.nil?
-            =Staff.find(advance.tutor5).full_name
-        .section
-          %b Notas:
-          %br
-          =advance.notes.gsub(/\n/, '<br/>').html_safe
+          No hay avances
 
-  #test4.col.s12 Test 4
+  /////////////////////////////////////////////////////////////////////// Comité
+  #test4.col.s12
+    .card-panel
+      -student_agreements = []
+      -student_agreements << @student.professional_exams
+      -student_agreements << @student.new_admissions
+      -student_agreements.each do |agreement_types|
+        -agreement_types.each do |agreement_type|
+          =agreement_type.agreement.agreeable_type
 
 :javascript
   $(document).ready(function(){
