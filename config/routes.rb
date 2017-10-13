@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/agreements/:id/files' => 'agreements#agreement_files'
   get '/agreement_files/:id' => 'agreements#display_agreement_file'
   get '/agreements/:id/student_record/:student_id' => 'agreements#student_record'
-
+  delete '/agreements/:id' => 'agreements#destroy'
 
   post '/meetings/:meeting_id/synod_designations' => 'synod_designations#create'
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'

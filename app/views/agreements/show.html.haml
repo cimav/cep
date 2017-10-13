@@ -1,42 +1,46 @@
-.container
-  .row
-    %h1.center
-      =@agreement.get_type
-      .chip.amber
-        -if @agreement.status.eql? Agreement::CLOSE
-          %i.fa.fa-lock{"aria-hidden"=>true}
-        -else
-          %i.fa.fa-unlock{"aria-hidden"=>true}
-      -if @agreement.decision
-        -color = 'green'
-        -case @agreement.decision
-          -when Agreement::ACCEPTED
-            -color = 'green'
-          -when Agreement::REJECTED
-            -color = 'orange'
-        .chip{class:color}
-          ="#{@agreement.get_decision}"
-
-.row
-  =render partial:"#{@agreement.agreeable.class.table_name}/show", locals:{agreeable:@agreement.agreeable}
--if is_admin?
-  .row
-    .fixed-action-btn.toolbar
-      %a.btn-floating.btn-large.blue
-        %i.large.fa.fa-pencil{"aria-hidden"=>true}
-      %ul.padding-content
-        %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar acuerdo"}
-          %a.ajax-item{:href => "/meetings/#{@agreement.meeting.id}/agreements/#{@agreement.id}", "data-remote"=>"true", url:"meetings/#{@agreement.meeting.id}/agreements/#{@agreement.id}"}
-            %i.fa.fa-pencil{"aria-hidden"=>true}
-        %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Cerrar votación"}
-          %a{:href => "#!"}
+-if @agreement.status.eql? Agreement::DELETED
+  %h1.center.red
+    Acuerdo eliminado
+-else
+  .container
+    .row
+      %h1.center
+        =@agreement.get_type
+        .chip.amber
+          -if @agreement.status.eql? Agreement::CLOSE
             %i.fa.fa-lock{"aria-hidden"=>true}
-        %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar"}
-          %a{:href => "#!"}
+          -else
             %i.fa.fa-unlock{"aria-hidden"=>true}
-        %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Borrar acuerdo"}
-          %a.ajax-item{:href => "/agreements/#{@agreement.id}", "data-remote"=>"true"}
-            %i.fa.fa-trash{"aria-hidden"=>true}
+        -if @agreement.decision
+          -color = 'green'
+          -case @agreement.decision
+            -when Agreement::ACCEPTED
+              -color = 'green'
+            -when Agreement::REJECTED
+              -color = 'orange'
+          .chip{class:color}
+            ="#{@agreement.get_decision}"
+
+  .row
+    =render partial:"#{@agreement.agreeable.class.table_name}/show", locals:{agreeable:@agreement.agreeable}
+  -if is_admin?
+    .row
+      .fixed-action-btn.toolbar
+        %a.btn-floating.btn-large.blue
+          %i.large.fa.fa-pencil{"aria-hidden"=>true}
+        %ul.padding-content
+          %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar acuerdo"}
+            %a.ajax-item{:href => "/meetings/#{@agreement.meeting.id}/agreements/#{@agreement.id}", "data-remote"=>"true", url:"meetings/#{@agreement.meeting.id}/agreements/#{@agreement.id}"}
+              %i.fa.fa-pencil{"aria-hidden"=>true}
+          %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Cerrar votación"}
+            %a{:href => "#!"}
+              %i.fa.fa-lock{"aria-hidden"=>true}
+          %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar"}
+            %a{:href => "#!"}
+              %i.fa.fa-unlock{"aria-hidden"=>true}
+          %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Borrar acuerdo"}
+            %a.ajax-item{:href => "/agreements/#{@agreement.id}", "data-remote"=>"true", "data-method"=>"delete"}
+              %i.fa.fa-trash{"aria-hidden"=>true}
 
 :javascript
   $('select').material_select();
