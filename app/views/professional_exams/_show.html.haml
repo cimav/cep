@@ -1,6 +1,6 @@
 
 .row
-  .col.l9
+  .col.l9.m9
 
     .row
       .card
@@ -48,15 +48,15 @@
                   Enviar respuesta
                 =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas refresh'} do |f|
                   .row
-                    .col.l4.input-field
+                    .col.l4.m4.input-field
                       =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --'}, {required:true}
                       =f.label :answer, 'Respuesta'
-                    .col.l4.input-field
+                    .col.l4.m4.input-field
                       =f.text_field :comment
                       =f.label :comment, 'Comentarios', class:'active'
-                    .col.l4.input-field.center
+                    .col.l4.m4.input-field.center
                       =f.submit 'Enviar', class:'btn brown'
-  .col.l3
+  .col.l3.m3
 
     .card.blue.white-text
       .card-content

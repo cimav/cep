@@ -1,7 +1,7 @@
 .row
-  .col.l2
+  .col.l2.m2
     %img#imagen-expediente.responsive-img.circle{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{@student.id}"}
-  .col.l10
+  .col.l10.m10
     .row
       %h5
         =@student.full_name
@@ -23,7 +23,7 @@
         Campus:
       =@student.campus.name
 .row
-  .col.s12
+  .col.s12.m12
     %ul.tabs
       %li.tab.col.s3
         %a.activet{:href => "#test1"} Calificaciones
@@ -35,7 +35,7 @@
         %a{:href => "#expediente-comite"} CEP
 
   ////////////////////////////////////////////////////////////////////////////// Kardex
-  #test1.col.s12
+  #test1.col.s12.m12.l12
     .card-panel
 
       %table.striped
@@ -70,7 +70,7 @@
           Promedio:
           =@student.get_average
   /////////////////////////////////////////////////////////////////////////// Tesis
-  #test2.col.s12
+  #test2.col.s12.m12
     .card-panel
       .section
 
@@ -105,7 +105,7 @@
 
 
   /////////////////////////////////////////////////////////////////////// Avances
-  #test3.col.s12
+  #test3.col.s12.m12
     -if @student.advance.size >0
       -@student.advance.each do |advance|
 
@@ -147,7 +147,7 @@
           No hay avances
 
   /////////////////////////////////////////////////////////////////////// Comité
-  #expediente-comite.col.s12
+  #expediente-comite.col.s12.m12
     .card-panel
       -student_agreements = []
       -student_agreements << @student.professional_exams

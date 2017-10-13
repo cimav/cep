@@ -1,36 +1,36 @@
-.container
+
+.row
+  %h3 Designación de sinodales
+
+=form_for @synod_designation, class:'alertas', url:"/meetings/#{@meeting_id}/synod_designations" do |f|
+  .row.input-field
+    %label.active{:for => "agreement_description"} Descripción
+    =text_field_tag :description
+  .row.input-field
+    %label.active{:for => "student_id"} Estudiante
+    =f.collection_select :student_id, Student.all, :id, :full_name,prompt: true
   .row
-    %h3 Designación de sinodales
-
-  =form_for @synod_designation, class:'alertas', url:"/meetings/#{@meeting_id}/synod_designations" do |f|
-    .row.input-field
-      %label.active{:for => "agreement_description"} Descripción
-      =text_field_tag :description
-    .row.input-field
-      %label.active{:for => "student_id"} Estudiante
-      =f.collection_select :student_id, Student.all, :id, :full_name,prompt: true
-    .row
-      .col.l1
-      .col.l11
-        .row.input-field
-          %label.active{:for => "synodal1"} Sinodal 1
-          =f.collection_select :synodal1, @staffs, :id, :full_name,prompt: true
-        .row.input-field
-          %label.active{:for => "synodal2"} Sinodal 2
-          =f.collection_select :synodal2,  Staff.all, :id, :full_name,prompt: true
-        .row.input-field
-          %label.active{:for => "synodal"} Sinodal 3
-          =f.collection_select 'synodal3', Staff.all, :id, :full_name,prompt: true
-        .row.input-field
-          %label.active{:for => "synodal4"} Sinodal 4
-          =f.collection_select 'synodal4',  Staff.all, :id, :full_name,prompt: true
-        .row.input-field
-          %label.active{:for => "synodal5"} Sinodal 5
-          =f.collection_select 'synodal5',  Staff.all, :id, :full_name,prompt: true
+    .col.l1.m1
+    .col.l11.m11
+      .row.input-field
+        %label.active{:for => "synodal1"} Sinodal 1
+        =f.collection_select :synodal1, @staffs, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => "synodal2"} Sinodal 2
+        =f.collection_select :synodal2,  Staff.all, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => "synodal"} Sinodal 3
+        =f.collection_select 'synodal3', Staff.all, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => "synodal4"} Sinodal 4
+        =f.collection_select 'synodal4',  Staff.all, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => "synodal5"} Sinodal 5
+        =f.collection_select 'synodal5',  Staff.all, :id, :full_name,prompt: true
 
 
-    .row
-      =f.submit 'Crear', class:'btn'
+  .row
+    =f.submit 'Crear', class:'btn'
 
 :javascript
     $('select').material_select();

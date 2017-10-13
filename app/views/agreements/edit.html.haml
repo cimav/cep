@@ -1,9 +1,9 @@
-.container
-  .row
-    .chip.right
-      =@agreement.get_type
-  .row
-    =render partial:"#{@agreement.agreeable.class.table_name}/edit", locals:{agreeable:@agreement.agreeable}
+
+.row
+  .chip.right
+    =@agreement.get_type
+.row
+  =render partial:"#{@agreement.agreeable.class.table_name}/edit", locals:{agreeable:@agreement.agreeable}
 
 :javascript
     $('select').material_select();

@@ -12,6 +12,7 @@ class HomeController < ApplicationController
   end
 
   def menu_items
+    @meetings = Meeting.where.not(status:Meeting::DELETED)
     render layout:false
   end
 end

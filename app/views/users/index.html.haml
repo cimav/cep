@@ -1,19 +1,19 @@
-.container
-  .row
-    .col.l12
-      %h1
-        Administradores
-      .collection
-        -@admins.each do |user|
-          =link_to edit_user_path(user.id), class:'collection-item ajax-item', remote:true, url:"users/#{user.id}/edit" do
-            =user.name
 
-      %h1
-        Miembros del CEP
-      .collection
-        -@ceps.each do |user|
-          =link_to edit_user_path(user.id), class:'collection-item ajax-item', remote:true, url:"users/#{user.id}/edit" do
-            =user.name
+.row
+  .col.l12.m12
+    %h1
+      Administradores
+    .collection
+      -@admins.each do |user|
+        =link_to edit_user_path(user.id), class:'collection-item ajax-item', remote:true, url:"users/#{user.id}/edit" do
+          =user.name
+
+    %h1
+      Miembros del CEP
+    .collection
+      -@ceps.each do |user|
+        =link_to edit_user_path(user.id), class:'collection-item ajax-item', remote:true, url:"users/#{user.id}/edit" do
+          =user.name
 
 .fixed-action-btn
   %a.btn-floating.btn-large.red.tooltipped.ajax-item{href:'/users/new',"data-position" => "left", "data-tooltip" => "Nuevo usuario", "data-delay" => "100", url:"users/new", "data-remote"=>"true"}

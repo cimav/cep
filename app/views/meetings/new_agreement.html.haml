@@ -1,14 +1,14 @@
-.container
-  %h3
-    Selecciona el tipo de acuerdo
-  .row
-    .col.l4
-      .card-panel
-        =link_to 'Designación de sinodales', "/meetings/#{@meeting.id}/synod_designations/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/synod_designations/new"
-    .col.l4
-      .card-panel
-        =link_to 'Nuevo ingreso', "/meetings/#{@meeting.id}/new_admissions/new", remote:true, class:'ajax-item', url: "meetings/#{@meeting.id}/new_admissions/new"
 
-    .col.l4
-      .card-panel
-        =link_to 'Examen de grado', "/meetings/#{@meeting.id}/professional_exams/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/professional_exams/new"
+%h3
+  Selecciona el tipo de acuerdo
+.row
+  .col.l4.m4
+    .card-panel
+      =link_to 'Designación de sinodales', "/meetings/#{@meeting.id}/synod_designations/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/synod_designations/new"
+  .col.l4.m4
+    .card-panel
+      =link_to 'Nuevo ingreso', "/meetings/#{@meeting.id}/new_admissions/new", remote:true, class:'ajax-item', url: "meetings/#{@meeting.id}/new_admissions/new"
+
+  .col.l4.m4
+    .card-panel
+      =link_to 'Examen de grado', "/meetings/#{@meeting.id}/professional_exams/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/professional_exams/new"

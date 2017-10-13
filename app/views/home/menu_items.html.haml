@@ -8,7 +8,7 @@
           %i.fa.fa-bank.white-text{"aria-hidden" => "true"}
     .collapsible-body
       %ul.collapsible
-        -Meeting.all.each do |meeting|
+        -@meetings.each do |meeting|
           %li
             .collapsible-header.meeting-item{url:"meetings/#{meeting.id}"}
               =meeting.id_key
@@ -17,7 +17,7 @@
 
             .collapsible-body
               %ul.agreement-list
-                -meeting.agreement.each do |agreement|
+                -meeting.agreement.where.not(status:Agreement::DELETED).each do |agreement|
                   %li
                     %ul.collection
                       =link_to agreement, remote:true, url:"agreements/#{agreement.id}", class:'menu-item' do
@@ -25,9 +25,9 @@
 
                           .row
 
-                            .col.l3
+                            .col.l3.m3
                               %i.fa.fa-list.circle.blue{"aria-hidden"=>true}
-                            .col.l9
+                            .col.l9.m9
                               %span.title
                                 =agreement.id_key
                               %p

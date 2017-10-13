@@ -1,26 +1,26 @@
-.container
-  .row
-    =form_for @meeting, html:{remote:true, class:'alertas redirect'} do |f|
-      .row
-        .input-field.col.l4
-          %h5 Tipo de reunión
-          .row
-            =f.radio_button :meeting_type, Meeting::ORDINARY, checked:'checked'
-            =f.label :meeting_type, 'Ordinaria', value:Meeting::ORDINARY
-          .row
-            =f.radio_button :meeting_type, Meeting::EXTRAORDINARY
-            =f.label :meeting_type, 'Extraordinaria', value:Meeting::EXTRAORDINARY
-        .input-field.col.l4
 
-          %h5 Fecha
-          =text_field_tag :date , @date, class: "datepicker",placeholder:'Selecciona la fecha de la reunión'
+.row
+  =form_for @meeting, html:{remote:true, class:'alertas redirect'} do |f|
+    .row
+      .input-field.col.l4.m4
+        %h5 Tipo de reunión
+        .row
+          =f.radio_button :meeting_type, Meeting::ORDINARY, checked:'checked'
+          =f.label :meeting_type, 'Ordinaria', value:Meeting::ORDINARY
+        .row
+          =f.radio_button :meeting_type, Meeting::EXTRAORDINARY
+          =f.label :meeting_type, 'Extraordinaria', value:Meeting::EXTRAORDINARY
+      .input-field.col.l4.m4
 
-        .input-field.col.l4
-          %h5 Hora
-          =text_field_tag :time,@time, class: "timepicker",placeholder:'Selecciona la hora de la reunión',:type => "time"
-      .row
-        .input-field
-          =f.submit 'Actualizar reunión', class:'btn'
+        %h5 Fecha
+        =text_field_tag :date , @date, class: "datepicker",placeholder:'Selecciona la fecha de la reunión'
+
+      .input-field.col.l4.m4
+        %h5 Hora
+        =text_field_tag :time,@time, class: "timepicker",placeholder:'Selecciona la hora de la reunión',:type => "time"
+    .row
+      .input-field
+        =f.submit 'Actualizar reunión', class:'btn'
 
 :javascript
    $('.datepicker').pickadate({

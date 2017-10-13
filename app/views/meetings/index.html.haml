@@ -1,23 +1,23 @@
-.container
-  %h1 Reuniones
-  .collection
-    -@meetings.each do |meeting|
-      =link_to "/meetings/#{meeting.id}/edit", class:'collection-item avatar ajax-item', remote:true, url:"meetings/#{meeting.id}/edit" do
-        -if meeting.status == Meeting::OPENED
-          %i.fa.fa-unlock.circle.blue{"aria-hidden" => "true"}
-        -else
-          %i.fa.fa-lock.circle{"aria-hidden" => "true"}
 
-        %span.title
-        =meeting.date.day
-        \/
-        =get_month_name(meeting.date.month.to_i).capitalize
-        \/
-        =meeting.date.year
-        %p
-          =meeting.get_type
-          %br/
-          =meeting.get_status
+%h1 Reuniones
+.collection
+  -@meetings.each do |meeting|
+    =link_to "/meetings/#{meeting.id}/edit", class:'collection-item avatar ajax-item', remote:true, url:"meetings/#{meeting.id}/edit" do
+      -if meeting.status == Meeting::OPENED
+        %i.fa.fa-unlock.circle.blue{"aria-hidden" => "true"}
+      -else
+        %i.fa.fa-lock.circle{"aria-hidden" => "true"}
+
+      %span.title
+      =meeting.date.day
+      \/
+      =get_month_name(meeting.date.month.to_i).capitalize
+      \/
+      =meeting.date.year
+      %p
+        =meeting.get_type
+        %br/
+        =meeting.get_status
         / Element Showed
 
 
