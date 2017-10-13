@@ -1,8 +1,7 @@
 class AgreementsController < ApplicationController
   before_action :auth_required
 
-  skip_before_action :verify_authenticity_token
-  before_action
+
 
   def index
     @agreements = Agreement.all
@@ -42,6 +41,7 @@ class AgreementsController < ApplicationController
 
   def destroy
     agreement = Agreement.find(params[:id])
+    response = {}
     respond_to do |format|
       if is_admin?
         agreement.status = Agreement::DELETED

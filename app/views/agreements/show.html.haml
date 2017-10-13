@@ -39,7 +39,7 @@
             %a{:href => "#!"}
               %i.fa.fa-unlock{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Borrar acuerdo"}
-            %a.ajax-item{:href => "/agreements/#{@agreement.id}", "data-remote"=>"true", "data-method"=>"delete"}
+            %a.eliminar{:href => "/agreements/#{@agreement.id}", "data-remote"=>"true", "data-method"=>"delete"}
               %i.fa.fa-trash{"aria-hidden"=>true}
 
 :javascript
