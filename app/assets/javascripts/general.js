@@ -143,6 +143,7 @@ $(document)
     .on('ajax:beforeSend', '.ajax-item', function (evt, data, status, xhr) {
         $('#preloader-agreement').show();
         $('.tooltipped').tooltip('remove');
+        $('.modal').modal('close');
     })
 
     .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {

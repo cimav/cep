@@ -46,7 +46,7 @@ $(document)
     })
 
     .on('ajax:error', '#expediente-trigger', function (evt, data, status, xhr) {
-        Materialize.toast("Error al mostrar documentos", 4000)
+        Materialize.toast("Error al cargar expediente", 4000)
         $('#modalExpediente').modal('close');
     })
 

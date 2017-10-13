@@ -83,7 +83,7 @@ header, main, footer {
 }
 
 .avatar {
-  display: inline-block;
+  //display: inline-block;
   height: 100%;
 }
 
@@ -96,4 +96,13 @@ header, main, footer {
 
 .larger-text{
   font-size: larger;
+}
+.collection{
+  li a{
+    color: inherit;
+  }
+}
+
+body{
+  background-color: #f3f3f3;
 }

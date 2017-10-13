@@ -32,7 +32,7 @@
       %li.tab.col.s3
         %a{:href => "#test3"} Avances
       %li.tab.col.s3
-        %a{:href => "#test4"} CEP
+        %a{:href => "#expediente-comite"} CEP
 
   ////////////////////////////////////////////////////////////////////////////// Kardex
   #test1.col.s12
@@ -147,16 +147,26 @@
           No hay avances
 
   /////////////////////////////////////////////////////////////////////// Comité
-  #test4.col.s12
+  #expediente-comite.col.s12
     .card-panel
       -student_agreements = []
       -student_agreements << @student.professional_exams
       -student_agreements << @student.new_admissions
-      -student_agreements.each do |agreement_types|
-        -agreement_types.each do |agreement_type|
-          =agreement_type.agreement.agreeable_type
+      .container
+        %ul.collection
+          -student_agreements.each do |agreement_types|
+            -agreement_types.each do |agreement_type|
+              %li.collection-item.avatar.grey.lighten-4
+                .larger-text
+                  =agreement_type.agreement.id_key
+                %p
+                  =agreement_type.agreement.get_type
+
+                =link_to agreement_type.agreement, class:'btn brown white-text secondary-content ajax-item tooltipped', remote:true, url:"agreements/#{agreement_type.agreement.id}", "data-position"=>"right", "data-delay"=>"50", "data-tooltip"=>"Ir al acuerdo" do
+                  %i.fa.fa-caret-right{"aria-hidden"=>true}
 
 :javascript
   $(document).ready(function(){
     $('ul.tabs').tabs();
+    $('.tooltipped').tooltip({delay: 50});
   });
