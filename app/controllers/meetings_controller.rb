@@ -58,20 +58,21 @@ class MeetingsController < ApplicationController
   end
 
   def destroy
-
     meeting = Meeting.find(params[:id])
+    response = {}
     respond_to do |format|
       if is_admin?
         meeting.status = Meeting::DELETED
-        if agreement.save
-          response[:message] = 'Acuerdo eliminado'
+        if meeting.save
+          response[:message] = 'Sesión eliminada'
         else
-          response[:message] = 'Error al eliminar acuerdo'
+          response[:message] = 'Error al eliminar sesión'
+          response[:redirect_url] = "meetings/#{meeting.id}"
         end
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'
       end
-      response[:redirect_url] = "meetings"
+      response[:redirect_url] = "/home"
       response[:errors] = agreement.errors.full_messages
       format.json {render json: response}
     end

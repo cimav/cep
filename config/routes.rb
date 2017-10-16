@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
   get '/logout' => 'sessions#destroy'
   get '/menu-items' => 'home#menu_items'
+  get '/home' => 'home#index'
 
   #agreements
   get '/meetings/:meeting_id/agreements/:agreement_id' => 'agreements#edit'
