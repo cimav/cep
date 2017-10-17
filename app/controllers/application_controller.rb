@@ -22,8 +22,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :authenticated?
-
   def auth_required
     redirect_to '/login' unless authenticated?
   end

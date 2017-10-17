@@ -172,7 +172,7 @@ $(document)
 
 function goIndex() {
     url = "/dashboard";
-    window.location.hash = "#!"
+    window.location.hash = "#!";
     $.get(url, function (data, status) {
         $('#main-content').html(data);
     });

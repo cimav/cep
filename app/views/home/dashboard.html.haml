@@ -1,2 +1,18 @@
-%h1
-  Dashboard
+.row
+  .col.l14.m4
+    ///////////////////////////////////////////////////////////////// Acuerdos pendientes
+    .card
+      .card-content
+        .card-title
+          Acuerdos pendientes
+        -if missing_votes.size == 0
+          %h4.center 0
+        -else
+          %ul.collection.with-header
+            -missing_votes.each do |agreement|
+              =link_to  "agreements/#{agreement.id}", remote:true, url:"agreements/#{agreement.id}", class:'ajax-item collection-item avatar' do
+                %i.fa.fa-list.circle.blue{"aria-hidden"=>true}
+                %span.title
+                  =agreement.id_key
+                %p
+                  =agreement.get_type

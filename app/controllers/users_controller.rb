@@ -54,10 +54,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def missing_votes
-    votes = Response.where(user_id: current_user.id)
 
-  end
 
   private
 
