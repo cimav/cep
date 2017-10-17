@@ -1,8 +1,10 @@
 class HomeController < ApplicationController
   before_action :auth_required
 
-  def index
 
+  # entry point
+  def index
+    @agreements = Agreement.where(status: Agreement::OPEN)
   end
 
   def menu_items
@@ -10,7 +12,8 @@ class HomeController < ApplicationController
     render layout: false
   end
 
-  def home
-    @agreements = Agreement.where(status: Agreement::OPEN)
+  def dashboard
+    render layout:false
   end
+
 end

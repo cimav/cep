@@ -1,85 +1,94 @@
+-if @meeting.status.eql? Meeting::DELETED
+  %h1.red.center Sesión eliminada
+-else
+  .row
+    %h1
+      Sesión
+      %span.black-text.text-darken-4
+        =@meeting.id_key
 
-.row
-  %h1
-    Sesión
-    %span.black-text.text-darken-4
-      =@meeting.id_key
-
-.row
-  .col.l4.m4
-    .card.blue.darken-3.white-text
-      .card-content
-        .card-title
-          =I18n.l(@meeting.date, format: '%B').capitalize
-          =@meeting.date.strftime("%Y")
-        =I18n.l(@meeting.date, format: '%A').capitalize
-        =I18n.l(@meeting.date, format: '%d')
-        %br
-        =I18n.l(@meeting.date, format: '%l:%M %P')
+  .row
+    .col.l4.m4
+      .card.blue.darken-3.white-text
+        .card-content
+          .card-title
+            =I18n.l(@meeting.date, format: '%B').capitalize
+            =@meeting.date.strftime("%Y")
+          =I18n.l(@meeting.date, format: '%A').capitalize
+          =I18n.l(@meeting.date, format: '%d')
+          %br
+          =I18n.l(@meeting.date, format: '%l:%M %P')
+      .card
+        .card-content
+          %a.btn-floating.btn-large.grey.tooltipped.eliminar{href:"/meetings/#{@meeting.id}","data-position" => "bottom", "data-tooltip" => "Eliminar sesión", "data-delay" => "100", "data-method"=>"delete", "data-remote"=>"true"}
+            %i.fa.fa-trash{"aria-hidden" => "true"}
 
 
-  .col.l4.m4
-    .card
-      .card-content
-        .card-title
-          Acuerdos totales:
-          =@meeting.agreement.size
-        %canvas#completedChart{:height => "400", :width => "400"}
-  .col.l4.m4
-    .card
-      .card-content
-        .card-title
-          Tipos de acuerdos
-        %canvas#typesChart{:height => "400", :width => "400"}
--if is_admin?
-  .fixed-action-btn
-    %a.btn-floating.btn-large.red.tooltipped.ajax-item{href:"/meetings/#{@meeting.id}/new_agreement","data-position" => "left", "data-tooltip" => "Nuevo acuerdo", "data-delay" => "100", url:"meetings/#{@meeting.id}/new_agreement", "data-remote"=>"true"}
-      %i.fa.fa-plus{"aria-hidden" => "true"}
-:javascript
 
-  var completedChart = document.getElementById("completedChart");
+    .col.l4.m4
+      .card
+        .card-content
+          .card-title
+            Acuerdos totales:
+            =@meeting.agreement.size
+          %canvas#completedChart{:height => "400", :width => "400"}
+    .col.l4.m4
+      .card
+        .card-content
+          .card-title
+            Tipos de acuerdos
+          %canvas#typesChart{:height => "400", :width => "400"}
+  -if is_admin?
+    .fixed-action-btn
+      %a.btn-floating.btn-large.green.darken-2.tooltipped.ajax-item{href:"/meetings/#{@meeting.id}/new_agreement","data-position" => "left", "data-tooltip" => "Nuevo acuerdo", "data-delay" => "100", "data-remote"=>"true"}
+        %i.fa.fa-plus{"aria-hidden" => "true"}
 
-  var oilData = {
-    labels: [
-      "Pendientes",
-      "Resueltos"
-    ],
-    datasets: [
-      {
-        data: [#{@meeting.agreement.where(status: Agreement::OPEN).size}, #{@meeting.agreement.where(status: Agreement::CLOSE).size}],
-        backgroundColor: [
-          "#FF6384",
 
-          "#66aa00"
-        ]
-      }]
-  };
+  :javascript
 
-  var pieChart = new Chart(completedChart, {
-    type: 'pie',
-    data: oilData
-  });
+    var completedChart = document.getElementById("completedChart");
 
-  var typesChart = document.getElementById("typesChart");
+    var oilData = {
+      labels: [
+        "Pendientes",
+        "Resueltos"
+      ],
+      datasets: [
+        {
+          data: [#{@meeting.agreement.where(status: Agreement::OPEN).size}, #{@meeting.agreement.where(status: Agreement::CLOSE).size}],
+          backgroundColor: [
+            "#FF6384",
 
-  var oilData = {
-    labels: [
-      #{raw @agreement_type_name}.replace(/&quot;/g,'"')
-    ],
-    datasets: [
-      {
-        data: [#{@agreement_type_value}],
-        backgroundColor: [
-          "#FF6384",
+            "#66aa00"
+          ]
+        }]
+    };
 
-          "#6384FF"
-        ]
-      }]
-  };
+    var pieChart = new Chart(completedChart, {
+      type: 'pie',
+      data: oilData
+    });
 
-  var doughnutChart = new Chart(typesChart, {
-    type: 'doughnut',
-    data: oilData
-  });
-  $('.tooltipped').tooltip({delay: 50});
+    var typesChart = document.getElementById("typesChart");
+
+    var oilData = {
+      labels: [
+        #{raw @agreement_type_name}.replace(/&quot;/g,'"')
+      ],
+      datasets: [
+        {
+          data: [#{@agreement_type_value}],
+          backgroundColor: [
+            "#FF6384",
+
+            "#6384FF"
+          ]
+        }]
+    };
+
+    var doughnutChart = new Chart(typesChart, {
+      type: 'doughnut',
+      data: oilData
+    });
+    $('.tooltipped').tooltip({delay: 50});
 

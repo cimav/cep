@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
   get '/logout' => 'sessions#destroy'
   get '/menu-items' => 'home#menu_items'
-  get '/home' => 'home#index'
 
   #agreements
   get '/meetings/:meeting_id/agreements/:agreement_id' => 'agreements#edit'
@@ -19,6 +18,8 @@ Rails.application.routes.draw do
   get '/agreement_files/:id' => 'agreements#display_agreement_file'
   get '/agreements/:id/student_record/:student_id' => 'agreements#student_record'
   delete '/agreements/:id' => 'agreements#destroy'
+  delete '/meetings/:id' => 'meetings#destroy'
+  get '/dashboard' => 'home#dashboard'
 
   post '/meetings/:meeting_id/synod_designations' => 'synod_designations#create'
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'

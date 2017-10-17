@@ -72,8 +72,8 @@ class MeetingsController < ApplicationController
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'
       end
-      response[:redirect_url] = "/home"
-      response[:errors] = agreement.errors.full_messages
+      response[:redirect_url] = "home"
+      response[:errors] = meeting.errors.full_messages
       format.json {render json: response}
     end
   end

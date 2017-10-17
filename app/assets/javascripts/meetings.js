@@ -77,9 +77,13 @@ $(document)
 //función genérica para mostrar alertas
 //-------------------------------------
     .on("ajax:success","a.eliminar", function(ev,data){
-        setHash(data.redirect_url);
-        refreshMenu();
-
+        if (data.redirect_url == 'home')
+            goIndex();
+        else
+        {
+            setHash(data.redirect_url);
+            refreshMenu();
+        }
         Materialize.toast(data.message, 4000);
         for (i = 0; i<data.errors.length;i++) {
             Materialize.toast(data.errors[i], 4000);

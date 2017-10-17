@@ -163,6 +163,16 @@ $(document)
     })
 
 ;
+
+function goIndex() {
+    setHash("");
+    url = "/dashboard";
+    $.get(url, function (data, status) {
+        $('#main-content').html(data);
+    });
+    refreshMenu();
+}
+
 function refreshMenu() {
 
     url = "/menu-items";
