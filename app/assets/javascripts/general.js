@@ -86,6 +86,12 @@ function checkHash() {
     }else{
         console.log("Error al validar hash");
     }
+    if (url != actual_url) {
+        if (hash == "#!" || hash == "") {
+            goIndex();
+            actual_url = url
+        }
+    }
 }
 setInterval(checkHash,600);
 
@@ -165,7 +171,6 @@ $(document)
 ;
 
 function goIndex() {
-    setHash("");
     url = "/dashboard";
     $.get(url, function (data, status) {
         $('#main-content').html(data);

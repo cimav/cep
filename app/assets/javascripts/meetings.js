@@ -74,7 +74,7 @@ $(document)
 
 
 //-------------------------------------
-//función genérica para mostrar alertas
+//función al eliminar sesiones o acuerdos
 //-------------------------------------
     .on("ajax:success","a.eliminar", function(ev,data){
         if (data.redirect_url == 'home')
