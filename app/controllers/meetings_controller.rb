@@ -6,12 +6,12 @@ class MeetingsController < ApplicationController
   end
 
   def show
-    @agreement_new = Agreement.new
     @meeting = Meeting.find(params[:id])
+    @meeting_agreements = Agreement.where(meeting_id:@meeting.id).where.not(status: Agreement::DELETED)
+    #Estadísticas de acuerdos resueltos
     agreement_types = @meeting.agreement.group(:agreeable_type).count
     @agreement_type_name = ''
     @agreement_type_value = ''
-    #Estadísticas de acuerdos resueltos
     agreement_types.each do |type, count|
       @agreement_type_name +="'" + type+ "'" + ","
       @agreement_type_value += count.to_s + ","
