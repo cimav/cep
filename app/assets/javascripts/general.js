@@ -104,9 +104,10 @@ $(document)
 
     .on('ajax:success', '.menu-item', function (evt, data, status, xhr) {
         $('#main-content').html(data);
-        $(".agreement-list li").removeClass("active");
+        $(".menu-list li").removeClass("active");
         setHash($(this).attr("url"));
-        $(this).children('li').addClass("active");
+        $(this).parent('li').addClass('active');
+        console.log($(this))
 
     })
 

@@ -6,34 +6,18 @@ $color-menu: #21272e;
   ul.collection{
     line-height: 0;
   }
-  .collection {
-    a{
-      padding: 0 0 0 0;
-    }
-    .collection-item.avatar {
-      padding-top: 7px;
-      padding-bottom: 7px;
-      min-height: 0;
 
-      .row {
-        margin-bottom: 0px;
-      }
-    }
-  }
   background-color: $color-menu;
+
   li{
     width: 100%;
     background-color: $color-menu;
     color:white;
   }
 
-  lli:hover, li.active{
+  li:hover, li.active{
     //background-color: #eb5456;
     border-left: 2px solid red;
-
-    li:hover, li.active{
-      //background-color: #20AAEA;
-      border-left: 2px solid #20AAEA;
 
       li:hover{
         background-color: #125b7c;
@@ -47,7 +31,7 @@ $color-menu: #21272e;
       }
     }
 
-  }
+
   a {
     color: white;
     font-weight: inherit;
@@ -109,4 +93,21 @@ header, main, footer {
 
 body{
   background-color: #f3f3f3;
+}
+
+.breadcrumbs{
+  font-size: 300%;
+  a{
+    color: #b4446d;
+
+
+  }
+  a:hover{
+    color: #ee8cce;
+  }
+  font-size: large;
+  i{
+    margin: 0 1em 0 1em;
+  }
+  color: #aaaaaa;
 }

@@ -1,3 +1,10 @@
+.row.breadcrumbs
+  .col.s12
+    %a.ajax-item.tooltipped{href:"/meetings/#{@agreement.meeting.id}", "data-remote"=>"true", url:"meetings/#{@agreement.meeting.id}","data-position"=>"bottom", "data-delay"=>"50", "data-tooltip"=>"Sesión #{@agreement.meeting.id_key}"}
+      =@agreement.meeting.id_key
+    %i.fa.fa-angle-right{"aria-hidden"=>true}
+    =@agreement.id_key
+
 -if @agreement.status.eql? Agreement::DELETED
   %h1.center.red
     Acuerdo eliminado

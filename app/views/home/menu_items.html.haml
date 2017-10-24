@@ -6,31 +6,14 @@
       %span.right
         %i.fa.fa-bank.white-text{"aria-hidden" => "true"}
     .collapsible-body
-      %ul.collapsible
+      %ul.menu-list
         -@meetings.each do |meeting|
           %li
-            .collapsible-header.meeting-item{url:"meetings/#{meeting.id}"}
+            %a.menu-item{href:"/meetings/#{meeting.id}","data-remote"=>"true",url:"meetings/#{meeting.id}"}
               =meeting.id_key
 
 
 
-            .collapsible-body
-              %ul.agreement-list
-                -meeting.agreement.where.not(status:Agreement::DELETED).each do |agreement|
-                  %li
-                    %ul.collection
-                      =link_to agreement, remote:true, url:"agreements/#{agreement.id}", class:'menu-item' do
-                        %li.collection-item.avatar
-
-                          .row
-
-                            .col.l3.m3
-                              %i.fa.fa-list.circle.blue{"aria-hidden"=>true}
-                            .col.l9.m9
-                              %span.title
-                                =agreement.id_key
-                              %p
-                                =agreement.get_type
         -if is_admin?
           %li
             %a.menu-item{href:"/meetings/new", url:"meetings/new", "data-remote"=>"true"}
@@ -46,9 +29,9 @@
         %span.right
           %i.fa.fa-cog.white-text{"aria-hidden" => "true"}
       .collapsible-body
-        %ul
+        %ul.menu-list
           %li
-            %a.ajax-item{href: "/users", "data-remote"=>"true", url:"users"}
+            %a.menu-item{href: "/users", "data-remote"=>"true", url:"users"}
               Usuarios
 
 :javascript

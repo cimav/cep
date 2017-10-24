@@ -62,10 +62,8 @@
       .card-content
 
         .card-title
-          -if agreeable.student.gender.eql? 'F'
-            %i.fa.fa-venus{"aria-hidden" => "true"}
-          -else agreeable.student.gender.eql? 'M'
-            %i.fa.fa-mars{"aria-hidden" => "true"}
+          %img.responsive-img.circle{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreeable.student.id}"}
+
           =agreeable.student.full_name
         %p
           %b
