@@ -1,100 +1,43 @@
 
-.row
-  .col.l9.m9
-
-    .row
-      .card
-        .card-content
-          .card-title
-            Votación
-          %table
-            %thead
-              %tr
-                %th
-                %th Miembro del CEP
-                %th Voto
-                %th Comentarios
-            %tbody
-              -@ceps.each do |member|
-                %tr
-                  %td
-                    =image_tag "http://cimav.edu.mx/foto/#{member.email[/[^@]+/]}/50", class:'circle responsive-img', alt:'*'
-                  %td
-                    =member.name
-                  %td
-                    -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
-                    -if response.size > 0
-                      -if response.first.answer.eql? Response::ACCEPTED
-                        %i.fa.fa-check{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Aceptar"}
-                      -if response.first.answer.eql? Response::REJECTED
-                        %i.fa.fa-times{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
-                      -if response.first.answer.eql? Response::TO_COMMITTEE
-                        %i.fa.fa-exclamation-circle.tooltipped.red-text.text-darken-2{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
-                    -else
-                      = "---"
-                  %td
-                    -if response.size >0
-                      =response.first.comment
-                    -else
-                      = "---"
-
-
-      -if current_user.user_type == User::CEP
-        -if @agreement.status == Agreement::OPEN
-          -if Response.where(:user_id => current_user.id).where(:agreement_id => @agreement.id).size == 0
-            .card
-              .card-content
-                .card-title
-                  Enviar respuesta
-                =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas refresh'} do |f|
-                  .row
-                    .col.l4.m4.input-field
-                      =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --'}, {required:true}
-                      =f.label :answer, 'Respuesta'
-                    .col.l4.m4.input-field
-                      =f.text_field :comment
-                      =f.label :comment, 'Comentarios', class:'active'
-                    .col.l4.m4.input-field.center
-                      =f.submit 'Enviar', class:'btn brown'
-  .col.l3.m3
-
-    .card.blue.white-text
-      .card-content
-
-        .card-title
-          %img.responsive-img.circle{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreeable.student.id}"}
-
-          =agreeable.student.full_name
-        %p
-          %b
-            Matrícula
-          =agreeable.student.card
-          %br
-          %b
-            Programa:
-          =agreeable.student.program.name
-          %br
-          %b
-            Estatus:
-          =agreeable.student.get_status
-          %br
-          %b
-            Campus
-          =agreeable.student.campus.name
-          %br
-          %b
-            Fecha de inicio:
-          =agreeable.student.start_date
+.card-panel.z-depth-2
+  .row
+    .col.l3.l3
+      %img.student-img.responsive-img.circle.tooltipped{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreeable.student.id}","data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Ver expediente de estudiante"}
+    .col.l9.m9
+      .larger-text
+        =agreeable.student.full_name
+      %p
+        %b
+          Matrícula
+        =agreeable.student.card
+        %br
+        %b
+          Programa:
+        =agreeable.student.program.name
+        %br
+        %b
+          Estatus:
+        =agreeable.student.get_status
+        %br
+        %b
+          Campus
+        =agreeable.student.campus.name
+        %br
+        %b
+          Fecha de inicio:
+        =agreeable.student.start_date
+        %br
+        %b
+          Fecha de examen:
+        =agreeable.exam_date.strftime("%d %B, %Y") rescue "No se ha agendado"
       .card-action
         %a#documentos-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Documentos", "data-remote"=>"true", href:"/agreements/#{agreeable.agreement.id}/files"}
           %i.fa.fa-folder{"aria-hidden"=>true}
         %a#expediente-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante", "data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
           %i.fa.fa-book{"aria-hidden"=>true}
-    .card.amber.darken-3.white-text
-      .card-content
-        .card-title
-          Fecha de examen:
-          =agreeable.exam_date.strftime("%d %B, %Y") rescue "No se ha agendado"
+
+
+
 
 #modalDocumentos.modal.bottom-sheet
   .modal-content
