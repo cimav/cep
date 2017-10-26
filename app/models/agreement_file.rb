@@ -1,10 +1,10 @@
 class AgreementFile < ApplicationRecord
   belongs_to :agreement
-  mount_uploader :name, DocumentUploader
+  mount_uploader :file, DocumentUploader
 
   after_destroy :delete_file
 
   def delete_file
-    remove_name!
+    remove_file!
   end
 end

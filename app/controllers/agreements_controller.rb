@@ -137,8 +137,10 @@ class AgreementsController < ApplicationController
 
   def upload_file
     agreement = Agreement.find(params[:id])
-    file = AgreementFile.new(name:params[:file])
+    file = AgreementFile.new(file:params[:file])
     file.agreement = agreement
+    f = params[:file]
+    file.name = f.original_filename rescue 'Sin nombre'
     response = {}
     respond_to do |format|
       if is_admin?
@@ -150,7 +152,6 @@ class AgreementsController < ApplicationController
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'
       end
-
       response[:redirect_url] = "agreements/#{agreement.id}"
       response[:errors] = file.errors.full_messages
       format.json {render json: response}
@@ -183,7 +184,7 @@ class AgreementsController < ApplicationController
   end
 
   def display_agreement_file
-    file = AgreementFile.find(params[:id]).name
+    file = AgreementFile.find(params[:id]).file
     send_file file.to_s, disposition:'inline'
   end
 
@@ -202,7 +203,7 @@ class AgreementsController < ApplicationController
   end
 
   def file_params
-    params.require(:agreement_file).permit(:name, :file_type)
+    params.require(:agreement_file).permit(:file, :name, :file_type)
   end
 
 

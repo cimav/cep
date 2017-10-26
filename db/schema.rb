@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20170921222500) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
+    t.string   "file"
     t.string   "name"
     t.integer  "file_type"
     t.datetime "created_at",   null: false

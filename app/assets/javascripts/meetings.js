@@ -31,21 +31,21 @@ $(document)
 //------------------------------------------------
 //Carga el expediente del estudiante en un modal
 //------------------------------------------------
-    .on('ajax:success', '#expediente-trigger', function (evt, data, status, xhr) {
+    .on('ajax:success', '.expediente-trigger', function (evt, data, status, xhr) {
         $('#modalExpediente #expediente').html(data);
     })
 
-    .on('ajax:beforeSend', '#expediente-trigger', function (evt, data, status, xhr) {
+    .on('ajax:beforeSend', '.expediente-trigger', function (evt, data, status, xhr) {
         $('#modalExpediente #expediente').html('');
         $('#preloader-expediente').show();
         $('#modalExpediente').modal('open');
     })
 
-    .on('ajax:complete', '#expediente-trigger', function (evt, data, status, xhr) {
+    .on('ajax:complete', '.expediente-trigger', function (evt, data, status, xhr) {
         $('#preloader-expediente').hide();
     })
 
-    .on('ajax:error', '#expediente-trigger', function (evt, data, status, xhr) {
+    .on('ajax:error', '.expediente-trigger', function (evt, data, status, xhr) {
         Materialize.toast("Error al cargar expediente", 4000)
         $('#modalExpediente').modal('close');
     })

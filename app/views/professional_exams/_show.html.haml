@@ -2,7 +2,8 @@
 .card-panel.z-depth-2
   .row
     .col.l3.m3
-      %img.student-img.responsive-img.circle.tooltipped{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreeable.student.id}","data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Ver expediente de estudiante"}
+      %a.expediente-trigger{"data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
+        %img.student-img.responsive-img.circle.tooltipped{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreeable.student.id}","data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Ver expediente de estudiante"}
     .col.l9.m9
       .larger-text
         =agreeable.student.full_name
@@ -20,12 +21,8 @@
         =agreeable.student.get_status
         %br
         %b
-          Campus
+          Campus:
         =agreeable.student.campus.name
-        %br
-        %b
-          Fecha de inicio:
-        =agreeable.student.start_date
         %br
         %b
           Fecha de examen:
@@ -33,11 +30,23 @@
       .card-action
         %a#documentos-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Documentos", "data-remote"=>"true", href:"/agreements/#{agreeable.agreement.id}/files"}
           %i.fa.fa-folder{"aria-hidden"=>true}
-        %a#expediente-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante", "data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
+        %a.expediente-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante", "data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
           %i.fa.fa-book{"aria-hidden"=>true}
 
 
 
+.card-panel
+  .row
+    #expediente
+
+
+
+
+
+
+
+
+///// modal de expediente
 
 #modalDocumentos.modal.bottom-sheet
   .modal-content
