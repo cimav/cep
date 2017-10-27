@@ -1,10 +1,10 @@
 
-.card-panel.z-depth-2
+.section.valign-wrapper
   .row
     .col.l3.m3
       %a.expediente-trigger{"data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
         %img.student-img.responsive-img.circle.tooltipped{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreeable.student.id}","data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Ver expediente de estudiante"}
-    .col.l9.m9
+    .col.l7.m7
       .larger-text
         =agreeable.student.full_name
       %p
@@ -27,42 +27,15 @@
         %b
           Fecha de examen:
         =agreeable.exam_date.strftime("%d %B, %Y") rescue "No se ha agendado"
-      .card-action
-        %a#documentos-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Documentos", "data-remote"=>"true", href:"/agreements/#{agreeable.agreement.id}/files"}
-          %i.fa.fa-folder{"aria-hidden"=>true}
-        %a.expediente-trigger.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante", "data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
-          %i.fa.fa-book{"aria-hidden"=>true}
-
-
-
-.card-panel
-  .row
-    #expediente
-
-
-
+    .col.l2.m2
+      %h5
+        Fecha del examen:
 
 
 
 
 
 ///// modal de expediente
-
-#modalDocumentos.modal.bottom-sheet
-  .modal-content
-    %h4 Documentos
-    #preloader-documentos.center
-      .preloader-wrapper.big.active
-        .spinner-layer.spinner-blue-only
-          .circle-clipper.left
-            .circle
-          .gap-patch
-            .circle
-          .circle-clipper.right
-            .circle
-    #agreement_files
-  .modal-footer
-    %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cerrar
 
 #modalExpediente.modal
   .modal-content

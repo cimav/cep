@@ -30,8 +30,20 @@
 
   .row
     .col.l12.m12
-      =render partial:"#{@agreement.agreeable.class.table_name}/show", locals:{agreeable:@agreement.agreeable}
-
+      .card.z-depth-2
+        .card-content
+          .card-title
+            Informacion del acuerdo
+          =render partial:"#{@agreement.agreeable.class.table_name}/show", locals:{agreeable:@agreement.agreeable}
+  .row
+    .col.l12.m12
+      .card
+        .card-content
+          .card-title
+            Documentos
+          #agreement_files
+            :javascript
+              refreshFiles();
   .row
     .col.l12.m12
       -if current_user.user_type == User::CEP
@@ -40,53 +52,54 @@
             .card
               .card-content
                 .card-title
-                  Enviar respuesta
-                =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas refresh'} do |f|
-                  .row
-                    .col.l4.m4.input-field
-                      =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --'}, {required:true}
-                      =f.label :answer, 'Respuesta'
-                    .col.l4.m4.input-field
-                      =f.text_field :comment
-                      =f.label :comment, 'Comentarios', class:'active'
-                    .col.l4.m4.input-field.center
-                      =f.submit 'Enviar', class:'btn brown'
-  .row
-    .col.l12.m12
-      .card
-        .card-content
-          .card-title
-            Votación
-          %table
-            %thead
-              %tr
-                %th
-                %th Miembro del CEP
-                %th Voto
-                %th Comentarios
-            %tbody
-              -@ceps.each do |member|
-                %tr
-                  %td
-                    =image_tag "http://cimav.edu.mx/foto/#{member.email[/[^@]+/]}/50", class:'circle responsive-img', alt:'*'
-                  %td
-                    =member.name
-                  %td
-                    -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
-                    -if response.size > 0
-                      -if response.first.answer.eql? Response::ACCEPTED
-                        %i.fa.fa-check{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Aceptar"}
-                      -if response.first.answer.eql? Response::REJECTED
-                        %i.fa.fa-times{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
-                      -if response.first.answer.eql? Response::TO_COMMITTEE
-                        %i.fa.fa-exclamation-circle.tooltipped.red-text.text-darken-2{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
-                    -else
-                      = "---"
-                  %td
-                    -if response.size >0
-                      =response.first.comment
-                    -else
-                      = "---"
+                  Votación
+                .section#vote-form
+                  %h5
+                    Realizar votación
+                  =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas refresh'} do |f|
+                    .row
+                      .col.l4.m4.input-field
+                        =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --',required:true}
+                        =f.label :answer, 'Respuesta'
+                      .col.l4.m4.input-field
+                        =f.text_field :comment
+                        =f.label :comment, 'Comentarios', class:'active'
+                      .col.l4.m4.input-field.center
+                        =f.submit 'Enviar', class:'btn brown'
+                .section.soft-border
+                  %h5
+                    Tabla de votaciones
+                  %table
+                    %thead
+                      %tr
+                        %th
+                        %th Miembro del CEP
+                        %th Voto
+                        %th Comentarios
+                    %tbody
+                      -@ceps.each do |member|
+                        %tr
+                          %td
+                            =image_tag "http://cimav.edu.mx/foto/#{member.email[/[^@]+/]}/50", class:'circle responsive-img', alt:'*'
+                          %td
+                            =member.name
+                          %td
+                            -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
+                            -if response.size > 0
+                              -if response.first.answer.eql? Response::ACCEPTED
+                                %i.fa.fa-check{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Aceptar"}
+                              -if response.first.answer.eql? Response::REJECTED
+                                %i.fa.fa-times{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
+                              -if response.first.answer.eql? Response::TO_COMMITTEE
+                                %i.fa.fa-exclamation-circle.tooltipped.red-text.text-darken-2{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
+                            -else
+                              = "---"
+                          %td
+                            -if response.size >0
+                              =response.first.comment
+                            -else
+                              = "---"
+
   -if is_admin?
     .row
       .fixed-action-btn.toolbar

@@ -3,6 +3,8 @@ class Response < ApplicationRecord
   belongs_to :user
   after_save :set_response
 
+  validates :answer, presence:true
+
   ACCEPTED = 1
   REJECTED = 2
   TO_COMMITTEE = 3
