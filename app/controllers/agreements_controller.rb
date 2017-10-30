@@ -47,7 +47,7 @@ class AgreementsController < ApplicationController
         # Si el acuerdo es el último de la sesion entonces se eliminará permanentemente para que el folio se reinicie
         if agreement.consecutive == Agreement.where(meeting_id: agreement.meeting_id).maximum("consecutive")
           if agreement.agreeable.destroy
-            response[:message] = 'Acuerdo eliminado'
+            response[:message] = 'Acuerdo eliminado permanentemente'
           else
             response[:message] = 'Error al eliminar acuerdo'
           end

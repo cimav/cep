@@ -4,11 +4,10 @@
     .card
       .card-content
         .card-title
-          Acuerdos pendientes:
-          =missing_votes.size
+          Acuerdos pendientes
         -if missing_votes.size == 0
           %h4.center.grey-text
-            No hay pendientes
+            0
         -else
           %ul.collection.with-header
             -missing_votes.each do |agreement|

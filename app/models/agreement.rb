@@ -1,6 +1,6 @@
 class Agreement < ApplicationRecord
   belongs_to :meeting
-  has_many :agreement_file
+  has_many :agreement_file, dependent: :destroy
   has_many :responses, dependent: :destroy
   belongs_to :agreeable, polymorphic: true
   after_create :set_id_key
