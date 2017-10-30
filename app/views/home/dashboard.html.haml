@@ -1,17 +1,20 @@
 .row
   .col.l14.m4
     ///////////////////////////////////////////////////////////////// Acuerdos pendientes
-    .card.pink.lighten-5
+    .card
       .card-content
         .card-title
-          Acuerdos pendientes
+          Acuerdos pendientes:
+          =missing_votes.size
         -if missing_votes.size == 0
-          %h4.center 0
+          %h4.center.grey-text
+            No hay pendientes
         -else
           %ul.collection.with-header
             -missing_votes.each do |agreement|
               =link_to  "agreements/#{agreement.id}", remote:true, url:"agreements/#{agreement.id}", class:'ajax-item collection-item avatar' do
-                %i.fa.fa-list.circle.blue{"aria-hidden"=>true}
+                -if agreement.agreeable_type.eql? 'ProfessionalExam'
+                  %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
                 %span.title
                   =agreement.id_key
                 %p

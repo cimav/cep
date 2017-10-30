@@ -4,7 +4,7 @@
     .col.l3.m3
       %a.expediente-trigger{"data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
         %img.student-img.responsive-img.circle.tooltipped{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreeable.student.id}","data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Ver expediente de estudiante"}
-    .col.l7.m7
+    .col.l6.m6
       .larger-text
         =agreeable.student.full_name
       %p
@@ -25,11 +25,12 @@
         =agreeable.student.campus.name
         %br
         %b
-          Fecha de examen:
-        =agreeable.exam_date.strftime("%d %B, %Y") rescue "No se ha agendado"
-    .col.l2.m2
-      %h5
-        Fecha del examen:
+    .col.l3.m3
+      %p.flow-text
+        Fecha de examen:
+        %br
+        %span.pink-text
+          =I18n.l(agreeable.exam_date, format: "%d de %B, %Y").capitalize rescue 'No se ha agendado'
 
 
 

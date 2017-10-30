@@ -26,7 +26,8 @@
             %ul.collection.with-header
               -@meeting_agreements.each do |agreement|
                 =link_to  "agreements/#{agreement.id}", remote:true, url:"agreements/#{agreement.id}", class:'ajax-item collection-item avatar' do
-                  %i.fa.fa-list.circle.blue{"aria-hidden"=>true}
+                  -if agreement.agreeable_type.eql? 'ProfessionalExam'
+                    %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
                   %span.title
                     =agreement.id_key
                   %p
@@ -48,10 +49,11 @@
           .card-title
             Tipos de acuerdos
           %canvas#typesChart{:height => "400", :width => "400"}
-      .card
-        .card-content
-          %a.btn-floating.btn-large.grey.tooltipped.eliminar{href:"/meetings/#{@meeting.id}","data-position" => "bottom", "data-tooltip" => "Eliminar sesión", "data-delay" => "100", "data-method"=>"delete", "data-remote"=>"true"}
-            %i.fa.fa-trash{"aria-hidden" => "true"}
+      -if is_admin?
+        .card
+          .card-content
+            %a.btn-floating.btn-large.grey.tooltipped.eliminar{href:"/meetings/#{@meeting.id}","data-position" => "bottom", "data-tooltip" => "Eliminar sesión", "data-delay" => "100", "data-method"=>"delete", "data-remote"=>"true"}
+              %i.fa.fa-trash{"aria-hidden" => "true"}
   -if is_admin?
     .fixed-action-btn
       %a.btn-floating.btn-large.green.darken-2.tooltipped.ajax-item{href:"/meetings/#{@meeting.id}/new_agreement","data-position" => "left", "data-tooltip" => "Nuevo acuerdo", "data-delay" => "100", "data-remote"=>"true"}
