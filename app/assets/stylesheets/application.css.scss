@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require dropzone/dropzone
+
  */
 
 @import "materialize";
@@ -20,4 +21,5 @@
 @import "general";
 @import "meetings";
 @import "agreements";
+@import "select2-materialize";
 

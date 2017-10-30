@@ -43,7 +43,7 @@
             Documentos
           #agreement_files
             :javascript
-              refreshFiles();
+              refreshFiles(#{@agreement.id});
   .row
     .col.l12.m12
       -if current_user.user_type == User::CEP

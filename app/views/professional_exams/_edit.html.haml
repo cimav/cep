@@ -5,9 +5,9 @@
     =text_field_tag :description, agreeable.agreement.description
   .row.input-field
     %label.active{:for => "student_id"} Estudiante
-    =f.collection_select :student_id, @students, :id, :full_name,prompt: true
+    =f.collection_select :student_id, @students, :id, :full_name,prompt: true, class:'select2'
 
-  .row
+  .row.input-field
     -if !agreeable.exam_date.nil?
       -datetime = agreeable.exam_date
     -else

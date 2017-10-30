@@ -9,7 +9,7 @@
       =@student.program.name
       %br
       %b Director:
-      =Staff.find(@student.supervisor).full_name
+      =Staff.find(@student.supervisor).full_name rescue "Sin director"
       %br
       %b
         Fecha de inicio:

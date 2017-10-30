@@ -20,6 +20,7 @@ gem 'font-awesome-sass'
 gem 'materialize-sass', '~> 0.99.0'
 gem 'dropzonejs-rails'
 gem 'carrierwave', '~> 1.0'
+gem 'select2-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

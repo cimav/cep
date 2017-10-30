@@ -17,4 +17,4 @@
 //= require turbolinks
 //= require materialize-sprockets
 //= require dropzone
-
+//= require select2

@@ -1,14 +1,32 @@
 
 -if @files.size>0
-  %ul.collection
-    -@files.each do |file|
-      %li.collection-item
-        %div
-          =link_to "/agreement_files/#{file.id}" ,target: :_blank do
-            =file.name
+  %table.bordered
+    %thead
+      %tr
+        %th
+        %th
+    %tbody
+      -@files.each do |file|
+        %tr
+          %td
+            =link_to "/agreement_files/#{file.id}" ,target: :_blank, class:'grey-text text-darken-2' do
+              -case File.extname(file.name)
+                -when '.jpg'
+                  %i.fa.fa-file-image-o.fa-2x{"aria-hidden" => "true"}
+                -when '.png'
+                  %i.fa.fa-file-image-o.fa-2x{"aria-hidden" => "true"}
+                -when '.pdf'
+                  %i.fa.fa-file-pdf-o.fa-2x{"aria-hidden" => "true"}
+                -when '.docx'
+                  %i.fa.fa-file-word-o.fa-2x{"aria-hidden" => "true"}
+          %td
+            =link_to "/agreement_files/#{file.id}" ,target: :_blank, class:'grey-text text-darken-2' do
+              .truncate
+                =file.name
           -if is_admin?
-            =link_to "/agreement_files/#{file.id}", class:'secondary-content delete_file', method:'delete', agreement_id: file.agreement_id, remote:true do
-              %i.fa.fa-close{"aria-hidden" => "true"}
+            %td
+              =link_to "/agreement_files/#{file.id}", class:'delete_file red-text', method:'delete', agreement_id: file.agreement_id, remote:true do
+                %i.fa.fa-trash{"aria-hidden" => "true"}
 -else
   %blockquote
     No hay documentos
