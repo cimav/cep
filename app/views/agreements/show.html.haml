@@ -11,7 +11,7 @@
 -else
   .container
     .row
-      %h1.center
+      %h1.center#agreement-title
         =@agreement.get_type
         .chip.amber
           -if @agreement.status.eql? Agreement::CLOSE
