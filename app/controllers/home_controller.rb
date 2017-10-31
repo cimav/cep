@@ -13,6 +13,7 @@ class HomeController < ApplicationController
   end
 
   def dashboard
+    @next_meeting = Meeting.where("date > ?", DateTime.now).order("date ASC").first
     render layout:false
   end
 

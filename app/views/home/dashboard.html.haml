@@ -22,3 +22,16 @@
                   =agreement.id_key
                 %p
                   =agreement.get_type
+
+  .col.l8.m8
+    .card-panel.blue.white-text
+      %h5
+        Próxima reunión
+
+      %h3
+        /=@next_meeting.date.strftime("%d %B %Y%l:%M %P")
+        =f_date_no_time(@next_meeting.date)
+    .card
+      .card-content
+        .card-title
+          Acuerdos recientes
