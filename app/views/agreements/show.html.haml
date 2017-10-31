@@ -13,11 +13,9 @@
     .row
       %h1.center#agreement-title
         =@agreement.get_type
-        .chip.amber
-          -if @agreement.status.eql? Agreement::CLOSE
-            %i.fa.fa-lock{"aria-hidden"=>true}
-          -else
-            %i.fa.fa-unlock{"aria-hidden"=>true}
+        -if @agreement.status.eql? Agreement::OPEN
+          .chip
+            Abierto
         -if @agreement.decision
           -color = 'green'
           -case @agreement.decision
@@ -25,15 +23,15 @@
               -color = 'green'
             -when Agreement::REJECTED
               -color = 'orange'
-          .chip{class:color}
-            ="#{@agreement.get_decision}"
+          .chip{class:color+' lighten-4'}
+            ="Acuerdo #{@agreement.get_decision.downcase}"
 
   .row
     .col.l12.m12
       .card.z-depth-2
         .card-content
           .card-title
-            Informacion del acuerdo
+            Información del acuerdo
           =render partial:"#{@agreement.agreeable.class.table_name}/show", locals:{agreeable:@agreement.agreeable}
   .row
     .col.l12.m12
@@ -44,6 +42,11 @@
           #agreement_files
             :javascript
               refreshFiles(#{@agreement.id});
+          = form_tag "/agreements/#{@agreement.id}/upload_file", method: :post, class: "dropzone", id: "upload-dropzone" do
+            %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
+            .fallback
+              = file_field_tag "file", multiple: true
+
   .row
     .col.l12.m12
       -if current_user.user_type == User::CEP
@@ -65,7 +68,7 @@
                         =f.text_field :comment
                         =f.label :comment, 'Comentarios', class:'active'
                       .col.l4.m4.input-field.center
-                        =f.submit 'Enviar', class:'btn brown'
+                        =f.submit 'Enviar', class:'btn blue darken-3'
                 .section.soft-border
                   %h5
                     Tabla de votaciones
@@ -124,4 +127,48 @@
   $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
   $('.tooltipped').tooltip({delay: 50});
   $('.modal').modal();
+  Dropzone.autoDiscover = false;
 
+  var headlineDropzone = new Dropzone("#upload-dropzone", {
+
+  //url: "/agreements/#{@agreement.id}/upload_file", // You can override url of form in here.
+
+  maxFilesize: 5, // in MB
+  addRemoveLinks: true,
+  parallelUploads: 2,
+  //autoQueue:false,
+
+  acceptedFiles:'.jpg, .png, .jpeg, .gif, .pdf, .doc, .docx, .xls', // type of files
+
+  init: function(){
+
+    this.on('addedfile', function(file) {
+
+      // Called when a file is added to the list.
+
+    });
+
+    this.on('removedfile', function(file) {
+
+      // Called when a file is added to the list.
+
+    });
+
+    this.on('sending', function(file, xhr, formData) {
+
+      // Called just before each file is sent.
+
+    });
+
+    this.on('success', function(file, json) {
+      refreshFiles(#{@agreement.id});
+      Materialize.toast("Archivo subido", 4000);
+      this.removeFile(file)
+
+      // Called when file uploaded successfully.
+
+    });
+
+  }
+
+  });

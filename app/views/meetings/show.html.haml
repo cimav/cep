@@ -8,7 +8,7 @@
         =@meeting.id_key
 
     %span.pink-text.text-darken-4.flow-text
-      =I18n.l(@meeting.date, format: '%d de %B %Y a las %l:%M %P').capitalize
+      =f_date(@meeting.date)
 
   .row
     .col.l4.m4

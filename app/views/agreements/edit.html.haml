@@ -1,7 +1,9 @@
-
+.row
+  %h2
+    Editar acuerdo
 .row
   .chip.right
-    =@agreement.get_type
+    ="#{@agreement.id_key} #{@agreement.get_type}"
 .row
   =render partial:"#{@agreement.agreeable.class.table_name}/edit", locals:{agreeable:@agreement.agreeable}
 
