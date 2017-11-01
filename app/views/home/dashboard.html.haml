@@ -44,3 +44,7 @@
                 =agreement.id_key
               %p
                 =agreement.get_type
+              %p.secondary-content
+                Mi voto
+                %br
+                =agreement.responses.where(user_id:current_user.id).last.get_decision

@@ -1,4 +1,5 @@
 class MeetingsController < ApplicationController
+  include AgreementsHelper
 
   def index
     @meetings = Meeting.all.order(date: :desc)
@@ -8,12 +9,12 @@ class MeetingsController < ApplicationController
   def show
     @meeting = Meeting.find(params[:id])
     @meeting_agreements = Agreement.where(meeting_id:@meeting.id).where.not(status: Agreement::DELETED)
-    #Estadísticas de acuerdos resueltos
+    # Estadísticas de acuerdos resueltos
     agreement_types = @meeting.agreement.group(:agreeable_type).count
     @agreement_type_name = ''
     @agreement_type_value = ''
     agreement_types.each do |type, count|
-      @agreement_type_name +="'" + type+ "'" + ","
+      @agreement_type_name +="'" + a_class_to_name(type.to_s)+ "'" + ","
       @agreement_type_value += count.to_s + ","
     end
     @agreement_type_name = @agreement_type_name[0...@agreement_type_name.length-1]

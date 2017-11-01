@@ -9,7 +9,12 @@ class Response < ApplicationRecord
   REJECTED = 2
   TO_COMMITTEE = 3
 
+  DESISIONS = {ACCEPTED => "Aceptar", REJECTED =>"Rechazado",TO_COMMITTEE => "Resolver en comité"}
 
+
+  def get_decision
+    DESISIONS[self.answer]
+  end
 
   def set_response
     agreement = Agreement.find(self.agreement.id)

@@ -58,51 +58,51 @@
 
 
 
-  :javascript
+:javascript
 
-    var completedChart = document.getElementById("completedChart");
+  var completedChart = document.getElementById("completedChart");
 
-    var oilData = {
-      labels: [
-        "Pendientes",
-        "Resueltos"
-      ],
-      datasets: [
-        {
-          data: [#{@meeting.agreement.where(status: Agreement::OPEN).size}, #{@meeting.agreement.where(status: Agreement::CLOSE).size}],
-          backgroundColor: [
-            "#FF6384",
+  var oilData = {
+    labels: [
+      "Pendientes",
+      "Resueltos"
+    ],
+    datasets: [
+      {
+        data: [#{@meeting.agreement.where(status: Agreement::OPEN).size}, #{@meeting.agreement.where(status: Agreement::CLOSE).size}],
+        backgroundColor: [
+          "#FF6384",
 
-            "#66aa00"
-          ]
-        }]
-    };
+          "#66aa00"
+        ]
+      }]
+  };
 
-    var pieChart = new Chart(completedChart, {
-      type: 'pie',
-      data: oilData
-    });
+  var pieChart = new Chart(completedChart, {
+    type: 'pie',
+    data: oilData
+  });
 
-    var typesChart = document.getElementById("typesChart");
+  var typesChart = document.getElementById("typesChart");
 
-    var oilData = {
-      labels: [
-        #{raw @agreement_type_name}.replace(/&quot;/g,'"')
-      ],
-      datasets: [
-        {
-          data: [#{@agreement_type_value}],
-          backgroundColor: [
-            "#FF6384",
+  var oilData = {
+    labels: [
+      #{raw @agreement_type_name}
+    ],
+    datasets: [
+      {
+        data: [#{@agreement_type_value}],
+        backgroundColor: [
+          "#FF6384",
 
-            "#6384FF"
-          ]
-        }]
-    };
+          "#6384FF"
+        ]
+      }]
+  };
 
-    var doughnutChart = new Chart(typesChart, {
-      type: 'doughnut',
-      data: oilData
-    });
-    $('.tooltipped').tooltip({delay: 50});
+  var doughnutChart = new Chart(typesChart, {
+    type: 'doughnut',
+    data: oilData
+  });
+  $('.tooltipped').tooltip({delay: 50});
 

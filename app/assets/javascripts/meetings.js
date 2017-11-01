@@ -15,6 +15,7 @@ $(document)
     .on('ajax:beforeSend', '#documentos-trigger', function (evt, data, status, xhr) {
         $('#modalDocumentos #agreement_files').html('');
         $('#preloader-documentos').show();
+        $('.tooltipped').tooltip('remove');
         $('#modalDocumentos').modal('open');
     })
 
@@ -38,6 +39,7 @@ $(document)
     .on('ajax:beforeSend', '.expediente-trigger', function (evt, data, status, xhr) {
         $('#modalExpediente #expediente').html('');
         $('#preloader-expediente').show();
+        $('.tooltipped').tooltip('remove');
         $('#modalExpediente').modal('open');
     })
 

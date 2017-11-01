@@ -79,6 +79,7 @@ function checkHash() {
         url = "/"+hash.slice(2 - hash.length)
         if (url != actual_url) {
             $.get(url, function (data, status) {
+                $('.tooltipped').tooltip('remove');
                 $('#main-content').html(data);
             });
             actual_url = url
@@ -100,6 +101,7 @@ $(document)
     .on('ajax:beforeSend', '.menu-item', function (evt, data, status, xhr) {
         $('#main-content').html('');
         $('#preloader-agreement').show();
+        $('.tooltipped').tooltip('remove');
     })
 
     .on('ajax:success', '.menu-item', function (evt, data, status, xhr) {

@@ -50,13 +50,13 @@
 
   .row
     .col.l12.m12
-      -if current_user.user_type == User::CEP
-        -if @agreement.status == Agreement::OPEN
-          -if Response.where(:user_id => current_user.id).where(:agreement_id => @agreement.id).size == 0
-            .card
-              .card-content
-                .card-title
-                  Votación
+      .card
+        .card-content
+          .card-title
+            Votación
+          -if current_user.user_type == User::CEP
+            -if @agreement.status == Agreement::OPEN
+              -if Response.where(:user_id => current_user.id).where(:agreement_id => @agreement.id).size == 0
                 .section#vote-form
                   %h5
                     Realizar votación
@@ -70,39 +70,39 @@
                         =f.label :comment, 'Comentarios', class:'active'
                       .col.l4.m4.input-field.center
                         =f.submit 'Enviar', class:'btn blue darken-3'
-                .section.soft-border
-                  %h5
-                    Tabla de votaciones
-                  %table
-                    %thead
-                      %tr
-                        %th
-                        %th Miembro del CEP
-                        %th Voto
-                        %th Comentarios
-                    %tbody
-                      -@ceps.each do |member|
-                        %tr
-                          %td
-                            =image_tag "http://cimav.edu.mx/foto/#{member.email[/[^@]+/]}/50", class:'circle responsive-img', alt:'*'
-                          %td
-                            =member.name
-                          %td
-                            -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
-                            -if response.size > 0
-                              -if response.first.answer.eql? Response::ACCEPTED
-                                %i.fa.fa-check{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Aceptar"}
-                              -if response.first.answer.eql? Response::REJECTED
-                                %i.fa.fa-times{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
-                              -if response.first.answer.eql? Response::TO_COMMITTEE
-                                %i.fa.fa-exclamation-circle.tooltipped.red-text.text-darken-2{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
-                            -else
-                              = "---"
-                          %td
-                            -if response.size >0
-                              =response.first.comment
-                            -else
-                              = "---"
+          .section.soft-border
+            %h5
+              Tabla de votaciones
+            %table
+              %thead
+                %tr
+                  %th
+                  %th Miembro del CEP
+                  %th Voto
+                  %th Comentarios
+              %tbody
+                -@ceps.each do |member|
+                  %tr
+                    %td
+                      =image_tag "http://cimav.edu.mx/foto/#{member.email[/[^@]+/]}/50", class:'circle responsive-img', alt:'*'
+                    %td
+                      =member.name
+                    %td
+                      -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
+                      -if response.size > 0
+                        -if response.first.answer.eql? Response::ACCEPTED
+                          %i.fa.fa-check.tooltipped{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Aceptar"}
+                        -if response.first.answer.eql? Response::REJECTED
+                          %i.fa.fa-times.tooltipped{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
+                        -if response.first.answer.eql? Response::TO_COMMITTEE
+                          %i.fa.fa-exclamation-circle.tooltipped.red-text.text-darken-2{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
+                      -else
+                        = "---"
+                    %td
+                      -if response.size >0
+                        =response.first.comment
+                      -else
+                        = "---"
 
   -if is_admin?
     .row
