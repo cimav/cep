@@ -42,10 +42,11 @@
           #agreement_files
             :javascript
               refreshFiles(#{@agreement.id});
-          = form_tag "/agreements/#{@agreement.id}/upload_file", method: :post, class: "dropzone", id: "upload-dropzone" do
-            %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
-            .fallback
-              = file_field_tag "file", multiple: true
+          -if is_admin?
+            = form_tag "/agreements/#{@agreement.id}/upload_file", method: :post, class: "dropzone", id: "upload-dropzone" do
+              %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
+              .fallback
+                = file_field_tag "file", multiple: true
 
   .row
     .col.l12.m12
@@ -127,6 +128,7 @@
   $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
   $('.tooltipped').tooltip({delay: 50});
   $('.modal').modal();
+  if(#{is_admin?}){
   Dropzone.autoDiscover = false;
 
   var headlineDropzone = new Dropzone("#upload-dropzone", {
@@ -172,3 +174,5 @@
   }
 
   });
+
+  }
