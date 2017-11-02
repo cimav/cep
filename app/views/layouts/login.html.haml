@@ -1,11 +1,26 @@
 !!!
 %html
   %head
-    %title= "login"
-    = stylesheet_link_tag    "application"
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title CEP
     = csrf_meta_tags
-  %body#body-login
-    #container-login
-      = yield
-.clearfix
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+  %body
+    .slider.fullscreen
+      %ul.slides
+        %li
+          = image_tag "cimav-6", class: 'slide-image'
+        %li
+          = image_tag "cimav-37", class: 'slide-image'
+        %li
+          = image_tag "cimav-39", class: 'slide-image'
+
+    = yield
+    :javascript
+      $(document).ready(function(){
+          $('.slider').slider({indicators: false});
+      });

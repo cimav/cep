@@ -1,34 +1,40 @@
-$brand: #fdf8ff;
-#body-login {
-  background-color: $brand;
-  padding-top: 20px;
-  #login-area {
-    background: transparent image-url(logo-cep) center top no-repeat;
-    padding-top: 260px;
-    margin: 0 auto;
-    margin-top: 40px;
-    width: 640px;
-    .login-title {
-      color: #4c4c4c;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 0 30px rgba(0, 0, 0, .075);
-      font-size: 45px;
-      text-align: center;
-    }
-    .login-message {
-      margin-top: 20px;
-      text-align: center;
-      color: #848484;
-    }
-    .login-methods {
-      margin-top: 20px;
-      text-align: center;
-    }
-    button:hover {
-      //background-color: #9ba2a5;
-    }
-    rounded corner {
-      background-repeat: repeat-x;
-      border-color: darken(#fafafa, 14%);
-    }
-  }
+#logsin-area {
+  z-index: 9999;
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  right: 25%;
+  left: 25%;
+  //bottom: 48px;
+  //width: 50%;
+  min-height: 440px;
+  background-color: rgba(255, 255, 255, 0.93);
+  vertical-align: middle
+}
+
+#app-logo{
+  margin-top: 2rem;
+}
+#login-area {
+  z-index: 999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(255, 255, 255, 0.93);
+  transform: translate(-50%, -50%);
+}
+
+#cimav-logo{
+  //height: 4rem;
+  width: 14rem;
+}
+
+#app-logo{
+  //height: 4rem;
+  width: 14rem;
+}
+
+#login-title{
+  margin: 2rem 2rem;
+
 }
