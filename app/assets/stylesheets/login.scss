@@ -6,6 +6,8 @@
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 30%;
+  height: 90%;
   background-color: rgba(255, 255, 255, 0.93);
   transform: translate(-50%, -50%);
 }
@@ -17,7 +19,7 @@
 
 #app-logo{
   //height: 4rem;
-  width: 14rem;
+  width: 16rem;
 }
 
 #login-title{
