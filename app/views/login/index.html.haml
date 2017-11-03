@@ -1,11 +1,11 @@
 #login-area.card-panel
   /logo cep
   .row
-    .col.l12.m12
+    .col.l12.m12.s12
       =image_tag "cimav-logo-texto.png", id: 'cimav-logo',class:'responsive-img small'
-    .col.l12.m12.center
+    .col.l12.m12.s12.center
       = image_tag "logo-cep.png", id: 'app-logo', class:'responsive-img'
-    .col.l12.m12.center
+    .col.l12.m12.s12.center
       %h5#login-title Comite de Estudios de Posgrado
-    .col.l12.m12.center
-      %a.red.lighten-1.waves-effect.waves-light.btn{:href => "/auth/google_oauth2"} Ingresar
+    .col.l12.m12.s12.center
+      %a#login-button.cyan.darken-1.waves-effect.waves-light.btn.pulse{:href => "/auth/google_oauth2"} Ingresar

@@ -30,7 +30,7 @@
 
       %h3
         /=@next_meeting.date.strftime("%d %B %Y%l:%M %P")
-        =f_date_no_time(@next_meeting.date)
+        =f_date_no_time(@next_meeting.date) rescue 'No hay próximas reuniones'
     .card
       .card-content
         .card-title
