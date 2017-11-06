@@ -2,7 +2,7 @@ module AgreementsHelper
 
   # Votos pendientes por usuario
   def missing_votes
-    @agreements = Agreement.where(status:Agreement::OPEN).where.not(id: Response.select(:agreement_id).where(user_id:current_user.id))
+    @agreements = Agreement.where(status:Agreement::OPEN).where(meeting: Meeting.where(status: Meeting::OPENED)).where.not(id: Response.select(:agreement_id).where(user_id:current_user.id))
   end
 
   def last_agreement_votes

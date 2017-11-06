@@ -2,7 +2,7 @@
 .row
   =form_for @meeting, html:{remote:true, class:'alertas redirect'} do |f|
     .row
-      .input-field.col.l4.m4
+      .input-field.col.l3.m3
         %h5 Tipo de reunión
         .row
           =f.radio_button :meeting_type, Meeting::ORDINARY, checked:'checked'
@@ -10,14 +10,23 @@
         .row
           =f.radio_button :meeting_type, Meeting::EXTRAORDINARY
           =f.label :meeting_type, 'Extraordinaria', value:Meeting::EXTRAORDINARY
-      .input-field.col.l4.m4
+      -if !@meeting.date.nil?
+        -datetime = @meeting.date
+      -else
+        =label_tag :date, 'Seleccione fecha para examen', class:'active red-text'
+        -datetime = '0000-01-01 00:00:00'
+      -date = datetime.to_s.split(" ")[0].to_date.strftime("%d %B, %Y")
+      -time = datetime.to_s.split(" ")[1].to_time.strftime('%l:%M%P')
+      .input-field.col.s3.l3.m3
+        =text_field_tag :date,date, class: "datepicker"
+        =label_tag :date, 'Fecha', class:'active'
 
-        %h5 Fecha
-        =text_field_tag :date , @date, class: "datepicker",placeholder:'Selecciona la fecha de la reunión'
-
-      .input-field.col.l4.m4
-        %h5 Hora
-        =text_field_tag :time,@time, class: "timepicker",placeholder:'Selecciona la hora de la reunión',:type => "time"
+      .input-field.col.s3.m3.l3
+        =text_field_tag :time,time, class: "timepicker", :type => "text", id:'exam_time'
+        =label_tag :exam_time, 'Hora', class:'active'
+      .input-field.col.s3.m3.l3
+        =f.select :status, [["Abierta", Meeting::OPENED], ["Cerrada", Meeting::CLOSED]]
+        =f.label :status, 'Estatus'
     .row
       .input-field
         =f.submit 'Actualizar reunión', class:'btn'

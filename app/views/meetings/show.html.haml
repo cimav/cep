@@ -9,6 +9,9 @@
 
     %span.pink-text.text-darken-4.flow-text
       =f_date(@meeting.date)
+    -if @meeting.status.eql? Meeting::CLOSED
+      %span.red-text.flow-text.chip
+        Esta sesión esta cerrada
 
   .row
     .col.l4.m4
@@ -55,6 +58,9 @@
         %li
           %a.btn-floating.btn-large.red.tooltipped.eliminar{href:"/meetings/#{@meeting.id}","data-position" => "left", "data-tooltip" => "Eliminar sesión", "data-delay" => "100", "data-method"=>"delete", "data-remote"=>"true","data-confirm"=>"Se eliminará la sesión"}
             %i.fa.fa-trash{"aria-hidden" => "true"}
+        %li
+          %a.btn-floating.btn-large.blue.lighten-1.tooltipped.ajax-item{href:"/meetings/#{@meeting.id}/edit",url:"meetings/#{@meeting.id}/edit","data-position" => "left", "data-tooltip" => "Editar sesión", "data-delay" => "100", "data-remote"=>"true"}
+            %i.fa.fa-pencil{"aria-hidden" => "true"}
 
 
 
