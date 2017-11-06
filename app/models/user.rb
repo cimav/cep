@@ -1,5 +1,7 @@
 class User < ApplicationRecord
+  audited
   has_many :responses
+
 
   ADMIN = 1
   CEP = 2
