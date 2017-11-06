@@ -1,0 +1,12 @@
+%h3
+  Estimado miembro del Comité de Estudios de Posgrado
+
+%p
+  Como integrante del Comité de Estudios de Posgrado, se solicita su voto para resolver uno de los acuerdos del comité, para ello ingrese al siguiente enlace:
+  =link_to "cep.cimav.edu.mx", "http://cep.cimav.edu.mx/#!agreements/#{@agreement.id}"
+
+%br
+
+%b Tipo de acuerdo:
+=a_class_to_name(@agreement.agreeable.class.name)
+%br

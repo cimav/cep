@@ -147,6 +147,28 @@ $(document)
     })
 
 ;
+
+$(document)
+
+    .on('ajax:beforeSend', '.send-email', function (evt, data, status, xhr) {
+        Materialize.toast("Enviando email...", 4000);
+        $('.tooltipped').tooltip('remove');
+    })
+
+    .on('ajax:success', '.send-email', function (evt, data, status, xhr) {
+        Materialize.toast(data.message, 4000);
+
+
+    })
+
+    .on('ajax:error', '.send-email', function (evt, data, status, xhr) {
+        Materialize.toast("Error inesperado", 4000)
+        $('#preloader-agreement').hide();
+
+    })
+
+;
+
 $(document)
 
     .on('ajax:beforeSend', '.ajax-item', function (evt, data, status, xhr) {

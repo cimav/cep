@@ -9,6 +9,10 @@ module AgreementsHelper
     @last_agreement_votes = Agreement.where(id: Response.select(:agreement_id).where(user_id:current_user.id)).limit(10)
   end
 
+  def has_voted(user,agreement)
+    Response.where(user:user).where(agreement:agreement).first.nil?
+  end
+
   def a_class_to_name(agreement_class)
     case agreement_class
       when "NewAdmission"

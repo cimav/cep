@@ -1,6 +1,7 @@
 class AgreementsController < ApplicationController
   before_action :auth_required
-
+  include AgreementsHelper
+  helper AgreementsHelper
 
 
   def index
@@ -194,6 +195,38 @@ class AgreementsController < ApplicationController
     render layout:false
   end
 
+  # Mandar notificacion por email
+  def send_vote_reminder
+    agreement = Agreement.find(params[:agreement_id])
+    response = {}
+    respond_to do |format|
+
+      # solo se notifica si el acuerdo esta abierto
+      if agreement.status.eql? Agreement::OPEN
+        # solo se notifica a quienes no han votado
+        send_to = []
+        User.where(user_type: User::CEP).each do |cep|
+          if has_voted(cep, agreement)
+            send_to << cep
+          end
+        end
+        # Verificar que al menos uno de los miembros del comite no ha votado
+        if send_to.size > 0
+          # Se envia el correo
+          CepMailer.vote_reminder(agreement, send_to).deliver_now
+          response[:message] = 'Se envio el correo'
+        else
+          response[:message] = 'No hay votaciones pendientes'
+        end
+      else
+        response[:message] = 'El acuerdo ya ha sido cerrado'
+      end
+      response[:redirect_url] = "agreements/#{agreement.id}"
+      response[:errors] = agreement.errors.full_messages
+      response[:object] = agreement
+      format.json {render json: response}
+    end
+  end
 
 
   private

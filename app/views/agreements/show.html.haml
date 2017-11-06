@@ -116,9 +116,9 @@
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Cerrar votación"}
             %a{:href => "#!"}
               %i.fa.fa-lock{"aria-hidden"=>true}
-          %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar"}
-            %a{:href => "#!"}
-              %i.fa.fa-unlock{"aria-hidden"=>true}
+          %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Recordar votación por email"}
+            %a.send-email{:href => "/agreements/#{@agreement.id}/send_email", "data-remote"=>"true", "data-method"=>"post"}
+              %i.fa.fa-envelope{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Borrar acuerdo"}
             %a.eliminar{:href => "/agreements/#{@agreement.id}", "data-remote"=>"true", "data-method"=>"delete", "data-confirm"=>"Se eliminará el acuerdo permanentemente"}
               %i.fa.fa-trash{"aria-hidden"=>true}
