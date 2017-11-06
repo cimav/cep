@@ -7,6 +7,15 @@
 
 %br
 
+
+%b Folio:
+=@agreement.id_key
+%br
 %b Tipo de acuerdo:
 =a_class_to_name(@agreement.agreeable.class.name)
+%br
+%br
+%br
+Este acuerdo pertenece a la sesión:
+=@agreement.meeting.id_key
 %br
