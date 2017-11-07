@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: cep_production
-  username: cep
-  password: <%= ENV['CEP_DATABASE_PASSWORD'] %>
+  username: root
+  password:
