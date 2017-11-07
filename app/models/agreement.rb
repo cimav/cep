@@ -1,4 +1,5 @@
 class Agreement < ApplicationRecord
+  audited
   belongs_to :meeting
   has_many :agreement_file, dependent: :destroy
   has_many :responses, dependent: :destroy

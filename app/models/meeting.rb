@@ -1,4 +1,5 @@
 class Meeting < ApplicationRecord
+  audited
   has_many :agreement, dependent: :destroy
   after_create :set_id_key
 

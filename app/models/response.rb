@@ -1,4 +1,5 @@
 class Response < ApplicationRecord
+  audited
   belongs_to :agreement
   belongs_to :user
   after_save :set_response
