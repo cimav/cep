@@ -114,10 +114,10 @@
             %a.ajax-item{:href => "/meetings/#{@agreement.meeting.id}/agreements/#{@agreement.id}", "data-remote"=>"true", url:"meetings/#{@agreement.meeting.id}/agreements/#{@agreement.id}"}
               %i.fa.fa-pencil{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Cerrar votación"}
-            %a{:href => "#!"}
+            %a.ajax-response.refresh{:href => "/agreements/#{@agreement.id}/close_agreement", "data-remote"=>"true", "data-method"=>"post", "data-confirm"=>"¿Desea cerrar el acuerdo manualmente?"}
               %i.fa.fa-lock{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Recordar votación por email"}
-            %a.send-email{:href => "/agreements/#{@agreement.id}/send_email", "data-remote"=>"true", "data-method"=>"post"}
+            %a.send-email{:href => "/agreements/#{@agreement.id}/send_email", "data-remote"=>"true", "data-method"=>"post", "data-confirm"=>"Se enviará un correo"}
               %i.fa.fa-envelope{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Borrar acuerdo"}
             %a.eliminar{:href => "/agreements/#{@agreement.id}", "data-remote"=>"true", "data-method"=>"delete", "data-confirm"=>"Se eliminará el acuerdo permanentemente"}

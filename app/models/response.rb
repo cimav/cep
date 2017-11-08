@@ -20,6 +20,7 @@ class Response < ApplicationRecord
   def set_response
     agreement = Agreement.find(self.agreement.id)
     responses = Response.where(agreement: agreement)
+    # si todos los miembros del comite votaron, se cierra la votacion
     if responses.size == User.where(user_type: User::CEP).size
       # Aquí se guardarán las respuestas de cada miembro
       answers = []
@@ -35,15 +36,17 @@ class Response < ApplicationRecord
           responses_hash[answer] += 1
         end
       end
-      # Asignar el nivel más votado
+      # Obtener la decisión más votada
       more_voted = responses_hash.max_by{|k,v| v}
       number_of_members = User.where(user_type: User::CEP).size
       if more_voted[1] > number_of_members/2
+        # Asignar la decisión más votada
         agreement.decision = more_voted[0]
         agreement.status = Agreement::CLOSE
         agreement.save!
       else
-        agreement.status = Agreement::REJECTED
+        agreement.status = Agreement::CLOSE
+        agreement.decision = Agreement::TO_COMMITTEE
         agreement.save!
       end
 

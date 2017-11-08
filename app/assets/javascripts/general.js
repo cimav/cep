@@ -81,6 +81,8 @@ function checkHash() {
             $.get(url, function (data, status) {
                 $('.tooltipped').tooltip('remove');
                 $('#main-content').html(data);
+            }).fail(function() {
+                Materialize.toast("Error al cargar elemento", 4000)
             });
             actual_url = url
         }
@@ -132,7 +134,6 @@ $(document)
 
     .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {
         $('#main-content').html(data);
-        $(".agreement-list li").removeClass("active");
         setHash($(this).attr("url"));
         $(this).parent().addClass("active");
         $('#preloader-agreement').hide();
@@ -162,7 +163,34 @@ $(document)
     })
 
     .on('ajax:error', '.send-email', function (evt, data, status, xhr) {
-        Materialize.toast("Error inesperado", 4000)
+        Materialize.toast("Error inesperado", 4000);
+        $('#preloader-agreement').hide();
+
+    })
+
+;
+
+$(document)
+
+    .on('ajax:beforeSend', '.ajax-response', function (evt, data, status, xhr) {
+        $('.tooltipped').tooltip('remove');
+        $('#preloader-agreement').show();
+    })
+
+    .on('ajax:success', '.ajax-response', function (evt, data, status, xhr) {
+
+        if($(this).hasClass("refresh")){
+            location.reload();
+        }
+        Materialize.toast(data.message, 4000);
+        for (i = 0; i<data.errors.length;i++) {
+            Materialize.toast(data.errors[i], 4000);
+        }
+
+    })
+
+    .on('ajax:error', '.ajax-response', function (evt, data, status, xhr) {
+        Materialize.toast("Error inesperado", 4000);
         $('#preloader-agreement').hide();
 
     })
@@ -179,7 +207,6 @@ $(document)
 
     .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {
         $('#main-content').html(data);
-        $(".agreement-list li").removeClass("active");
         setHash($(this).attr("url"));
         $(this).parent().addClass("active");
         $('#preloader-agreement').hide();
@@ -194,6 +221,11 @@ $(document)
     })
 
 ;
+
+////////////////// click en tablas
+$(document).on('click','.tr-click', function() {
+    setHash($(this).attr('href'));
+});
 
 function goIndex() {
     url = "/dashboard";

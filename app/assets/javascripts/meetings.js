@@ -53,27 +53,6 @@ $(document)
     })
 
 
-//-------------------------------------
-//función genérica para mostrar alertas
-//-------------------------------------
-    .on("ajax:success","form.alertas", function(ev,data){
-        if($(this).hasClass("redirect")){
-            setHash(data.redirect_url)
-        }
-        if($(this).hasClass("refresh")){
-            location.reload();
-        }
-            refreshMenu();
-
-
-        Materialize.toast(data.message, 4000);
-        for (i = 0; i<data.errors.length;i++) {
-            Materialize.toast(data.errors[i], 4000);
-        }
-        // se puede acceder al objeto  por ejemplo data.object.id
-    })
-
-
 
 //-------------------------------------
 //función al eliminar sesiones o acuerdos

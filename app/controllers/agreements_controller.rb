@@ -229,6 +229,64 @@ class AgreementsController < ApplicationController
   end
 
 
+  # Cerrar el acuerdo manualmente
+  def close_agreement
+    agreement = Agreement.find(params[:id])
+    response = {}
+    respond_to do |format|
+      if is_admin?
+        # verificar que el acuerdo este abierto
+        if agreement.status.eql? Agreement::OPEN
+          votes = Response.where(agreement: agreement)
+          if votes.size > 0
+            # Aquí se guardarán las respuestas de cada miembro
+            answers = []
+            votes.each do |response|
+              answers.push(response[:answer])
+            end
+            # Se crea un hash para obtener la respuesta más votada
+            votes_hash = {}
+            answers.each do |answer|
+              if votes_hash[answer].nil?
+                votes_hash[answer] = 1
+              else
+                votes_hash[answer] += 1
+              end
+            end
+            # Obtener la decisión más votada
+            more_voted = votes_hash.max_by{|k,v| v}
+            number_of_members = User.where(user_type: User::CEP).size
+            if more_voted[1] > number_of_members/2
+              # Asignar al acuerdo la decisión más votada
+              agreement.decision = more_voted[0]
+              agreement.status = Agreement::CLOSE
+              if agreement.save!
+                response[:message] = 'El acuerdo ha sido resuelto'
+              end
+            else
+              agreement.status = Agreement::CLOSE
+              agreement.decision = Agreement::TO_COMMITTEE
+              if agreement.save!
+                # Si no se obtuvo una mayoria, ek acuerdo debe resolverse en la reunion del CEP
+                response[:message] = 'No se pudo llegar a una decisión'
+              end
+            end
+          else
+            response[:message] = 'Debe haber al menos un voto'
+            # Debe haber al menos un voto
+          end
+        else
+          response[:message] = 'El acuerdo ya está cerrado'
+        end
+      else
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+      end
+      response[:errors] = agreement.errors.full_messages
+      response[:object] = agreement
+      format.json {render json: response}
+    end
+  end
+
   private
 
   def agreement_params

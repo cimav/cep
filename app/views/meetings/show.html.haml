@@ -14,7 +14,7 @@
         Esta sesión esta cerrada
 
   .row
-    .col.l4.m4
+    .col.l9.m9
       .card
         .card-content
           .card-title
@@ -25,27 +25,51 @@
           -if @meeting_agreements.size == 0
             %h4.center 0
           -else
-            %ul.collection.with-header
-              -@meeting_agreements.each do |agreement|
-                =link_to  "agreements/#{agreement.id}", remote:true, url:"agreements/#{agreement.id}", class:'ajax-item collection-item avatar' do
-                  -if agreement.agreeable_type.eql? 'ProfessionalExam'
-                    %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
-                  %span.title
-                    =agreement.id_key
-                  %p
-                    =agreement.get_type
+            %table.bordered.agreement-table.highlight
+              %thead
+                %tr
+                  %th
+                  %th Folio
+                  %th Información
+                  %th Estado
+              %tbody
+                -@meeting_agreements.each do |agreement|
+                  %tr.tr-click{href:"agreements/#{agreement.id}"}
+                    %td
+                      -if agreement.agreeable_type.eql? 'ProfessionalExam'
+                        %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
+                      -else
+                        = image_tag "logo-cep.png", class:'responsive-img agreement-icon'
+                    %td
+                      =agreement.id_key
+                    %td
+                      =agreement.get_type
+                      -if agreement.agreeable_type.eql? 'ProfessionalExam'
+                        =agreement.agreeable.student.full_name
+                    %td
+                      -if agreement.status.eql? Agreement::OPEN
+                        Pendiente
+                      -else
+                        -case agreement.decision
+                          -when Agreement::ACCEPTED
+                            %i.fa.fa-check{"aria-hidden" => "true"}
+                          -when Agreement::REJECTED
+                            %i.fa.fa-times{"aria-hidden" => "true"}
+                          -when Agreement::TO_COMMITTEE
+                            %i.fa.fa-exclamation{"aria-hidden" => "true"}
 
 
 
 
-    .col.l4.m4
+
+    .col.l3.m3
       .card
         .card-content
           .card-title
             Acuerdos totales:
             =@meeting.agreement.size
           %canvas#completedChart{:height => "400", :width => "400"}
-    .col.l4.m4
+
       .card
         .card-content
           .card-title
@@ -68,7 +92,7 @@
 :javascript
 
   var completedChart = document.getElementById("completedChart");
-
+  Chart.defaults.global.legend.display = false;
   var oilData = {
     labels: [
       "Pendientes",
@@ -78,9 +102,9 @@
       {
         data: [#{@meeting.agreement.where(status: Agreement::OPEN).size}, #{@meeting.agreement.where(status: Agreement::CLOSE).size}],
         backgroundColor: [
-          "#FF6384",
+          "#919595",
 
-          "#66aa00"
+          "#45BC57"
         ]
       }]
   };
@@ -100,9 +124,9 @@
       {
         data: [#{@agreement_type_value}],
         backgroundColor: [
-          "#FF6384",
-
-          "#6384FF"
+          "#FFC02F",
+          "#1F667C",
+          "#9E9795"
         ]
       }]
   };
