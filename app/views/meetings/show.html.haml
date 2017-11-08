@@ -25,41 +25,38 @@
           -if @meeting_agreements.size == 0
             %h4.center 0
           -else
-            %table.bordered.agreement-table
+            %table.bordered.agreement-table.highlight
               %thead
                 %tr
                   %th
                   %th Folio
-                  %th Tipo
                   %th Información
                   %th Estado
               %tbody
                 -@meeting_agreements.each do |agreement|
-                  =link_to  "agreements/#{agreement.id}", remote:true, url:"agreements/#{agreement.id}", class:'ajax-item' do
-                    %tr
-                      %td
-                        -if agreement.agreeable_type.eql? 'ProfessionalExam'
-                          %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
-                        -else
-                          = image_tag "logo-cep.png", class:'responsive-img agreement-icon'
-                      %td
-                        =agreement.id_key
-                      %td
-                        =agreement.get_type
-                      %td
-                        -if agreement.agreeable_type.eql? 'ProfessionalExam'
-                          =agreement.agreeable.student.full_name
-                      %td
-                        -if agreement.status.eql? Agreement::OPEN
-                          Pendiente
-                        -else
-                          -case agreement.decision
-                            -when Agreement::ACCEPTED
-                              %i.fa.fa-check{"aria-hidden" => "true"}
-                            -when Agreement::REJECTED
-                              %i.fa.fa-times{"aria-hidden" => "true"}
-                            -when Agreement::TO_COMMITTEE
-                              %i.fa.fa-exclamation{"aria-hidden" => "true"}
+                  %tr.tr-click{href:"agreements/#{agreement.id}"}
+                    %td
+                      -if agreement.agreeable_type.eql? 'ProfessionalExam'
+                        %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
+                      -else
+                        = image_tag "logo-cep.png", class:'responsive-img agreement-icon'
+                    %td
+                      =agreement.id_key
+                    %td
+                      =agreement.get_type
+                      -if agreement.agreeable_type.eql? 'ProfessionalExam'
+                        =agreement.agreeable.student.full_name
+                    %td
+                      -if agreement.status.eql? Agreement::OPEN
+                        Pendiente
+                      -else
+                        -case agreement.decision
+                          -when Agreement::ACCEPTED
+                            %i.fa.fa-check{"aria-hidden" => "true"}
+                          -when Agreement::REJECTED
+                            %i.fa.fa-times{"aria-hidden" => "true"}
+                          -when Agreement::TO_COMMITTEE
+                            %i.fa.fa-exclamation{"aria-hidden" => "true"}
 
 
 

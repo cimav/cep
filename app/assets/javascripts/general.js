@@ -81,6 +81,8 @@ function checkHash() {
             $.get(url, function (data, status) {
                 $('.tooltipped').tooltip('remove');
                 $('#main-content').html(data);
+            }).fail(function() {
+                Materialize.toast("Error al cargar elemento", 4000)
             });
             actual_url = url
         }
@@ -219,6 +221,11 @@ $(document)
     })
 
 ;
+
+////////////////// click en tablas
+$(document).on('click','.tr-click', function() {
+    setHash($(this).attr('href'));
+});
 
 function goIndex() {
     url = "/dashboard";
