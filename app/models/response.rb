@@ -45,7 +45,8 @@ class Response < ApplicationRecord
         agreement.status = Agreement::CLOSE
         agreement.save!
       else
-        agreement.status = Agreement::REJECTED
+        agreement.status = Agreement::CLOSE
+        agreement.decision = Agreement::TO_COMMITTEE
         agreement.save!
       end
 

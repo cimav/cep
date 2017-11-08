@@ -264,7 +264,8 @@ class AgreementsController < ApplicationController
                 response[:message] = 'El acuerdo ha sido resuelto'
               end
             else
-              agreement.status = Agreement::TO_COMMITTEE
+              agreement.status = Agreement::CLOSE
+              agreement.decision = Agreement::TO_COMMITTEE
               if agreement.save!
                 # Si no se obtuvo una mayoria, ek acuerdo debe resolverse en la reunion del CEP
                 response[:message] = 'No se pudo llegar a una decisión'

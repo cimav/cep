@@ -132,7 +132,6 @@ $(document)
 
     .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {
         $('#main-content').html(data);
-        $(".agreement-list li").removeClass("active");
         setHash($(this).attr("url"));
         $(this).parent().addClass("active");
         $('#preloader-agreement').hide();
@@ -206,7 +205,6 @@ $(document)
 
     .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {
         $('#main-content').html(data);
-        $(".agreement-list li").removeClass("active");
         setHash($(this).attr("url"));
         $(this).parent().addClass("active");
         $('#preloader-agreement').hide();
