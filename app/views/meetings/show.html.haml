@@ -14,7 +14,7 @@
         Esta sesión esta cerrada
 
   .row
-    .col.l4.m4
+    .col.l9.m9
       .card
         .card-content
           .card-title
@@ -38,14 +38,14 @@
 
 
 
-    .col.l4.m4
+    .col.l3.m3
       .card
         .card-content
           .card-title
             Acuerdos totales:
             =@meeting.agreement.size
           %canvas#completedChart{:height => "400", :width => "400"}
-    .col.l4.m4
+
       .card
         .card-content
           .card-title
@@ -68,7 +68,7 @@
 :javascript
 
   var completedChart = document.getElementById("completedChart");
-
+  Chart.defaults.global.legend.display = false;
   var oilData = {
     labels: [
       "Pendientes",
@@ -78,9 +78,9 @@
       {
         data: [#{@meeting.agreement.where(status: Agreement::OPEN).size}, #{@meeting.agreement.where(status: Agreement::CLOSE).size}],
         backgroundColor: [
-          "#FF6384",
+          "#919595",
 
-          "#66aa00"
+          "#45BC57"
         ]
       }]
   };
@@ -100,9 +100,9 @@
       {
         data: [#{@agreement_type_value}],
         backgroundColor: [
-          "#FF6384",
-
-          "#6384FF"
+          "#FFC02F",
+          "#1F667C",
+          "#9E9795"
         ]
       }]
   };

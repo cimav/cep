@@ -162,7 +162,34 @@ $(document)
     })
 
     .on('ajax:error', '.send-email', function (evt, data, status, xhr) {
-        Materialize.toast("Error inesperado", 4000)
+        Materialize.toast("Error inesperado", 4000);
+        $('#preloader-agreement').hide();
+
+    })
+
+;
+
+$(document)
+
+    .on('ajax:beforeSend', '.ajax-response', function (evt, data, status, xhr) {
+        $('.tooltipped').tooltip('remove');
+        $('#preloader-agreement').show();
+    })
+
+    .on('ajax:success', '.ajax-response', function (evt, data, status, xhr) {
+
+        if($(this).hasClass("refresh")){
+            location.reload();
+        }
+        Materialize.toast(data.message, 4000);
+        for (i = 0; i<data.errors.length;i++) {
+            Materialize.toast(data.errors[i], 4000);
+        }
+
+    })
+
+    .on('ajax:error', '.ajax-response', function (evt, data, status, xhr) {
+        Materialize.toast("Error inesperado", 4000);
         $('#preloader-agreement').hide();
 
     })

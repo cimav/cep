@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
   get '/menu-items' => 'home#menu_items'
   post '/agreements/:agreement_id/send_email' => 'agreements#send_vote_reminder'
+  post '/agreements/:id/close_agreement' => 'agreements#close_agreement'
 
   #agreements
   get '/meetings/:meeting_id/agreements/:agreement_id' => 'agreements#edit'
