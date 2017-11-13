@@ -20,7 +20,7 @@
           .card-title
             Acuerdos
             -if is_admin?
-              %a.btn-floating.green.darken-2.tooltipped.ajax-item.right{href:"/meetings/#{@meeting.id}/new_agreement","data-position" => "left", "data-tooltip" => "Nuevo acuerdo", "data-delay" => "100", "data-remote"=>"true"}
+              %a.btn-floating.green.darken-2.tooltipped.ajax-item.right{href:"/meetings/#{@meeting.id}/new_agreement",url:"meetings/#{@meeting.id}/new_agreement","data-position" => "left", "data-tooltip" => "Nuevo acuerdo", "data-delay" => "100", "data-remote"=>"true"}
                 %i.fa.fa-plus{"aria-hidden" => "true"}
           -if @meeting_agreements.size == 0
             %h4.center 0
