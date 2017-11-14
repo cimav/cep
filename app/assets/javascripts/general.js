@@ -123,33 +123,10 @@ $(document)
         $('#preloader-agreement').hide();
     })
 
-;
 
-$(document)
-
-    .on('ajax:beforeSend', '.ajax-item', function (evt, data, status, xhr) {
-        $('#preloader-agreement').show();
-        $('.tooltipped').tooltip('remove');
-    })
-
-    .on('ajax:success', '.ajax-item', function (evt, data, status, xhr) {
-        $('#main-content').html(data);
-        setHash($(this).attr("url"));
-        $(this).parent().addClass("active");
-        $('#preloader-agreement').hide();
-
-
-    })
-
-    .on('ajax:error', '.ajax-item', function (evt, data, status, xhr) {
-        Materialize.toast("Error al cargar elemento", 4000)
-        $('#preloader-agreement').hide();
-
-    })
-
-;
-
-$(document)
+//-------------------------------------
+//Función para enviar emails a los miembros del CEP
+//-------------------------------------
 
     .on('ajax:beforeSend', '.send-email', function (evt, data, status, xhr) {
         Materialize.toast("Enviando email...", 4000);
@@ -168,9 +145,9 @@ $(document)
 
     })
 
-;
-
-$(document)
+//-------------------------------------
+//Función genérica para reponder por ajax
+//-------------------------------------
 
     .on('ajax:beforeSend', '.ajax-response', function (evt, data, status, xhr) {
         $('.tooltipped').tooltip('remove');
@@ -195,9 +172,9 @@ $(document)
 
     })
 
-;
-
-$(document)
+//-------------------------------------
+//Función para cargar elementos por ajax, usar en enlaces
+//-------------------------------------
 
     .on('ajax:beforeSend', '.ajax-item', function (evt, data, status, xhr) {
         $('#preloader-agreement').show();
@@ -220,12 +197,56 @@ $(document)
 
     })
 
-;
 
-////////////////// click en tablas
-$(document).on('click','.tr-click', function() {
-    setHash($(this).attr('href'));
-});
+
+//-------------------------------------
+//función al eliminar sesiones o acuerdos
+//-------------------------------------
+    .on("ajax:success","a.eliminar", function(ev,data){
+        if (data.redirect_url == 'home')
+            goIndex();
+        else
+        {
+            setHash(data.redirect_url);
+            refreshMenu();
+        }
+        Materialize.toast(data.message, 4000);
+        for (i = 0; i<data.errors.length;i++) {
+            Materialize.toast(data.errors[i], 4000);
+        }
+        // se puede acceder al objeto  por ejemplo data.object.id
+    })
+
+//-------------------------------------
+//click en tablas
+//-------------------------------------
+    .on('click','.tr-click', function() {
+        setHash($(this).attr('href'));
+    })
+
+
+//-------------------------------------
+//función genérica para mostrar alertas
+//-------------------------------------
+    .on("ajax:success","form.alertas", function(ev,data){
+        if($(this).hasClass("redirect")){
+            setHash(data.redirect_url)
+        }
+        if($(this).hasClass("refresh")){
+            location.reload();
+        }
+        refreshMenu();
+
+
+        Materialize.toast(data.message, 4000);
+        for (i = 0; i<data.errors.length;i++) {
+            Materialize.toast(data.errors[i], 4000);
+        }
+        // se puede acceder al objeto  por ejemplo data.object.id
+    })
+
+
+; // cierre del $(document)
 
 function goIndex() {
     url = "/dashboard";

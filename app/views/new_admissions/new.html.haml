@@ -1,16 +1,16 @@
 %h1 Nuevo ingreso
-= form_for @new_admission, class:'form_agreement', url:"/meetings/#{@meeting_id}/new_admissions"  do |f|
+= form_for @new_admission,  html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/new_admissions"  do |f|
   .row.input-field
 
     %label.active{:for => "description"} Descripción
     =text_field_tag :description
 
   .row.input-field
-    %label.active{:for => "student_id"} Estudiante
-    =f.collection_select :student_id, Student.all, :id, :full_name, prompt: true
+    %label.active{:for => "applicant_id"} Aspirante
+    =f.collection_select :applicant_id, Applicant.all, :id, :full_name, prompt: true
 
   .row
     =f.submit 'listo',class:'btn'
 
 :javascript
-    $('select').material_select();
+  $("select").select2();

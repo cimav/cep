@@ -212,9 +212,13 @@ class AgreementsController < ApplicationController
         end
         # Verificar que al menos uno de los miembros del comite no ha votado
         if send_to.size > 0
-          # Se envia el correo
-          CepMailer.vote_reminder(agreement, send_to).deliver_now
-          response[:message] = 'Se envio el correo'
+          # Se envia el correo si se está en producción
+          if Rails.env.production?
+            CepMailer.vote_reminder(agreement, send_to).deliver_now
+            response[:message] = 'Se envio el correo'
+          else
+            response[:message] = 'El sistema no está en modo de producción'
+          end
         else
           response[:message] = 'No hay votaciones pendientes'
         end

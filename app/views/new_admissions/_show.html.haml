@@ -1,64 +1,33 @@
+.section.valign-wrapper
+  .row.full-width
+    .col.l12.m12
+      %h5
+        =agreeable.applicant.full_name
 
-.row
-  .col.l9.m9
-    .card
-      .card-content
-        .card-title
-          Descripción
-        =@agreement.description
-    .row
-      .card
-        .card-content
-          .card-title
-            Votación
-          %table
-            %thead
-              %tr
-                %th
-                %th Miembro del CEP
-                %th Voto
-                %th Comentarios
-            %tbody
-              %tr
-                %td
-                  =image_tag "http://cimav.edu.mx/foto/teresa.mariscal/50", class:'circle responsive-img', alt:'*'
-                %td
-                  Teresa Mariscal
-                %td
-                  %i.fa.fa-check{"aria-hidden" => "true"}
-                %td
-                  Me parece muy bien ;)
-  .col.l3.m3
-    .card.blue.white-text
-      .card-content
+    .col.l6.m6
+      %p.grey-text.text-darken-3
+        %b
+          Institución previa:
+        =agreeable.applicant.institution.full_name
+        %br
+        %b
+          Grado académico:
+        =agreeable.applicant.previous_degree_type
+        %br
+        %b
+          Promedio:
+        =agreeable.applicant.average
+        %br
 
-        .card-title
-          -if agreeable.student.gender.eql? 'F'
-            %i.fa.fa-venus{"aria-hidden" => "true"}
-          -elsif agreeable.student.gender.eql? 'M'
-            %i.fa.fa-mars{"aria-hidden" => "true"}
-          =agreeable.student.full_name
-        %p
-          %b
-            Matrícula
-          =agreeable.student.card
-          %br
-          %b
-            Programa:
-          =agreeable.student.program.name
-          %br
-          %b
-            Estatus:
-          =agreeable.student.get_status
-          %br
-          %b
-            Campus
-          =agreeable.student.campus.name
-          %br
-          %b
-            Fecha de inicio:
-          =agreeable.student.start_date
-      .card-action
-        %a.btn-floating.tooltipped.purple{"data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Expediente de estudiante"}
-          %i.fa.fa-book{"aria-hidden"=>true}
+    .col.l6.m6
+      %p.grey-text.text-darken-3
+        %b
+          Programa:
+        =agreeable.applicant.program.name
+        %br
+        %b
+          Campus:
+        =agreeable.applicant.campus.name
+        %br
+        %b
 
