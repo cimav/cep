@@ -3,25 +3,35 @@ class NewAdmissionsController < ApplicationController
 
   def create
     new_admission = NewAdmission.new(new_admission_params)
-    if new_admission.save
+    response = {}
 
-      agreement = new_admission.build_agreement
-      agreement.description = params[:description]
-      agreement.meeting_id = params[:meeting_id]
-      if new_admission.save
-        flash[:success] = "Acuerdo creado"
+    respond_to do |format|
+      if is_admin?
+        if new_admission.save
+
+          agreement = new_admission.build_agreement
+          agreement.description = params[:description]
+          agreement.meeting_id = params[:meeting_id]
+          if new_admission.save
+            response[:message] = "Acuerdo creado"
+            response[:redirect_url] = "agreements/#{agreement.id}"
+          else
+            response[:message] = "Error al registrar examen de grado"
+            response[:redirect_url] = "meetings/#{agreement.meeting_id}/new_admissions/new"
+          end
+
+        else
+          response[:message] = "Error al crear acuerdo"
+          response[:errors] = new_admission.errors.full_messages
+          response[:redirect_url] = "meetings/#{params[:meeting_id]}/new_admissions/new"
+
+        end
       else
-        flash[:error] = "Error al crear acuerdo"
-        flash[:error] = agreement.errors.full_messages[0]
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+        response[:redirect_url] = ""
       end
-
-    else
-      flash[:error] = "Error al crear acuerdo"
-      flash[:error] = new_admission.errors.full_messages[0]
-
+      format.json {render json: response}
     end
-    redirect_to Meeting.find(params[:meeting_id])
-
   end
 
   def update
@@ -60,7 +70,7 @@ class NewAdmissionsController < ApplicationController
   private
 
   def new_admission_params
-    params.require(:new_admission).permit(:student_id)
+    params.require(:new_admission).permit(:applicant_id)
   end
 
 

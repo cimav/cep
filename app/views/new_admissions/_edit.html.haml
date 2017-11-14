@@ -2,10 +2,14 @@
   .row.input-field
 
     %label.active{:for => "description"} Descripción
-    =text_field_tag :description, agreeable.agreement.description
+    =text_field_tag :description
+
   .row.input-field
-    %label.active{:for => "student_id"} Estudiante
-    =f.collection_select :student_id, Student.all, :id, :full_name,prompt: true
+    %label.active{:for => "applicant_id"} Aspirante
+    =f.collection_select :applicant_id, Applicant.all, :id, :full_name, prompt: true
 
   .row
     =f.submit 'listo',class:'btn'
+
+:javascript
+  $("select").select2();

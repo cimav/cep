@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171106231131) do
+ActiveRecord::Schema.define(version: 20171113222439) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
@@ -71,10 +71,10 @@ ActiveRecord::Schema.define(version: 20171106231131) do
   end
 
   create_table "new_admissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer  "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["student_id"], name: "index_new_admissions_on_student_id", using: :btree
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "applicant_id"
+    t.index ["applicant_id"], name: "index_new_admissions_on_applicant_id", using: :btree
   end
 
   create_table "professional_exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
