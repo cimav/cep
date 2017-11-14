@@ -151,7 +151,6 @@
     .card-panel
       -student_agreements = []
       -student_agreements << @student.professional_exams
-      -student_agreements << @student.new_admissions
       .container
         %ul.collection
           -student_agreements.each do |agreement_types|
