@@ -63,7 +63,7 @@
                   =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas refresh'} do |f|
                     .row
                       .col.l4.m4.input-field
-                        =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --',required:true}
+                        =f.select :answer, Response.const_get(@agreement.agreeable_type.upcase).invert.sort {|a,b| a[1] <=> b[1] }, {:include_blank => '-- Selecciona --',required:true}
                         =f.label :answer, 'Respuesta'
                       .col.l4.m4.input-field
                         =f.text_field :comment
