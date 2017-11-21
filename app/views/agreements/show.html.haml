@@ -21,7 +21,7 @@
           -if @agreement.decision.eql? Response::TO_COMMITTEE
             -color = 'yellow'
           .chip{class:color+' lighten-4'}
-            ="Acuerdo #{@agreement.decision.downcase}"
+            ="Acuerdo #{@agreement.get_decision.downcase}"
 
   .row
     .col.l12.m12
@@ -87,12 +87,8 @@
                     %td
                       -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
                       -if response.size > 0
-                        -if response.first.answer.eql? Response::ACCEPTED
-                          %i.fa.fa-check.tooltipped{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Aceptar"}
-                        -if response.first.answer.eql? Response::REJECTED
-                          %i.fa.fa-times.tooltipped{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
-                        -if response.first.answer.eql? Response::TO_COMMITTEE
-                          %i.fa.fa-exclamation-circle.tooltipped.red-text.text-darken-2{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
+                        .grey-text.text-darken-2
+                          =response.first.answer.capitalize
                       -else
                         = "---"
                     %td
