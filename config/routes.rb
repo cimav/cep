@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post '/agreements/:id/close_agreement' => 'agreements#close_agreement'
 
   #agreements
-  get '/agreements/:agreement_id' => 'agreements#edit'
+  get '/agreements/:agreement_id/edit' => 'agreements#edit'
   get '/meetings/:meeting_id/synod_designations/new' => 'synod_designations#new'
   get '/meetings/:meeting_id/new_admissions/new' => 'new_admissions#new'
   get '/meetings/:meeting_id/professional_exams/new' => 'professional_exams#new'

@@ -110,7 +110,7 @@
           %i.large.fa.fa-pencil{"aria-hidden"=>true}
         %ul.padding-content
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar acuerdo"}
-            %a.ajax-item{:href => "/agreements/#{@agreement.id}/edit", "data-remote"=>"true", url:"meetings/#{@agreement.meeting.id}/agreements/#{@agreement.id}"}
+            %a.ajax-item{:href => "/agreements/#{@agreement.id}/edit", "data-remote"=>"true", url:"agreements/#{@agreement.id}/edit"}
               %i.fa.fa-pencil{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Cerrar votación"}
             %a.ajax-response.refresh{:href => "/agreements/#{@agreement.id}/close_agreement", "data-remote"=>"true", "data-method"=>"post", "data-confirm"=>"¿Desea cerrar el acuerdo manualmente?"}
