@@ -6,16 +6,31 @@ class Response < ApplicationRecord
 
   validates :answer, presence:true
 
-  ACCEPTED = 1
-  REJECTED = 2
-  TO_COMMITTEE = 3
+  # Respuestas para acuerdo genérico
+  ACCEPTED = 'ACEPTAR'
+  REJECTED = 'RECHAZAR'
+  TO_COMMITTEE = 'RESOLVER EN COMITE'
 
-  DESISIONS = {ACCEPTED => "Aceptar", REJECTED =>"Rechazado",TO_COMMITTEE => "Resolver en comité"}
+  # Respuestas para nuevas admisiones
+  PROPAEDEUTIC = 'CURSO PROPEDEUTICO'
+  PROGRAM_ACCEPTED = 'ACEPTAR EN PROGRAMA'
 
 
-  def get_decision
-    DESISIONS[self.answer]
-  end
+
+  GENERIC_DESISIONS = {ACCEPTED => 'Aceptar', REJECTED =>'Rechazar',TO_COMMITTEE => 'Resolver en comité'}
+  PROFESSIONALEXAM = GENERIC_DESISIONS
+  NEWADMISSION = {PROGRAM_ACCEPTED => 'Aceptar en programa',PROPAEDEUTIC => 'Curso propedéutico', TO_COMMITTEE => 'Resolver en comité'}
+
+
+  # Diccionario para cuando se ha tomado ya la decisión
+  FINAL_DECISIONS = {
+      ACCEPTED => 'Aceptado',
+      REJECTED => 'Rechazado',
+      TO_COMMITTEE => 'Enviado a comité',
+      PROPAEDEUTIC => 'Enviado a curso propedéutico',
+      PROGRAM_ACCEPTED =>'Aceptado en programa'
+  }
+
 
   def set_response
     agreement = Agreement.find(self.agreement.id)
@@ -46,10 +61,9 @@ class Response < ApplicationRecord
         agreement.save!
       else
         agreement.status = Agreement::CLOSE
-        agreement.decision = Agreement::TO_COMMITTEE
+        agreement.decision = Response::TO_COMMITTEE
         agreement.save!
       end
-
     end
   end
 end

@@ -63,4 +63,5 @@
                 %p.secondary-content
                   Mi voto
                   %br
-                  =agreement.responses.where(user_id:current_user.id).last.get_decision
+                  -my_vote = agreement.responses.where(user_id:current_user.id).last
+                  =my_vote.answer.capitalize

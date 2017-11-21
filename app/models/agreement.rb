@@ -7,10 +7,6 @@ class Agreement < ApplicationRecord
   after_create :set_id_key
 
 
-  ACCEPTED = 1
-  REJECTED = 2
-  TO_COMMITTEE = 3
-
 
   OPEN = 1
   CLOSE = 2
@@ -18,7 +14,6 @@ class Agreement < ApplicationRecord
 
 
   STATUS = {OPEN=>'Abierto', CLOSE=>'Cerrado', DELETED =>'Eliminado'}
-  DECISIONS = {ACCEPTED =>'Aceptado', REJECTED => 'Rechazado', TO_COMMITTEE => 'Resolver en comité'}
 
   before_create do
     self.status = OPEN
@@ -28,18 +23,14 @@ class Agreement < ApplicationRecord
     STATUS[self.status]
   end
 
-  def get_decision
-    DECISIONS[self.decision]
-  end
-
   def get_type
     case self.agreeable_type
-      when "NewAdmission"
-        "Nuevo ingreso"
-      when "SynodDesignation"
-        "Designación de sinodales"
-      when "ProfessionalExam"
-        "Examen de grado"
+      when 'NewAdmission'
+        'Nuevo ingreso'
+      when 'SynodDesignation'
+        'Designación de sinodales'
+      when 'ProfessionalExam'
+        'Examen de grado'
     end
   end
 
@@ -58,6 +49,11 @@ class Agreement < ApplicationRecord
     self.consecutive = consecutive
     self.id_key = id_key
     self.save
+  end
+
+  # obtener texto de la decisión tomada
+  def get_decision
+    Response::FINAL_DECISIONS[self.decision]
   end
 
   def delete_agreeable

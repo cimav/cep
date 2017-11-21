@@ -17,12 +17,9 @@
           .chip
             Abierto
         -if @agreement.decision
-          -color = 'green'
-          -case @agreement.decision
-            -when Agreement::ACCEPTED
-              -color = 'green'
-            -when Agreement::REJECTED
-              -color = 'orange'
+          -color = ''
+          -if @agreement.decision.eql? Response::TO_COMMITTEE
+            -color = 'yellow'
           .chip{class:color+' lighten-4'}
             ="Acuerdo #{@agreement.get_decision.downcase}"
 
@@ -63,7 +60,7 @@
                   =form_for @response, :url => "/agreements/#{@agreement.id}/send_response", html:{remote:true, class:'alertas refresh'} do |f|
                     .row
                       .col.l4.m4.input-field
-                        =f.select :answer, options_for_select([['Aceptar',Response::ACCEPTED],['Rechazar', Response::REJECTED],['Resolver en comité', Response::TO_COMMITTEE]]),{:include_blank => '-- Selecciona --',required:true}
+                        =f.select :answer, Response.const_get(@agreement.agreeable_type.upcase).invert.sort {|a,b| a[1] <=> b[1] }, {:include_blank => '-- Selecciona --',required:true}
                         =f.label :answer, 'Respuesta'
                       .col.l4.m4.input-field
                         =f.text_field :comment
@@ -90,12 +87,8 @@
                     %td
                       -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
                       -if response.size > 0
-                        -if response.first.answer.eql? Response::ACCEPTED
-                          %i.fa.fa-check.tooltipped{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Aceptar"}
-                        -if response.first.answer.eql? Response::REJECTED
-                          %i.fa.fa-times.tooltipped{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Rechazar"}
-                        -if response.first.answer.eql? Response::TO_COMMITTEE
-                          %i.fa.fa-exclamation-circle.tooltipped.red-text.text-darken-2{"aria-hidden" => "true", "data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Resolver en comité"}
+                        .grey-text.text-darken-2
+                          =response.first.answer.capitalize
                       -else
                         = "---"
                     %td
