@@ -17,14 +17,11 @@
           .chip
             Abierto
         -if @agreement.decision
-          -color = 'green'
-          -case @agreement.decision
-            -when Agreement::ACCEPTED
-              -color = 'green'
-            -when Agreement::REJECTED
-              -color = 'orange'
+          -color = ''
+          -if @agreement.decision.eql? Response::TO_COMMITTEE
+            -color = 'yellow'
           .chip{class:color+' lighten-4'}
-            ="Acuerdo #{@agreement.get_decision.downcase}"
+            ="Acuerdo #{@agreement.decision.downcase}"
 
   .row
     .col.l12.m12

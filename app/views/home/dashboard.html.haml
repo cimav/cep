@@ -64,9 +64,4 @@
                   Mi voto
                   %br
                   -my_vote = agreement.responses.where(user_id:current_user.id).last
-                  -if my_vote.answer.eql? Response::ACCEPTED
-                    %i.fa.fa-check
-                  -if my_vote.answer.eql? Response::REJECTED
-                    %i.fa.fa-times
-                  -if my_vote.answer.eql? Response::TO_COMMITTEE
-                    %i.fa.fa-exclamation
+                  =my_vote.answer.capitalize

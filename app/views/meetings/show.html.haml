@@ -50,13 +50,7 @@
                       -if agreement.status.eql? Agreement::OPEN
                         Pendiente
                       -else
-                        -case agreement.decision
-                          -when Agreement::ACCEPTED
-                            %i.fa.fa-check{"aria-hidden" => "true"}
-                          -when Agreement::REJECTED
-                            %i.fa.fa-times{"aria-hidden" => "true"}
-                          -when Agreement::TO_COMMITTEE
-                            %i.fa.fa-exclamation{"aria-hidden" => "true"}
+                        =agreement.get_decision
 
 
 
