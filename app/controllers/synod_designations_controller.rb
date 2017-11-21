@@ -6,7 +6,7 @@ class SynodDesignationsController < ApplicationController
     if synod_designation.save
 
       agreement = synod_designation.build_agreement
-      agreement.description = params[:description]
+      agreement.notes = params[:notes]
       agreement.meeting_id = params[:meeting_id]
       if synod_designation.save
         flash[:success] = "Acuerdo creado"
@@ -31,7 +31,7 @@ class SynodDesignationsController < ApplicationController
     respond_to do |format|
       if is_admin?
         if synod_designation.update(synod_designation_params)
-          synod_designation.agreement.update(description:params[:description])
+          synod_designation.agreement.update(notes:params[:notes])
 
           response[:message] = 'Acuerdo actualizado'
           response[:redirect_url] = "agreements/#{synod_designation.agreement.id}"

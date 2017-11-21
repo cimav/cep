@@ -10,7 +10,7 @@ class NewAdmissionsController < ApplicationController
         if new_admission.save
 
           agreement = new_admission.build_agreement
-          agreement.description = params[:description]
+          agreement.notes = params[:notes]
           agreement.meeting_id = params[:meeting_id]
           if new_admission.save
             response[:message] = "Acuerdo creado"
@@ -41,7 +41,7 @@ class NewAdmissionsController < ApplicationController
     respond_to do |format|
       if is_admin?
         if new_admission.update(new_admission_params)
-          new_admission.agreement.update(description:params[:description])
+          new_admission.agreement.update(notes:params[:notes])
 
           response[:message] = 'Acuerdo actualizado'
 
