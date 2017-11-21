@@ -61,6 +61,7 @@ class NewAdmissionsController < ApplicationController
   def new
     @meeting_id = params[:meeting_id]
     @new_admission = NewAdmission.new
+    @applicants = Applicant.where.not(status:[Applicant::DELETED, Applicant::DESISTS])
     @students = Student.select("MAX(id) as id,first_name,last_name").where(:status=>[1,2,3,5,6]).group("first_name, last_name").order("first_name")
     render layout:false
   end

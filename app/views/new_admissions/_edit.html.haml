@@ -1,12 +1,12 @@
 = form_for agreeable,html:{remote:true, class:'form_agreement alertas'} do |f|
   .row.input-field
 
-    %label.active{:for => "description"} Descripción
-    =text_field_tag :description
+    %label.active{:for => "notes"} Descripción
+    =text_field_tag :notes
 
   .row.input-field
     %label.active{:for => "applicant_id"} Aspirante
-    =f.collection_select :applicant_id, Applicant.all, :id, :full_name, prompt: true
+    =f.collection_select :applicant_id, @applicants, :id, :full_name, prompt: true
 
   .row
     =f.submit 'listo',class:'btn'

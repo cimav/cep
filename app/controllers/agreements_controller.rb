@@ -75,6 +75,7 @@ class AgreementsController < ApplicationController
     @agreement = Agreement.find(params[:agreement_id])
     @staffs = Staff.all.order(:first_name)
     @students = Student.select("MAX(id) as id,first_name,last_name").where(:status=>[1,2,3,5,6]).group("first_name, last_name").order("first_name")
+    @applicants = Applicant.where.not(status:[Applicant::DELETED, Applicant::DESISTS])
     render layout:false
   end
   def update
@@ -294,7 +295,7 @@ class AgreementsController < ApplicationController
   private
 
   def agreement_params
-    params.require(:agreement).permit(:meeting_id, :status, :agreement_type, :description)
+    params.require(:agreement).permit(:meeting_id, :status, :agreement_type, :notes)
   end
 
   def file_params
