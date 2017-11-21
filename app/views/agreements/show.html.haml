@@ -21,7 +21,7 @@
           -if @agreement.decision.eql? Response::TO_COMMITTEE
             -color = 'yellow'
           .chip{class:color+' lighten-4'}
-            ="Acuerdo #{@agreement.get_decision.downcase}"
+            ="Acuerdo #{@agreement.get_decision.downcase rescue "---"}"
 
   .row
     .col.l12.m12
@@ -30,6 +30,10 @@
           .card-title
             Información del acuerdo
           =render partial:"#{@agreement.agreeable.class.table_name}/show", locals:{agreeable:@agreement.agreeable}
+          -if !@agreement.notes.blank?
+            .brown-text.text-darken-3
+              %b Notas:
+              =@agreement.notes
   .row
     .col.l12.m12
       .card

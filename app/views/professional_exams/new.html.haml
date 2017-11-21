@@ -4,8 +4,8 @@
 = form_for @professional_exam, html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/professional_exams"   do |f|
   .row.input-field
 
-    %label.active{:for => "description"} Descripción
-    =text_field_tag :description
+    %label.active{:for => "notes"} Notas
+    =text_field_tag :notes
 
   .row.input-field
     %label.active{:for => "student_id"} Estudiante

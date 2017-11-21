@@ -13,7 +13,7 @@ class ProfessionalExamsController < ApplicationController
         if professional_exam.save
 
           agreement = professional_exam.build_agreement
-          agreement.description = params[:description]
+          agreement.notes = params[:notes]
           agreement.meeting_id = params[:meeting_id]
           if professional_exam.save
             response[:message] = "Acuerdo creado"
@@ -49,7 +49,7 @@ class ProfessionalExamsController < ApplicationController
       data[:exam_date] = get_datetime(params)
       if is_admin?
         if professional_exam.update(data)
-          professional_exam.agreement.update(description:params[:description])
+          professional_exam.agreement.update(notes:params[:notes])
 
           response[:message] = 'Acuerdo actualizado'
           response[:redirect_url] = "agreements/#{professional_exam.agreement.id}"
