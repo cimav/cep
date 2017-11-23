@@ -6,6 +6,7 @@ class Student < RemoteModels
   has_many :advance
   has_many :professional_exams
   has_many :synod_designations
+  has_many :tutor_committees
 
 
   def full_name

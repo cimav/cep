@@ -1,0 +1,30 @@
+= form_for agreeable, html:{ remote: true, class:'alertas redirect'} do |f|
+
+  .row.input-field
+    %label.active{:for => "student_id"} Estudiante
+    =f.collection_select :student_id, @students, :id, :full_name,prompt: true
+  .row
+    .col.l1.m1
+    .col.l11.m11
+      .row.input-field
+        %label.active{:for => ":tutor1"} Comité tutoral 1
+        =f.collection_select :tutor1, @staffs, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => ":tutor2"} Comité tutoral 2
+        =f.collection_select :tutor2,  @staffs, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => ":tutor3"} Comité tutoral 3
+        =f.collection_select :tutor3, @staffs, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => ":tutor4"} Comité tutoral 4
+        =f.collection_select :tutor4,  @staffs, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => ":tutor5"} Comité tutoral 5
+        =f.collection_select :tutor5,  @staffs, :id, :full_name,prompt: true
+  .row.input-field
+
+    %label.active{:for => "notes"} Notes
+    =text_field_tag :notes, agreeable.agreement.notes
+  .row
+    =f.submit 'listo',class:'btn '
+

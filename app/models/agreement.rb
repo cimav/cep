@@ -31,6 +31,8 @@ class Agreement < ApplicationRecord
         'Designación de sinodales'
       when 'ProfessionalExam'
         'Examen de grado'
+      when 'TutorCommittee'
+        'Designación de comité tutoral'
     end
   end
 

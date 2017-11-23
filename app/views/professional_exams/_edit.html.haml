@@ -1,8 +1,5 @@
 = form_for agreeable,html:{remote:true, class:'alertas redirect'} do |f|
-  .row.input-field
 
-    %label.active{:for => "notes"} Descripción
-    =text_field_tag :notes, agreeable.agreement.notes
   .row.input-field
     %label.active{:for => "student_id"} Estudiante
     =f.collection_select :student_id, @students, :id, :full_name,prompt: true, class:'select2'
@@ -22,6 +19,10 @@
     .input-field.col.s3
       =text_field_tag :time,time, class: "timepicker", :type => "text", id:'exam_time'
       =label_tag :exam_time, 'Hora', class:'active'
+  .row.input-field
+
+    %label.active{:for => "notes"} Notas
+    =text_field_tag :notes, agreeable.agreement.notes
 
   .row
     =f.submit 'Actualizar',class:'btn right'

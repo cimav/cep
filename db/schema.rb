@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121184424) do
+ActiveRecord::Schema.define(version: 20171123224534) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "agreement_id"
@@ -106,6 +106,18 @@ ActiveRecord::Schema.define(version: 20171121184424) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_synod_designations_on_student_id", using: :btree
+  end
+
+  create_table "tutor_committees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "student_id"
+    t.integer  "tutor1"
+    t.integer  "tutor2"
+    t.integer  "tutor3"
+    t.integer  "tutor4"
+    t.integer  "tutor5"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_tutor_committees_on_student_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
