@@ -3,24 +3,31 @@ class SynodDesignationsController < ApplicationController
 
   def create
     synod_designation = SynodDesignation.new(synod_designation_params)
-    if synod_designation.save
+    response = {}
 
-      agreement = synod_designation.build_agreement
-      agreement.notes = params[:notes]
-      agreement.meeting_id = params[:meeting_id]
+    respond_to do |format|
+
       if synod_designation.save
-        flash[:success] = "Acuerdo creado"
+
+        agreement = synod_designation.build_agreement
+        agreement.notes = params[:notes]
+        agreement.meeting_id = params[:meeting_id]
+        if synod_designation.save
+          response[:message] = 'Acuerdo creado'
+          response[:redirect_url] = "agreements/#{agreement.id}"
+        else
+          response[:message] = 'Error al registrar designación de sinodales'
+          response[:redirect_url] = "meetings/#{agreement.meeting_id}/synod_designations/new"
+        end
+
       else
-        flash[:error] = "Error al crear acuerdo"
-        flash[:error] = agreement.errors.full_messages[0]
+        response[:message] = 'Error al crear acuerdo'
+        response[:errors] = agreement.errors.full_messages[0]
+        response[:redirect_url] = ""
       end
-
-    else
-      flash[:error] = "Error al crear acuerdo"
-      flash[:error] = agreement.errors.full_messages[0]
-
+      response[:object] = synod_designation
+      format.json {render json: response}
     end
-    redirect_to synod_designation.agreement.meeting
 
   end
 

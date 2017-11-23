@@ -75,7 +75,7 @@
       .section
 
         .larger-text.bold
-          -if @student.thesis.title.nil?
+          -if @student.thesis.title.blank?
             Sin título
           -else
             =@student.thesis.title
@@ -151,12 +151,13 @@
     .card-panel
       -student_agreements = []
       -student_agreements << @student.professional_exams
+      -student_agreements << @student.synod_designations
       .container
         %ul.collection
           -student_agreements.each do |agreement_types|
             -agreement_types.each do |agreement_type|
               =link_to agreement_type.agreement, class:'collection-item avatar ajax-item tooltipped', remote:true, url:"agreements/#{agreement_type.agreement.id}", "data-position"=>"right", "data-delay"=>"50", "data-tooltip"=>"Ir al acuerdo" do
-                -if agreement_type.class.name.eql? 'ProfessionalExam'
+                -if agreement_type.class.name.in? ['ProfessionalExam','SynodDesignation']
                   %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement_type.student.id}"}
                 %span.title
                   =agreement_type.agreement.id_key

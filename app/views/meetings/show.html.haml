@@ -36,7 +36,7 @@
                 -@meeting_agreements.each do |agreement|
                   %tr.tr-click{href:"agreements/#{agreement.id}"}
                     %td
-                      -if agreement.agreeable_type.eql? 'ProfessionalExam'
+                      -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation']
                         %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
                       -else
                         = image_tag "logo-cep.png", class:'responsive-img agreement-icon'

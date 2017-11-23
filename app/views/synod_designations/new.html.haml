@@ -2,13 +2,11 @@
 .row
   %h3 Designación de sinodales
 
-=form_for @synod_designation, class:'alertas', url:"/meetings/#{@meeting_id}/synod_designations" do |f|
-  .row.input-field
-    %label.active{:for => "notes"} Descripción
-    =text_field_tag :notes
+=form_for @synod_designation, html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/synod_designations" do |f|
+
   .row.input-field
     %label.active{:for => "student_id"} Estudiante
-    =f.collection_select :student_id, Student.all, :id, :full_name,prompt: true
+    =f.collection_select :student_id,@students, :id, :full_name, {include_blank:true}, {required:true}
   .row
     .col.l1.m1
     .col.l11.m11
@@ -28,9 +26,11 @@
         %label.active{:for => "synodal5"} Sinodal 5
         =f.collection_select 'synodal5',  Staff.all, :id, :full_name,prompt: true
 
-
+  .row.input-field
+    %label.active{:for => "notes"} Notas
+    =text_field_tag :notes
   .row
     =f.submit 'Crear', class:'btn'
 
 :javascript
-    $('select').material_select();
+  $("select").select2();

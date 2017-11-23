@@ -19,6 +19,7 @@ class Response < ApplicationRecord
 
   GENERIC_DESISIONS = {ACCEPTED => 'Aceptar', REJECTED =>'Rechazar',TO_COMMITTEE => 'Resolver en comité'}
   PROFESSIONALEXAM = GENERIC_DESISIONS
+  SYNODDESIGNATION = GENERIC_DESISIONS
   NEWADMISSION = {PROGRAM_ACCEPTED => 'Aceptar en programa',PROPAEDEUTIC => 'Curso propedéutico', TO_COMMITTEE => 'Resolver en comité'}
 
 

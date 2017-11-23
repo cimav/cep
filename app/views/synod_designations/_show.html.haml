@@ -1,0 +1,68 @@
+
+.section.valign-wrapper
+  .row
+    .col.l3.m3
+      %a.expediente-trigger{"data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
+        %img.student-img.responsive-img.circle.tooltipped.hoverable{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreeable.student.id}","data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Ver expediente de estudiante"}
+    .col.l5.m5
+      %a.expediente-trigger{"data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
+        .larger-text
+          =agreeable.student.full_name
+      %p
+        %b
+          Matrícula
+        =agreeable.student.card
+        %br
+        %b
+          Programa:
+        =agreeable.student.program.name
+        %br
+        %b
+          Estatus:
+        =agreeable.student.get_status
+        %br
+        %b
+          Campus:
+        =agreeable.student.campus.name
+        %br
+        %b
+    .col.l4.m4
+      %p.larger-text
+        Sinodales:
+        %br
+        -if agreeable.synodal1
+          %p
+            =Staff.find(agreeable.synodal1).full_name
+        -if agreeable.synodal2
+          %p
+            =Staff.find(agreeable.synodal2).full_name
+        -if agreeable.synodal3
+          %p
+            =Staff.find(agreeable.synodal3).full_name
+        -if agreeable.synodal4
+          %p
+            =Staff.find(agreeable.synodal4).full_name
+        -if agreeable.synodal5
+          %p
+            =Staff.find(agreeable.synodal5).full_name
+
+
+///// modal de expediente
+
+#modalExpediente.modal.modal-fixed-footer
+  .modal-content
+    #preloader-expediente.center
+      .preloader-wrapper.big.active
+        .spinner-layer.spinner-blue-only
+          .circle-clipper.left
+            .circle
+          .gap-patch
+            .circle
+          .circle-clipper.right
+            .circle
+    #expediente
+  .modal-footer
+    %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cerrar
+
+
+
