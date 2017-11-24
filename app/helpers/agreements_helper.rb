@@ -23,6 +23,8 @@ module AgreementsHelper
       "Examen de grado"
       when "TutorCommittee"
         "Designación de comité tutoral"
+      when "ThesisDirector"
+        "Director de tesis"
     end
   end
 

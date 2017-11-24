@@ -20,14 +20,8 @@
         %br
 
     .col.l6.m6
-      %p.grey-text.text-darken-3
+      %p.larger-text.grey-text.text-darken-3
         %b
-          Programa:
-        =agreeable.applicant.program.name
-        %br
-        %b
-          Campus:
-        =agreeable.applicant.campus.name
-        %br
-        %b
-
+          Programa al que aplica:
+      .larger-text.pink-text
+        ="#{agreeable.applicant.program.name} (#{agreeable.applicant.campus.name})"

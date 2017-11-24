@@ -15,3 +15,6 @@
   .col.l4.m4
     .card-panel
       =link_to 'Designación de comité tutoral', "/meetings/#{@meeting.id}/tutor_committees/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/tutor_committees/new"
+  .col.l4.m4
+    .card-panel
+      =link_to 'Director de tesis', "/meetings/#{@meeting.id}/thesis_directors/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/thesis_directors/new"

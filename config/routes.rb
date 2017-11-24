@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/meetings/:meeting_id/new_admissions/new' => 'new_admissions#new'
   get '/meetings/:meeting_id/professional_exams/new' => 'professional_exams#new'
   get '/meetings/:meeting_id/tutor_committees/new' => 'tutor_committees#new'
+  get '/meetings/:meeting_id/thesis_directors/new' => 'thesis_directors#new'
 
   get '/meetings/:id/new_agreement' => 'meetings#new_agreement'
   get '/agreements/:id/files' => 'agreements#agreement_files'
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
 
   #
   post '/meetings/:meeting_id/synod_designations' => 'synod_designations#create'
+  post '/meetings/:meeting_id/thesis_directors' => 'thesis_directors#create'
   post '/meetings/:meeting_id/tutor_committees' => 'tutor_committees#create'
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'
   post '/meetings/:meeting_id/professional_exams' => 'professional_exams#create'
@@ -42,6 +44,7 @@ Rails.application.routes.draw do
   resources 'new_admissions', :except => [:new, :create, :show]
   resources 'professional_exams', :except => [:new, :create, :show]
   resources 'tutor_committees', :except => [:new, :create, :show]
+  resources 'thesis_directors', :except => [:new, :create, :show]
 
 
 end

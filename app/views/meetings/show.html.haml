@@ -36,7 +36,7 @@
                 -@meeting_agreements.each do |agreement|
                   %tr.tr-click{href:"agreements/#{agreement.id}"}
                     %td
-                      -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation']
+                      -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
                         %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
                       -else
                         = image_tag "logo-cep.png", class:'responsive-img agreement-icon'
@@ -44,7 +44,8 @@
                       =agreement.id_key
                     %td
                       =agreement.get_type
-                      -if agreement.agreeable_type.eql? 'ProfessionalExam'
+                      -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
+                        de
                         =agreement.agreeable.student.full_name
                     %td
                       -if agreement.status.eql? Agreement::OPEN
