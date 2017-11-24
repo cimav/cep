@@ -156,17 +156,22 @@
       -student_agreements << @student.professional_exams
       -student_agreements << @student.synod_designations
       -student_agreements << @student.tutor_committees
+      -student_agreements << @student.thesis_directors
       .container
         %ul.collection
           -student_agreements.each do |agreement_types|
             -agreement_types.each do |agreement_type|
-              =link_to agreement_type.agreement, class:'collection-item avatar ajax-item tooltipped', remote:true, url:"agreements/#{agreement_type.agreement.id}", "data-position"=>"right", "data-delay"=>"50", "data-tooltip"=>"Ir al acuerdo" do
-                -if agreement_type.class.name.in? ['ProfessionalExam','SynodDesignation','TutorCommittee']
-                  %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement_type.student.id}"}
-                %span.title
-                  =agreement_type.agreement.id_key
-                %p
-                  =agreement_type.agreement.get_type
+              -if agreement_type.agreement.status.eql? Agreement::CLOSE
+                =link_to agreement_type.agreement, class:'collection-item avatar ajax-item tooltipped', remote:true, url:"agreements/#{agreement_type.agreement.id}", "data-position"=>"right", "data-delay"=>"50", "data-tooltip"=>"Ir al acuerdo" do
+                  -if agreement_type.class.name.in? ['ProfessionalExam','SynodDesignation','TutorCommittee', 'ThesisDirector']
+                    %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement_type.student.id}"}
+                  %span.title
+                    =agreement_type.agreement.id_key
+                  %p
+                    =agreement_type.agreement.get_type
+              -else
+                %li.collection-item
+                  ="No hay acuerdos cerrados para #{@student.full_name rescue 'el estudiante'}"
 
 
 :javascript
