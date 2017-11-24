@@ -9,19 +9,18 @@
   %h1.center.red
     Acuerdo eliminado
 -else
-  .container
-    .row
-      %h1.center#agreement-title
-        =@agreement.get_type
-        -if @agreement.status.eql? Agreement::OPEN
-          .chip
-            Abierto
-        -if @agreement.decision
-          -color = ''
-          -if @agreement.decision.eql? Response::TO_COMMITTEE
-            -color = 'yellow'
-          .chip{class:color+' lighten-4'}
-            ="Acuerdo #{@agreement.get_decision.downcase rescue "---"}"
+  .row
+    %h1.center#agreement-title
+      =@agreement.get_type
+      -if @agreement.status.eql? Agreement::OPEN
+        .chip
+          Abierto
+      -if @agreement.decision
+        -color = ''
+        -if @agreement.decision.eql? Response::TO_COMMITTEE
+          -color = 'yellow'
+        .chip{class:color+' lighten-4'}
+          ="Acuerdo #{@agreement.get_decision.downcase rescue "---"}"
 
   .row
     .col.l12.m12
@@ -33,9 +32,8 @@
           -if !@agreement.notes.blank?
             .divider
             %br
-            .brown-text.text-darken-3
-              %b Notas:
-              =@agreement.notes
+            %b Notas:
+            =@agreement.notes
   .row
     .col.l12.m12
       .card

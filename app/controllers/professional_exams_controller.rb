@@ -30,7 +30,7 @@ class ProfessionalExamsController < ApplicationController
         end
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'
-        response[:redirect_url] = ""
+        response[:redirect_url] = "meetings/#{agreement.meeting_id}/professional_exams/new"
       end
 
       format.json {render json: response}

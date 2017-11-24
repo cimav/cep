@@ -1,0 +1,21 @@
+
+.row
+  %h3 Director de tesis
+
+=form_for @thesis_director, html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/thesis_directors" do |f|
+
+  .row.input-field
+    %label.active{:for => "student_id"} Estudiante
+    =f.collection_select :student_id,@students, :id, :full_name, prompt: true
+  .row.input-field
+    %label.active{:for => ":director"} Director de tesis
+    =f.collection_select :director, @staffs, :id, :full_name,prompt: true
+
+  .row.input-field
+    %label.active{:for => "notes"} Notas
+    =text_field_tag :notes
+  .row
+    =f.submit 'Crear', class:'btn'
+
+:javascript
+  $("select").select2();

@@ -27,24 +27,14 @@
         %br
         %b
     .col.l4.m4
-      %p.larger-text
-        Sinodales:
-      .pink-text
-        -if agreeable.synodal1
-          %p
-            =Staff.find(agreeable.synodal1).full_name
-        -if agreeable.synodal2
-          %p
-            =Staff.find(agreeable.synodal2).full_name
-        -if agreeable.synodal3
-          %p
-            =Staff.find(agreeable.synodal3).full_name
-        -if agreeable.synodal4
-          %p
-            =Staff.find(agreeable.synodal4).full_name
-        -if agreeable.synodal5
-          %p
-            =Staff.find(agreeable.synodal5).full_name
+      %p.flow-text
+        Director de tesis:
+        %br
+      .larger-text.pink-text
+        =Staff.find(agreeable.director).full_name rescue 'Sin asignar'
+
+
+
 
 
 ///// modal de expediente

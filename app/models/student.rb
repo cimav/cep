@@ -5,6 +5,9 @@ class Student < RemoteModels
   has_one :thesis
   has_many :advance
   has_many :professional_exams
+  has_many :synod_designations
+  has_many :tutor_committees
+  has_many :thesis_directors
 
 
   def full_name
