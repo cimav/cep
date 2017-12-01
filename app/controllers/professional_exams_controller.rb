@@ -63,7 +63,7 @@ class ProfessionalExamsController < ApplicationController
         response[:message] = 'Sólo el administrador puede realizar esta acción'
         response[:redirect_url] = ""
       end
-
+      response[:errors] = professional_exam.errors.full_messages
       response[:object] = professional_exam
       format.json {render json: response}
     end
