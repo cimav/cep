@@ -1,8 +1,8 @@
 = form_for agreeable,html:{remote:true, class:'alertas redirect'} do |f|
 
   .row.input-field
-    %label.active{:for => "applicant_id"} Aspirante
-    =f.collection_select :applicant_id, @applicants, :id, :full_name, prompt: true
+    %label.active{:for => "applicant_id"} Asunto
+    =f.text_area :subject, class:'materialize-textarea'
 
   .row.input-field
     %label.active{:for => "notes"} Notas
@@ -10,6 +10,3 @@
 
   .row
     =f.submit 'listo',class:'btn'
-
-:javascript
-  $("select").select2();

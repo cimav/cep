@@ -11,7 +11,7 @@
 -else
   .row
     %h1.center#agreement-title
-      =@agreement.get_type
+      =a_class_to_name(@agreement.agreeable_type)
       -if @agreement.status.eql? Agreement::OPEN
         .chip
           Abierto

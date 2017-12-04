@@ -23,6 +23,7 @@ class Response < ApplicationRecord
   TUTORCOMMITTEE = GENERIC_DESISIONS
   THESISDIRECTOR = GENERIC_DESISIONS
   NEWADMISSION = {PROGRAM_ACCEPTED => 'Aceptar en programa',PROPAEDEUTIC => 'Curso propedéutico', TO_COMMITTEE => 'Resolver en comité'}
+  GENERALISSUE = GENERIC_DESISIONS
 
 
   # Diccionario para cuando se ha tomado ya la decisión

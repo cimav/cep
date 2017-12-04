@@ -12,12 +12,16 @@ Rails.application.routes.draw do
 
   # agreements
   get '/agreements/:agreement_id/edit' => 'agreements#edit'
+  post '/agreements/:id/send_response' => 'agreements#send_response'
+  post '/agreements/:id/upload_file' => 'agreements#upload_file'
+  delete '/agreement_files/:id' => 'agreements#delete_file'
 
   get '/meetings/:meeting_id/synod_designations/new' => 'synod_designations#new'
   get '/meetings/:meeting_id/new_admissions/new' => 'new_admissions#new'
   get '/meetings/:meeting_id/professional_exams/new' => 'professional_exams#new'
   get '/meetings/:meeting_id/tutor_committees/new' => 'tutor_committees#new'
   get '/meetings/:meeting_id/thesis_directors/new' => 'thesis_directors#new'
+  get '/meetings/:meeting_id/general_issues/new' => 'general_issues#new'
 
   get '/meetings/:id/new_agreement' => 'meetings#new_agreement'
   get '/agreements/:id/files' => 'agreements#agreement_files'
@@ -33,9 +37,8 @@ Rails.application.routes.draw do
   post '/meetings/:meeting_id/tutor_committees' => 'tutor_committees#create'
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'
   post '/meetings/:meeting_id/professional_exams' => 'professional_exams#create'
-  post '/agreements/:id/send_response' => 'agreements#send_response'
-  post '/agreements/:id/upload_file' => 'agreements#upload_file'
-  delete '/agreement_files/:id' => 'agreements#delete_file'
+  post '/meetings/:meeting_id/general_issues' => 'general_issues#create'
+
 
   resources 'users'
   resources 'meetings'
@@ -45,6 +48,7 @@ Rails.application.routes.draw do
   resources 'professional_exams', :except => [:new, :create, :show]
   resources 'tutor_committees', :except => [:new, :create, :show]
   resources 'thesis_directors', :except => [:new, :create, :show]
+  resources 'general_issues', :except => [:new, :create, :show]
 
 
 end

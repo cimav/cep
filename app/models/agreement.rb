@@ -23,21 +23,6 @@ class Agreement < ApplicationRecord
     STATUS[self.status]
   end
 
-  def get_type
-    case self.agreeable_type
-      when 'NewAdmission'
-        'Nuevo ingreso'
-      when 'SynodDesignation'
-        'Designación de sinodales'
-      when 'ProfessionalExam'
-        'Examen de grado'
-      when 'TutorCommittee'
-        'Designación de comité tutoral'
-      when 'ThesisDirector'
-        'Director de tesis'
-    end
-  end
-
   def set_id_key
     # Asignar número consecutivo
     last_consecutive = Agreement.where(meeting_id: self.meeting_id).maximum("consecutive")

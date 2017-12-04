@@ -18,3 +18,6 @@
   .col.l4.m4
     .card-panel
       =link_to 'Director de tesis', "/meetings/#{@meeting.id}/thesis_directors/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/thesis_directors/new"
+  .col.l4.m4
+    .card-panel
+      =link_to 'Asuntos generales', "/meetings/#{@meeting.id}/general_issues/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/general_issues/new"

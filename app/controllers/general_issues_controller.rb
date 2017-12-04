@@ -1,29 +1,29 @@
-class NewAdmissionsController < ApplicationController
+class GeneralIssuesController < ApplicationController
   before_action :auth_required
 
   def create
-    new_admission = NewAdmission.new(new_admission_params)
+    general_issue = GeneralIssue.new(general_issue_params)
     response = {}
 
     respond_to do |format|
       if is_admin?
-        if new_admission.save
+        if general_issue.save
 
-          agreement = new_admission.build_agreement
+          agreement = general_issue.build_agreement
           agreement.notes = params[:notes]
           agreement.meeting_id = params[:meeting_id]
-          if new_admission.save
+          if general_issue.save
             response[:message] = "Acuerdo creado"
             response[:redirect_url] = "agreements/#{agreement.id}"
           else
-            response[:message] = "Error al registrar nueva admisión"
-            response[:redirect_url] = "meetings/#{agreement.meeting_id}/new_admissions/new"
+            response[:message] = "Error al registrar asunto general"
+            response[:redirect_url] = "meetings/#{agreement.meeting_id}/general_issues/new"
           end
 
         else
           response[:message] = "Error al crear acuerdo"
-          response[:errors] = new_admission.errors.full_messages
-          response[:redirect_url] = "meetings/#{params[:meeting_id]}/new_admissions/new"
+          response[:errors] = general_issue.errors.full_messages
+          response[:redirect_url] = "meetings/#{params[:meeting_id]}/general_issues/new"
 
         end
       else
@@ -35,13 +35,13 @@ class NewAdmissionsController < ApplicationController
   end
 
   def update
-    new_admission = NewAdmission.find(params[:id])
+    general_issue = GeneralIssue.find(params[:id])
     response = {}
 
     respond_to do |format|
       if is_admin?
-        if new_admission.update(new_admission_params)
-          new_admission.agreement.update(notes:params[:notes])
+        if general_issue.update(general_issue_params)
+          general_issue.agreement.update(notes:params[:notes])
 
           response[:message] = 'Acuerdo actualizado'
 
@@ -53,16 +53,14 @@ class NewAdmissionsController < ApplicationController
         response[:redirect_url] = ""
       end
 
-      response[:object] = new_admission
+      response[:object] = general_issue
       format.json {render json: response}
     end
   end
 
   def new
     @meeting_id = params[:meeting_id]
-    @new_admission = NewAdmission.new
-    @applicants = Applicant.where.not(status:[Applicant::DELETED, Applicant::DESISTS])
-    @students = Student.select("MAX(id) as id,first_name,last_name").where(:status=>[1,2,3,5,6]).group("first_name, last_name").order("first_name")
+    @general_issue = GeneralIssue.new
     render layout:false
   end
 
@@ -70,9 +68,7 @@ class NewAdmissionsController < ApplicationController
 
   private
 
-  def new_admission_params
-    params.require(:new_admission).permit(:applicant_id)
+  def general_issue_params
+    params.require(:general_issue).permit(:subject)
   end
-
-
 end

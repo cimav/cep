@@ -1,0 +1,13 @@
+%h1 Nuevo ingreso
+= form_for @general_issue,  html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/general_issues"  do |f|
+
+  .row.input-field
+    %label.active{:for => "applicant_id"} Asunto
+    =f.text_area :subject, class:'materialize-textarea'
+
+  .row.input-field
+    %label.active{:for => "notes"} Notas
+    =text_field_tag :notes
+
+  .row
+    =f.submit 'listo',class:'btn'

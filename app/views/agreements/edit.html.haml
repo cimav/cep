@@ -3,7 +3,7 @@
     Editar acuerdo
 .row
   .chip.right
-    ="#{@agreement.id_key} #{@agreement.get_type}"
+    ="#{@agreement.id_key} #{a_class_to_name(@agreement.agreeable_type)}"
 .row
   =render partial:"#{@agreement.agreeable.class.table_name}/edit", locals:{agreeable:@agreement.agreeable}
 
@@ -11,7 +11,7 @@
     //$('select').material_select();
     $("select").select2();
 
-     $('.datepicker').pickadate({
+    $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15, // Creates a dropdown of 15 years to control year,
     today: 'Today',
