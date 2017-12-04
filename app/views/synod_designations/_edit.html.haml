@@ -1,7 +1,5 @@
 = form_for agreeable, html:{ remote: true, class:'alertas redirect'} do |f|
-  .row.input-field
-    %label.active{:for => "notes"} Notas
-    =text_field_tag :notes, agreeable.agreement.notes
+
   .row.input-field
     %label.active{:for => "student_id"} Estudiante
     =f.collection_select :student_id, @students, :id, :full_name,prompt: true
@@ -24,7 +22,9 @@
       .row.input-field
         %label.active{:for => "synodal5"} Sinodal 5
         =f.collection_select 'synodal5',  @staffs, :id, :full_name,prompt: true
-
+  .row.input-field
+    %label.active{:for => "notes"} Notas
+    =text_field_tag :notes, agreeable.agreement.notes
   .row
     =f.submit 'listo',class:'btn '
 

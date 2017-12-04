@@ -44,9 +44,11 @@ class GeneralIssuesController < ApplicationController
           general_issue.agreement.update(notes:params[:notes])
 
           response[:message] = 'Acuerdo actualizado'
+          response[:redirect_url] = "agreements/#{general_issue.agreement.id}"
 
         else
           response[:message] = 'Error al actualizar acuerdo'
+          response[:redirect_url] = "agreements/#{general_issue.agreement.id}"
         end
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'

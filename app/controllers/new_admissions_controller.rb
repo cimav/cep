@@ -44,9 +44,11 @@ class NewAdmissionsController < ApplicationController
           new_admission.agreement.update(notes:params[:notes])
 
           response[:message] = 'Acuerdo actualizado'
+          response[:redirect_url] = "agreements/#{new_admission.agreement.id}"
 
         else
           response[:message] = 'Error al actualizar acuerdo'
+          response[:redirect_url] = "agreements/#{new_admission.agreement.id}"
         end
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'
