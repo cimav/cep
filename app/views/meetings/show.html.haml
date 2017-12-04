@@ -47,8 +47,6 @@
                       -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
                         de
                         =agreement.agreeable.student.full_name
-                      -else
-                        = a_class_to_name(agreement.agreeable_type)
                     %td
                       -if agreement.status.eql? Agreement::OPEN
                         Pendiente
