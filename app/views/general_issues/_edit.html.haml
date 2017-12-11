@@ -1,0 +1,12 @@
+= form_for agreeable,html:{remote:true, class:'alertas redirect'} do |f|
+
+  .row.input-field
+    %label.active{:for => "applicant_id"} Asunto
+    =f.text_area :subject, class:'materialize-textarea'
+
+  .row.input-field
+    %label.active{:for => "notes"} Notas
+    =text_field_tag :notes, agreeable.agreement.notes
+
+  .row
+    =f.submit 'listo',class:'btn'

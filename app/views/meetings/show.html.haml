@@ -43,7 +43,7 @@
                     %td
                       =agreement.id_key
                     %td
-                      =agreement.get_type
+                      =a_class_to_name(agreement.agreeable_type)
                       -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
                         de
                         =agreement.agreeable.student.full_name

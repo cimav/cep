@@ -25,6 +25,8 @@ module AgreementsHelper
         "Designación de comité tutoral"
       when "ThesisDirector"
         "Director de tesis"
+      when "GeneralIssue"
+        "Asuntos generales"
     end
   end
 

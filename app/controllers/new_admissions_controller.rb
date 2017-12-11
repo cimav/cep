@@ -16,7 +16,7 @@ class NewAdmissionsController < ApplicationController
             response[:message] = "Acuerdo creado"
             response[:redirect_url] = "agreements/#{agreement.id}"
           else
-            response[:message] = "Error al registrar examen de grado"
+            response[:message] = "Error al registrar nueva admisión"
             response[:redirect_url] = "meetings/#{agreement.meeting_id}/new_admissions/new"
           end
 
@@ -44,9 +44,11 @@ class NewAdmissionsController < ApplicationController
           new_admission.agreement.update(notes:params[:notes])
 
           response[:message] = 'Acuerdo actualizado'
+          response[:redirect_url] = "agreements/#{new_admission.agreement.id}"
 
         else
           response[:message] = 'Error al actualizar acuerdo'
+          response[:redirect_url] = "agreements/#{new_admission.agreement.id}"
         end
       else
         response[:message] = 'Sólo el administrador puede realizar esta acción'

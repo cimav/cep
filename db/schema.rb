@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123234353) do
+ActiveRecord::Schema.define(version: 20171201232717) do
 
-  create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
     t.string   "file"
     t.string   "name"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171123234353) do
     t.index ["agreement_id"], name: "index_agreement_files_on_agreement_id", using: :btree
   end
 
-  create_table "agreements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "agreements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "meeting_id"
     t.integer  "status"
     t.string   "agreeable_type"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20171123234353) do
     t.index ["meeting_id"], name: "index_agreements_on_meeting_id", using: :btree
   end
 
-  create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "auditable_id"
     t.string   "auditable_type"
     t.integer  "associated_id"
@@ -60,7 +60,13 @@ ActiveRecord::Schema.define(version: 20171123234353) do
     t.index ["user_id", "user_type"], name: "user_index", using: :btree
   end
 
-  create_table "meetings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "general_issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meetings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "meeting_type"
     t.datetime "date"
     t.integer  "status"
@@ -70,14 +76,14 @@ ActiveRecord::Schema.define(version: 20171123234353) do
     t.integer  "consecutive"
   end
 
-  create_table "new_admissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "new_admissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "applicant_id"
     t.index ["applicant_id"], name: "index_new_admissions_on_applicant_id", using: :btree
   end
 
-  create_table "professional_exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "professional_exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "exam_date"
     t.integer  "student_id"
     t.datetime "created_at", null: false
@@ -85,7 +91,7 @@ ActiveRecord::Schema.define(version: 20171123234353) do
     t.index ["student_id"], name: "index_professional_exams_on_student_id", using: :btree
   end
 
-  create_table "responses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "responses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
     t.integer  "user_id"
     t.string   "comment"
@@ -96,7 +102,7 @@ ActiveRecord::Schema.define(version: 20171123234353) do
     t.index ["user_id"], name: "index_responses_on_user_id", using: :btree
   end
 
-  create_table "synod_designations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "synod_designations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "student_id"
     t.integer  "synodal1"
     t.integer  "synodal2"
@@ -128,7 +134,7 @@ ActiveRecord::Schema.define(version: 20171123234353) do
     t.index ["student_id"], name: "index_tutor_committees_on_student_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "email"
     t.integer  "user_type"

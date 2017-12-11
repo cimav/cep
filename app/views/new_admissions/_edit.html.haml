@@ -1,12 +1,12 @@
-= form_for agreeable,html:{remote:true, class:'form_agreement alertas'} do |f|
-  .row.input-field
-
-    %label.active{:for => "notes"} Descripción
-    =text_field_tag :notes
+= form_for agreeable,html:{remote:true, class:'alertas redirect'} do |f|
 
   .row.input-field
     %label.active{:for => "applicant_id"} Aspirante
     =f.collection_select :applicant_id, @applicants, :id, :full_name, prompt: true
+
+  .row.input-field
+    %label.active{:for => "notes"} Notas
+    =text_field_tag :notes,agreeable.agreement.notes
 
   .row
     =f.submit 'listo',class:'btn'
