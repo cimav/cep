@@ -40,4 +40,36 @@ module ApplicationHelper
     end
   end
 
+  def print_document(to, content, from)
+    agreement = Agreement.find(params[:id])
+    pdf = Prawn::Document.new(background: "private/membretada.png", background_scale: 0.36, right_margin: 20)
+    pdf.font 'Helvetica'
+    y= 600
+
+    # Cabecera
+    text = "Coordinación de Estudios de Posgrado" +
+        "\n Chihuahua, Chih., a #{Date.today.day} de #{get_month_name(Date.today.month)} del #{Date.today.year}"
+    pdf.text_box text, size: 11, at:[320,y], align: :right
+
+    # Destinatario
+    text = "to"
+    pdf.text_box text, size: 11, at:[20,y-=50]
+    # Presente
+    pdf.formatted_text_box([:text => "Presente.-", :size => 12, :styles => [:bold] ], at:[20,y-=50])
+    text = "Por este conducto me permito informar a Usted que el Comité de Estudios de Posgrado"
+    pdf.text_box content, size: 11, at:[20,y-=50]
+    # Contenido
+    text = "#{candidate.name} se integrará #{(candidate.department.name.include? "Departamento") ? "al":"a" } #{candidate.department.name}, "+
+        "realizando las siguientes funciones:"
+    pdf.text_box text, size: 11, at:[20,y-=70]
+    text = "#{candidate.function}"
+    pdf.text_box text, size: 11, at:[20,y-=50]
+    text = "A T E N T A M E N T E"
+    pdf.text_box text, size: 11, at:[0,150], align: :center
+    text = "Dr. José Alberto Duarte Möller \n Director Académico"
+    pdf.text_box text, size: 11, at:[0,80], align: :center
+
+    send_data pdf.render, filename: "contratacion#{candidate.name}.pdf", type: 'application/pdf', disposition: 'inline'
+  end
+
 end

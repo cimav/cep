@@ -292,6 +292,7 @@ class AgreementsController < ApplicationController
     end
   end
 
+
   private
 
   def agreement_params

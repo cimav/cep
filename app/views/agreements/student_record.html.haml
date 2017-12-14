@@ -50,24 +50,25 @@
         %tbody
           -@student.term_students.each do |ts|
             -ts.term_course_student.where(:status => TermCourseStudent::ACTIVE).each do |tcs|
-              %tr
-                %td
-                  =tcs.term_course.term.name
-                %td
-                  =tcs.term_course.course.name
-                %td
-                  -if tcs.grade.nil? && (tcs.term_course.term.status == Term::PROGRESS || tcs.term_course.term.status == Term::OPEN)
-                    .grey-text
-                      Cursando
-                  -else
-                    -if tcs.grade
-                      -if tcs.grade < 70
-                        .red-text
+              -if !tcs.term_course.nil?
+                %tr
+                  %td
+                    =tcs.term_course.term.name
+                  %td
+                    =tcs.term_course.course.name
+                  %td
+                    -if tcs.grade.nil? && (tcs.term_course.term.status == Term::PROGRESS || tcs.term_course.term.status == Term::OPEN)
+                      .grey-text
+                        Cursando
+                    -else
+                      -if tcs.grade
+                        -if tcs.grade < 70
+                          .red-text
+                            =tcs.grade
+                        -else
                           =tcs.grade
                       -else
-                        =tcs.grade
-                    -else
-                      N.D
+                        N.D
       .section
         %b.blue-grey-text
           Promedio:
