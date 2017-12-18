@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   post '/meetings/:meeting_id/professional_exams' => 'professional_exams#create'
   post '/meetings/:meeting_id/general_issues' => 'general_issues#create'
 
+  # print document
+  get '/professional_exams/:id/document' => 'professional_exams#document'
 
   resources 'users'
   resources 'meetings'

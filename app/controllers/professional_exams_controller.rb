@@ -1,6 +1,7 @@
 class ProfessionalExamsController < ApplicationController
   before_action :auth_required
 
+
   def create
     data = {}
     data = professional_exam_params
@@ -77,6 +78,19 @@ class ProfessionalExamsController < ApplicationController
   end
 
 
+  def document
+    professional_exam = ProfessionalExam.find(params[:id])
+    if professional_exam.agreement.status.eql? Agreement::CLOSE
+      to = "C. #{professional_exam.student.full_name}"
+      content = "Por este conducto me permito informar a Usted que el Comité de Estudios de Posgrado"
+      if professional_exam.agreement.decision.eql? Response::ACCEPTED
+        content += " ha aprobado su solicitud para presentar su examen de grado para el día <b>#{I18n.l(professional_exam.exam_date, format: '%d de %B del %Y a las %l:%M %P')}.</b>"
+      elsif professional_exam.agreement.decision.eql? Response::REJECTED
+      elsif professional_exam.agreement.decision.eql? Response::TO_COMMITTEE
+      end
+      print_document(to,content,professional_exam.agreement)
+    end
+  end
 
   private
 

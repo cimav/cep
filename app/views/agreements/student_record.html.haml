@@ -169,7 +169,7 @@
                   %span.title
                     =agreement_type.agreement.id_key
                   %p
-                    =agreement_type.agreement.get_type
+                    =a_class_to_name(agreement_type.class.name)
               -else
                 %li.collection-item
                   ="No hay acuerdos cerrados para #{@student.full_name rescue 'el estudiante'}"
