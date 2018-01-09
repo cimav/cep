@@ -68,7 +68,19 @@ class NewAdmissionsController < ApplicationController
     render layout:false
   end
 
-
+  def document
+    new_admission = NewAdmission.find(params[:id])
+    if new_admission.agreement.status.eql? Agreement::CLOSE
+      to = "C. #{new_admission.applicant.full_name}"
+      content = "Por este conducto me permito informar a usted que el Comité de Estudios de Posgrado"
+      if new_admission.agreement.decision.eql? Response::PROGRAM_ACCEPTED
+        content += " ha aprobado su solicitud para entrar en el programa de <b>#{new_admission.applicant.program.name}.</b>"
+      elsif new_admission.agreement.decision.eql? Response::PROPAEDEUTIC
+        content += " ha aprobado su solicitud para entrar al <b>Curso Propedéutico en #{new_admission.applicant.program.name}.</b>"
+      end
+      print_document(to,content,new_admission.agreement)
+    end
+  end
 
   private
 
