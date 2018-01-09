@@ -68,6 +68,7 @@ class GeneralIssuesController < ApplicationController
 
 
 
+
   private
 
   def general_issue_params

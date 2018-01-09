@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   # print document
   get '/professional_exams/:id/document' => 'professional_exams#document'
+  get '/new_admissions/:id/document' => 'new_admissions#document'
 
   resources 'users'
   resources 'meetings'
