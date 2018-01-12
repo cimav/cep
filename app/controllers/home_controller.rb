@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   end
 
   def menu_items
-    @meetings = Meeting.where.not(status: Meeting::DELETED)
+    @meetings = Meeting.where.not(status: Meeting::DELETED).order("date DESC")
     render layout: false
   end
 

@@ -2,7 +2,7 @@ class MeetingsController < ApplicationController
   include AgreementsHelper
 
   def index
-    @meetings = Meeting.all.order(date: :desc)
+    @meetings = Meeting.all.order("date DESC")
     render layout: false
   end
 
