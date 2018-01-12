@@ -62,6 +62,7 @@ class Response < ApplicationRecord
         # Asignar la decisión más votada
         agreement.decision = more_voted[0]
         agreement.status = Agreement::CLOSE
+        agreement.decision_date = DateTime.now
         agreement.save!
       else
         agreement.status = Agreement::CLOSE
