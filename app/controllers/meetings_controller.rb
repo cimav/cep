@@ -8,7 +8,7 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
-    @meeting_agreements = Agreement.where(meeting_id:@meeting.id).where.not(status: Agreement::DELETED)
+    @meeting_agreements = Agreement.where(meeting_id:@meeting.id).where.not(status: Agreement::DELETED).order("created_at DESC")
     # Estadísticas de acuerdos resueltos
     agreement_types = @meeting.agreement.group(:agreeable_type).count
     @agreement_type_name = ''

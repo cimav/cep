@@ -14,7 +14,7 @@
         Esta sesión esta cerrada
 
   .row
-    .col.l9.m9
+    #agreements-div.col.l9.m9
       .card
         .card-content
           .card-title
@@ -25,39 +25,40 @@
           -if @meeting_agreements.size == 0
             %h4.center 0
           -else
-            %table.bordered.agreement-table.highlight
-              %thead
-                %tr
-                  %th
-                  %th Folio
-                  %th Información
-                  %th Decisión
-              %tbody
-                -@meeting_agreements.each do |agreement|
-                  %tr.tr-click{href:"agreements/#{agreement.id}"}
-                    %td
-                      -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
-                        %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
-                      -else
-                        = image_tag "logo-cep.png", class:'responsive-img agreement-icon'
-                    %td
-                      =agreement.id_key
-                    %td
-                      =a_class_to_name(agreement.agreeable_type)
-                      -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
-                        de
-                        =agreement.agreeable.student.full_name
-                    %td
-                      -if agreement.status.eql? Agreement::OPEN
-                        Pendiente
-                      -else
-                        =agreement.get_decision
+            #agreements-table
+              %table.bordered.agreement-table.highlight
+                %thead
+                  %tr
+                    %th
+                    %th Folio
+                    %th Información
+                    %th Decisión
+                %tbody
+                  -@meeting_agreements.each do |agreement|
+                    %tr.tr-click{href:"agreements/#{agreement.id}"}
+                      %td
+                        -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
+                          %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
+                        -else
+                          = image_tag "logo-cep.png", class:'responsive-img agreement-icon'
+                      %td
+                        =agreement.id_key
+                      %td
+                        =a_class_to_name(agreement.agreeable_type)
+                        -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
+                          de
+                          =agreement.agreeable.student.full_name
+                      %td
+                        -if agreement.status.eql? Agreement::OPEN
+                          Pendiente
+                        -else
+                          =agreement.get_decision
 
 
 
 
 
-    .col.l3.m3
+    #graph-div.col.l3.m3
       .card
         .card-content
           .card-title
@@ -135,4 +136,7 @@
     data: oilData
   });
   $('.tooltipped').tooltip({delay: 50});
+
+  setAgreementsDivHeight();
+
 
