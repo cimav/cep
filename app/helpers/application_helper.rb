@@ -55,11 +55,11 @@ module ApplicationHelper
       text = "Coordinación de Estudios de Posgrado
            <b>#{agreement.id_key}</b>
             Chihuahua, Chih., a #{I18n.l(agreement.updated_at, format: '%d de %B del %Y')}"
-      pdf.text_box text,size:10, at:[320,y], align: :right, inline_format:true
+      pdf.text_box text,size:11, at:[320,y], align: :right, inline_format:true
 
       # Destinatario
       text = to
-      pdf.text_box text, at:[20,y-=50]
+      pdf.text_box text, at:[20,y-=60]
       # Presente
       pdf.text_box"<b>P r e s e n t e.-</b>", :size => 12, at:[20,y-=18], inline_format:true
       # contenido
