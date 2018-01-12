@@ -97,4 +97,9 @@ $(document)
 ;
 
 
-
+function setAgreementsDivHeight(){
+    var a = $("#agreements-div").height();
+    var b = $("#graph-div").height();
+    var c = $("#agreements-table").height();
+    document.getElementById("agreements-table").style.maxHeight = b - (a-c)+ "px";
+}

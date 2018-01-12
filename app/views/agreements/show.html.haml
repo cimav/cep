@@ -104,8 +104,8 @@
   -if is_admin?
     .row
       .fixed-action-btn.toolbar
-        %a.btn-floating.btn-large.blue
-          %i.large.fa.fa-pencil{"aria-hidden"=>true}
+        %a.btn-floating.btn-large.blue.darken-2
+          %i.large.fa.fa-ellipsis-v{"aria-hidden"=>true}
         %ul.padding-content
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar acuerdo"}
             %a.ajax-item{:href => "/agreements/#{@agreement.id}/edit", "data-remote"=>"true", url:"agreements/#{@agreement.id}/edit"}
