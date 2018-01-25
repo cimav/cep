@@ -9,7 +9,7 @@
           =user.name
       -@viewers.each do |user|
         =link_to edit_user_path(user.id), class:'collection-item ajax-item', remote:true, url:"users/#{user.id}/edit" do
-          %i.fa.fa-eye{"aria-hidden" => "true"}
+          %i.fa.fa-eye{"aria-hidden" => "true", style:"padding-right:1rem;"}
           =user.name
 
     %h1
