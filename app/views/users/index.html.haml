@@ -7,6 +7,10 @@
       -@admins.each do |user|
         =link_to edit_user_path(user.id), class:'collection-item ajax-item', remote:true, url:"users/#{user.id}/edit" do
           =user.name
+      -@viewers.each do |user|
+        =link_to edit_user_path(user.id), class:'collection-item ajax-item', remote:true, url:"users/#{user.id}/edit" do
+          %i.fa.fa-eye{"aria-hidden" => "true"}
+          =user.name
 
     %h1
       Miembros del CEP
