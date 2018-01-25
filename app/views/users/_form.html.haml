@@ -7,7 +7,7 @@
     =f.text_field :email, type:'email', class:'validate'
     =f.label :email, 'email', "data-error"=>"Introduce un email válido", "data-success"=>"Correcto"
   .row.input-field
-    =f.select :user_type, [['Administrador', User::ADMIN],['Miembro del CEP', User::CEP]]
+    =f.select :user_type, [['Administrador', User::ADMIN],['Miembro del CEP', User::CEP],['Espectador', User::VIEWER]]
     =f.label :user_type, 'Tipo de usuario'
   .row
     =f.submit 'Guardar', class:'btn'
