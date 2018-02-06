@@ -1,6 +1,6 @@
 .row
   .col.l2.m2
-    %img#imagen-expediente.responsive-img.circle{src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{@student.id}"}
+    %img#imagen-expediente.responsive-img.circle{src:"http://posgrado.cimav.edu.mx/imagen/student/#{@student.id}"}
   .col.l10.m10
     .row
       %h5
@@ -165,7 +165,7 @@
               -if agreement_type.agreement.status.eql? Agreement::CLOSE
                 =link_to agreement_type.agreement, class:'collection-item avatar ajax-item tooltipped', remote:true, url:"agreements/#{agreement_type.agreement.id}", "data-position"=>"right", "data-delay"=>"50", "data-tooltip"=>"Ir al acuerdo" do
                   -if agreement_type.class.name.in? ['ProfessionalExam','SynodDesignation','TutorCommittee', 'ThesisDirector']
-                    %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement_type.student.id}"}
+                    %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/student/#{agreement_type.student.id}"}
                   %span.title
                     =agreement_type.agreement.id_key
                   %p
