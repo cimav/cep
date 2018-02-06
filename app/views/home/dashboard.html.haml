@@ -33,7 +33,7 @@
               -missing_votes.each do |agreement|
                 =link_to  "agreements/#{agreement.id}", remote:true, url:"agreements/#{agreement.id}", class:'ajax-item collection-item avatar' do
                   -if agreement.agreeable_type.eql? 'ProfessionalExam'
-                    %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
+                    %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/student/#{agreement.agreeable.student.id}"}
                   %span.title
                     =agreement.id_key
                   %p
@@ -55,7 +55,7 @@
             -last_agreement_votes.each do |agreement|
               =link_to  "agreements/#{agreement.id}", remote:true, url:"agreements/#{agreement.id}", class:'ajax-item collection-item avatar' do
                 -if agreement.agreeable_type.eql? 'ProfessionalExam'
-                  %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
+                  %img.circle.blue{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/student/#{agreement.agreeable.student.id}"}
                 %span.title
                   =agreement.id_key
                 %p

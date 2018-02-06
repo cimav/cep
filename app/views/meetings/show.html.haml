@@ -38,7 +38,7 @@
                     %tr.tr-click{href:"agreements/#{agreement.id}"}
                       %td
                         -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
-                          %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/estudiante/#{agreement.agreeable.student.id}"}
+                          %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/student/#{agreement.agreeable.student.id}"}
                         -else
                           = image_tag "logo-cep.png", class:'responsive-img agreement-icon'
                       %td
