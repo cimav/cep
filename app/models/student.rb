@@ -1,4 +1,4 @@
-class Student < RemoteModels
+class Student < SaposModels
   belongs_to :program
   belongs_to :campus
   has_many :term_students
@@ -8,6 +8,8 @@ class Student < RemoteModels
   has_many :synod_designations
   has_many :tutor_committees
   has_many :thesis_directors
+
+  has_many :scholarships, as: :person
 
 
   def full_name

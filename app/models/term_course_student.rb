@@ -1,4 +1,4 @@
-class TermCourseStudent < RemoteModels
+class TermCourseStudent < SaposModels
   belongs_to :term_course
   belongs_to :term_student
 
