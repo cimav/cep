@@ -24,6 +24,7 @@ class Response < ApplicationRecord
   THESISDIRECTOR = GENERIC_DESISIONS
   NEWADMISSION = {PROGRAM_ACCEPTED => 'Aceptar en programa',PROPAEDEUTIC => 'Curso propedéutico', TO_COMMITTEE => 'Resolver en comité'}
   GENERALISSUE = GENERIC_DESISIONS
+  SCHOLARSHIP = GENERIC_DESISIONS
 
 
   # Diccionario para cuando se ha tomado ya la decisión
@@ -64,6 +65,16 @@ class Response < ApplicationRecord
         agreement.status = Agreement::CLOSE
         agreement.decision_date = DateTime.now
         agreement.save!
+        if agreement.agreeable_type == 'Scholarship'
+          ################## se cambia el estatus a la eca dependiendo de la decisión
+          if more_voted[0] == ACCEPTED
+            agreement.agreeable.status = Scholarship::APPROVED
+          end
+          if more_voted[0] == REJECTED
+            agreement.agreeable.status = Scholarship::REJECTED
+          end
+          agreement.agreeable.save
+        end
       else
         agreement.status = Agreement::CLOSE
         agreement.decision = Response::TO_COMMITTEE

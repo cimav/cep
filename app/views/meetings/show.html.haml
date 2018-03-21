@@ -39,6 +39,8 @@
                       %td
                         -if agreement.agreeable_type.in? ['ProfessionalExam', 'SynodDesignation', 'TutorCommittee','ThesisDirector']
                           %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/student/#{agreement.agreeable.student.id}"}
+                        -elsif agreement.agreeable_type == 'Scholarship'
+                          %img.circle.blue.responsive-img.agreement-icon{"aria-hidden"=>true, src:"http://posgrado.cimav.edu.mx/imagen/#{agreement.agreeable.person_type.downcase}/#{agreement.agreeable.person.id}"}
                         -else
                           = image_tag "logo-cep.png", class:'responsive-img agreement-icon'
                       %td

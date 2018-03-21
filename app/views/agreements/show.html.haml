@@ -42,8 +42,8 @@
         .card-content
           .card-title
             Documentos
-          -if @agreement.agreeable_type.eql?'Scholarship'
-            Documentos desde posgrado
+          -if @agreement.agreeable_type == 'Scholarship' && @agreement.agreeable.person_type == 'Internship'
+            =render partial: 'scholarships/documents', locals:{files: @agreement.agreeable.person.internship_files}
           -else
             #agreement_files
               :javascript

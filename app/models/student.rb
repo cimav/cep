@@ -1,5 +1,6 @@
 class Student < SaposModels
   belongs_to :program
+  belongs_to :supervisor, :foreign_key => "supervisor", :class_name => "Staff"
   belongs_to :campus
   has_many :term_students
   has_one :thesis

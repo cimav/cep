@@ -1,0 +1,56 @@
+%table.bordered.file-table
+  %thead
+    %tr
+      %th Tipo de documento
+      %th Archivo
+  %tbody
+    %tr
+      %td
+        Constancia de estudios
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::REGISTRATION_PROOF).last}
+    %tr
+      %td
+        Solicitud oficial de la institución de procedencia
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::INSTITUTION_REQUEST).last}
+    %tr
+      %td
+        Copia de credencial del IFE o INE
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::IFE).last}
+    %tr
+      %td
+        Centa bancaria con CLABE
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::BANK_ACCOUNT).last}
+    %tr
+      %td
+        Copia del CURP
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::CURP).last}
+    %tr
+      %td
+        Comprobante de domicilio
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::ADDRESS_BILL).last}
+    %tr
+      %td
+        Plan de trabajo detallado
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::WORKPLAN).last}
+    %tr
+      %td
+        Comprobante de seguro médico
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::INSURANCE).last}
+    %tr
+      %td
+        Credencial del CIMAV vigente
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::CIMAV_CREDENTIAL).last}
+    %tr
+      %td
+        Curso de seguridad e higiene
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:InternshipFile::COURSE).last}
