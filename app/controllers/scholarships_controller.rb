@@ -6,6 +6,8 @@ class ScholarshipsController < ApplicationController
     @scholarship = Scholarship.find(params[:id])
     if @scholarship.person_type == 'Internship'
       internship_document(@scholarship)
+    else
+      student_document(@scholarship)
     end
   end
 
@@ -59,7 +61,7 @@ class ScholarshipsController < ApplicationController
   end
   
   def student_document(scholarship)
-    
+    render plain:'Documento no disponible'
   end
 
 end
