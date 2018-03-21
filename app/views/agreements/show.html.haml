@@ -42,14 +42,17 @@
         .card-content
           .card-title
             Documentos
-          #agreement_files
-            :javascript
-              refreshFiles(#{@agreement.id});
-          -if is_admin?
-            = form_tag "/agreements/#{@agreement.id}/upload_file", method: :post, class: "dropzone", id: "upload-dropzone" do
-              %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
-              .fallback
-                = file_field_tag "file", multiple: true
+          -if @agreement.agreeable_type.eql?'Scholarship'
+            Documentos desde posgrado
+          -else
+            #agreement_files
+              :javascript
+                refreshFiles(#{@agreement.id});
+            -if is_admin?
+              = form_tag "/agreements/#{@agreement.id}/upload_file", method: :post, class: "dropzone", id: "upload-dropzone" do
+                %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
+                .fallback
+                  = file_field_tag "file", multiple: true
 
   .row
     .col.l12.m12

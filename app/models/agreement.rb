@@ -46,6 +46,6 @@ class Agreement < ApplicationRecord
   end
 
   def delete_agreeable
-    self.agreeable.destroy
+    self.agreeable.destroy unless self.agreeable_type.eql?'Scholarship'
   end
 end
