@@ -64,4 +64,29 @@ class ScholarshipsController < ApplicationController
     render plain:'Documento no disponible'
   end
 
+  def update
+    scholarship = Scholarship.find(params[:id])
+    response = {}
+
+    respond_to do |format|
+      if is_admin?
+        if scholarship.agreement.update(notes:params[:notes])
+
+          response[:message] = 'Acuerdo actualizado'
+          response[:redirect_url] = "agreements/#{scholarship.agreement.id}"
+
+        else
+          response[:message] = 'Error al actualizar acuerdo'
+          response[:redirect_url] = "agreements/#{scholarship.agreement.id}"
+
+        end
+      else
+        response[:message] = 'Sólo el administrador puede realizar esta acción'
+        response[:redirect_url] = ""
+      end
+      response[:errors] = scholarship.errors.full_messages
+      response[:object] = scholarship
+      format.json {render json: response}
+    end
+  end
 end

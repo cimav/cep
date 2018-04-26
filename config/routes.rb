@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   resources 'tutor_committees', :except => [:new, :create, :show]
   resources 'thesis_directors', :except => [:new, :create, :show]
   resources 'general_issues', :except => [:new, :create, :show]
+  resources 'scholarships', :only => [:update]
 
 
 end
