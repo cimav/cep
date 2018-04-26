@@ -114,11 +114,11 @@
         %ul.padding-content
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar acuerdo"}
             %a.ajax-item{:href => "/agreements/#{@agreement.id}/edit", "data-remote"=>"true", url:"agreements/#{@agreement.id}/edit"}
-              %i.fa.fa-pencil{"aria-hidden"=>true}
+              %i.fa.fa-pencil-alt{"aria-hidden"=>true}
           -if (@agreement.status.eql?Agreement::CLOSE) && (!@agreement.decision.eql? Response::TO_COMMITTEE)
             %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Imprimir documento"}
               %a{:href => "/#{@agreement.agreeable.class.table_name}/#{@agreement.agreeable.id}/document", target:'_blank'}
-                %i.fa.fa-file-text-o{"aria-hidden"=>true}
+                %i.fa.fa-file{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Cerrar votación"}
             %a.ajax-response.refresh{:href => "/agreements/#{@agreement.id}/close_agreement", "data-remote"=>"true", "data-method"=>"post", "data-confirm"=>"¿Desea cerrar el acuerdo manualmente?"}
               %i.fa.fa-lock{"aria-hidden"=>true}
