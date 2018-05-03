@@ -1,17 +1,8 @@
 class ScholarshipsController < ApplicationController
   include ActionView::Helpers::NumberHelper
 
-
   def document
     @scholarship = Scholarship.find(params[:id])
-    if @scholarship.person_type == 'Internship'
-      internship_document(@scholarship)
-    else
-      student_document(@scholarship)
-    end
-  end
-
-  def internship_document(scholarship)
 
     pdf = Prawn::Document.new(background: "private/membretada2018.png", background_scale: 0.36, right_margin: 20)
     pdf.font_size 12
@@ -30,22 +21,28 @@ class ScholarshipsController < ApplicationController
     pdf.move_down 10
     pdf.text "<b>P r e s e n t e.-</b>", :size => 12, inline_format: true
     # contenido
-    text = "Por este conducto y de la manera más atenta solicito se sirva generar apoyo de Beca para: <b>#{scholarship.person.full_name}</b>"
+    text = "Por este conducto y de la manera más atenta solicito se sirva generar apoyo de Beca para: <b>#{@scholarship.person.full_name}</b>"
     pdf.move_down 20
     pdf.text text, inline_format: true
     # tabla
     pdf.font_size 10
     pdf.move_down 30
+    if @scholarship.person_type == 'Internship'
     table_data = [['Actividad', 'Monto', 'Periodo', 'Responsable', 'Proyecto', 'No. solicitud'],
-                  [scholarship.person.internship_type.name, number_to_currency(scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(scholarship.end_date, format: '%B %Y')).capitalize}", scholarship.person.staff.full_name, (scholarship.project_number rescue ''), (scholarship.request_number rescue '')]]
+                  [@scholarship.person.internship_type.name, number_to_currency(@scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(@scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(@scholarship.end_date, format: '%B %Y')).capitalize}", @scholarship.person.staff.full_name, (@scholarship.project_number rescue ''), (@scholarship.request_number rescue '')]]
     pdf.table table_data, :position => :center, header: @person = 'Internship'
+    else
+      table_data = [['Programa', 'Monto', 'Periodo', 'Director de tesis', 'Proyecto', 'No. solicitud'],
+                    [@scholarship.person.program.name, number_to_currency(@scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(@scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(@scholarship.end_date, format: '%B %Y')).capitalize}", @scholarship.person.supervisor.full_name, (@scholarship.project_number rescue ''), (@scholarship.request_number rescue '')]]
+      pdf.table table_data, :position => :center, header: @person = 'Student'
+    end
     true
     pdf.font_size 12
     text = "\n\n Sin más por el momento reciba un cordial saludo.."
     pdf.move_down 20
     pdf.text text, inline_format: true
     # nota sólo para practicantes
-    if scholarship.person_type == 'Internship'
+    if @scholarship.person_type == 'Internship'
       text = "“EL BECARIO DECLARA BAJO PROTESTA DE DECIR VERDAD QUE NO RECIBE APOYOS SIMILARES POR PARTE DE CONACYT”"
       pdf.move_down 40
       pdf.text text, align: :center, inline_format: true, size: 8
@@ -59,7 +56,7 @@ class ScholarshipsController < ApplicationController
     pdf.move_down 40
     pdf.text text, align: :center, inline_format: true
 
-    send_data pdf.render, filename: "Solicitud de beca#{scholarship.id}.pdf", type: 'application/pdf', disposition: 'inline'
+    send_data pdf.render, filename: "Solicitud de beca#{@scholarship.id}.pdf", type: 'application/pdf', disposition: 'inline'
   end
 
   def student_document(scholarship)
