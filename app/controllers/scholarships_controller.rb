@@ -4,7 +4,7 @@ class ScholarshipsController < ApplicationController
   def document
     @scholarship = Scholarship.find(params[:id])
 
-    pdf = Prawn::Document.new(background: "private/membretada2018.png", background_scale: 0.36, right_margin: 20)
+    pdf = Prawn::Document.new(background: "private/membretada2018.png", background_scale: 0.36, left_margin: 30,right_margin: 30)
     pdf.font_size 12
     # Cabecera
     text = "Coordinación de Estudios de Posgrado
@@ -25,13 +25,14 @@ class ScholarshipsController < ApplicationController
     pdf.move_down 20
     pdf.text text, inline_format: true
     # tabla
-    pdf.font_size 9
+    pdf.font_size 10
     pdf.move_down 30
     if @scholarship.person_type == 'Internship'
     table_data = [['Actividad', 'Monto', 'Periodo', 'Responsable', 'Proyecto', 'No. solicitud'],
                   [@scholarship.person.internship_type.name, number_to_currency(@scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(@scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(@scholarship.end_date, format: '%B %Y')).capitalize}", @scholarship.person.staff.full_name, (@scholarship.project_number rescue ''), (@scholarship.request_number rescue '')]]
     pdf.table table_data, :position => :center, header: @person = 'Internship'
     else
+      pdf.font_size 9
       table_data = [['Programa', 'Monto', 'Periodo', 'Director de tesis', 'Proyecto', 'No. solicitud'],
                     [@scholarship.person.program.name, number_to_currency(@scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(@scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(@scholarship.end_date, format: '%B %Y')).capitalize}", @scholarship.person.supervisor.full_name, (@scholarship.project_number rescue ''), (@scholarship.request_number rescue '')]]
       pdf.table table_data, :position => :center, header: @person = 'Student'
