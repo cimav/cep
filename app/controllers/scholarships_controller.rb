@@ -25,7 +25,7 @@ class ScholarshipsController < ApplicationController
     pdf.move_down 20
     pdf.text text, inline_format: true
     # tabla
-    pdf.font_size 8
+    pdf.font_size 9
     pdf.move_down 30
     if @scholarship.person_type == 'Internship'
     table_data = [['Actividad', 'Monto', 'Periodo', 'Responsable', 'Proyecto', 'No. solicitud'],
