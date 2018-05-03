@@ -116,9 +116,15 @@
             %a.ajax-item{:href => "/agreements/#{@agreement.id}/edit", "data-remote"=>"true", url:"agreements/#{@agreement.id}/edit"}
               %i.fa.fa-pencil-alt{"aria-hidden"=>true}
           -if (@agreement.status.eql?Agreement::CLOSE) && (!@agreement.decision.eql? Response::TO_COMMITTEE)
-            %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Imprimir documento"}
-              %a{:href => "/#{@agreement.agreeable.class.table_name}/#{@agreement.agreeable.id}/document", target:'_blank'}
-                %i.fa.fa-file{"aria-hidden"=>true}
+            -if @agreement.agreeable_type == 'Scholarship'
+              -if @agreement.decision.eql? Response::ACCEPTED
+                %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Imprimir documento"}
+                  %a{:href => "/#{@agreement.agreeable.class.table_name}/#{@agreement.agreeable.id}/document", target:'_blank'}
+                    %i.fa.fa-file{"aria-hidden"=>true}
+            -else
+              %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Imprimir documento"}
+                %a{:href => "/#{@agreement.agreeable.class.table_name}/#{@agreement.agreeable.id}/document", target:'_blank'}
+                  %i.fa.fa-file{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Cerrar votación"}
             %a.ajax-response.refresh{:href => "/agreements/#{@agreement.id}/close_agreement", "data-remote"=>"true", "data-method"=>"post", "data-confirm"=>"¿Desea cerrar el acuerdo manualmente?"}
               %i.fa.fa-lock{"aria-hidden"=>true}
