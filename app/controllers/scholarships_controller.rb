@@ -12,7 +12,7 @@ class ScholarshipsController < ApplicationController
   end
 
   def internship_document(scholarship)
-    
+
     pdf = Prawn::Document.new(background: "private/membretada2018.png", background_scale: 0.36, right_margin: 20)
     pdf.font_size 12
     # Cabecera
@@ -44,10 +44,12 @@ class ScholarshipsController < ApplicationController
     text = "\n\n Sin más por el momento reciba un cordial saludo.."
     pdf.move_down 20
     pdf.text text, inline_format: true
-    # nota
-    text = "“EL BECARIO DECLARA BAJO PROTESTA DE DECIR VERDAD QUE NO RECIBE APOYOS SIMILARES POR PARTE DE CONACYT”"
-    pdf.move_down 40
-    pdf.text text, align: :center, inline_format: true, size: 8
+    # nota sólo para practicantes
+    if scholarship.person_type == 'Internship'
+      text = "“EL BECARIO DECLARA BAJO PROTESTA DE DECIR VERDAD QUE NO RECIBE APOYOS SIMILARES POR PARTE DE CONACYT”"
+      pdf.move_down 40
+      pdf.text text, align: :center, inline_format: true, size: 8
+    end
     # atentamente
     text = "Atentamente,"
     pdf.move_down 70
@@ -59,9 +61,9 @@ class ScholarshipsController < ApplicationController
 
     send_data pdf.render, filename: "Solicitud de beca#{scholarship.id}.pdf", type: 'application/pdf', disposition: 'inline'
   end
-  
+
   def student_document(scholarship)
-    render plain:'Documento no disponible'
+    render plain: 'Documento no disponible'
   end
 
   def update
@@ -70,7 +72,7 @@ class ScholarshipsController < ApplicationController
 
     respond_to do |format|
       if is_admin?
-        if scholarship.agreement.update(notes:params[:notes])
+        if scholarship.agreement.update(notes: params[:notes])
 
           response[:message] = 'Acuerdo actualizado'
           response[:redirect_url] = "agreements/#{scholarship.agreement.id}"
