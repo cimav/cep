@@ -72,7 +72,7 @@
                         =f.select :answer, Response.const_get(@agreement.agreeable_type.upcase).invert.sort {|a,b| a[1] <=> b[1] }, {:include_blank => '-- Selecciona --',required:true}
                         =f.label :answer, 'Respuesta'
                       .col.l4.m4.input-field
-                        =f.text_field :comment
+                        =f.text_area :comment, class:'materialize-textarea no-padding'
                         =f.label :comment, 'Comentarios', class:'active'
                       .col.l4.m4.input-field.center
                         =f.submit 'Enviar', class:'btn blue darken-3'
