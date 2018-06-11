@@ -12,13 +12,17 @@
             =link_to "/agreement_files/#{file.id}" ,target: :_blank, class:'grey-text text-darken-2' do
               -case File.extname(file.name)
                 -when '.jpg'
-                  %i.fa.fa-file-image-o.fa-2x{"aria-hidden" => "true"}
+                  %i.far.fa-file-image.fa-2x{"aria-hidden" => "true"}
                 -when '.png'
-                  %i.fa.fa-file-image-o.fa-2x{"aria-hidden" => "true"}
+                  %i.far.fa-file-image.fa-2x{"aria-hidden" => "true"}
                 -when '.pdf'
-                  %i.fa.fa-file-pdf-o.fa-2x{"aria-hidden" => "true"}
+                  %i.far.fa-file-pdf.fa-2x{"aria-hidden" => "true"}
                 -when '.docx'
-                  %i.fa.fa-file-word-o.fa-2x{"aria-hidden" => "true"}
+                  %i.far.fa-file-word.fa-2x{"aria-hidden" => "true"}
+                -when '.xls'
+                  %i.far.fa-file-excel.fa-2x{"aria-hidden" => "true"}
+                -when '.xlsx'
+                  %i.far.fa-file-excel.fa-2x{"aria-hidden" => "true"}
           %td
             =link_to "/agreement_files/#{file.id}" ,target: :_blank, class:'grey-text text-darken-2' do
               .truncate
