@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   # print document
   get '/professional_exams/:id/document' => 'professional_exams#document'
   get '/new_admissions/:id/document' => 'new_admissions#document'
+  get '/scholarships/:id/document' => 'scholarships#document'
 
   resources 'users'
   resources 'meetings'
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
   resources 'tutor_committees', :except => [:new, :create, :show]
   resources 'thesis_directors', :except => [:new, :create, :show]
   resources 'general_issues', :except => [:new, :create, :show]
+  resources 'scholarships', :only => [:update]
 
 
 end

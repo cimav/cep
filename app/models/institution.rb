@@ -1,4 +1,4 @@
-class Institution < RemoteModels
+class Institution < SaposModels
   has_many :staffs
   has_many :applicants
 

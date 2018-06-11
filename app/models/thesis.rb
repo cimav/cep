@@ -1,4 +1,4 @@
-class Thesis < RemoteModels
+class Thesis < SaposModels
   belongs_to :student
 
   CONCLUDED   = 'C'

@@ -27,6 +27,8 @@ module AgreementsHelper
         "Director de tesis"
       when "GeneralIssue"
         "Asuntos generales"
+      when "Scholarship"
+        "Autorización de beca"
     end
   end
 

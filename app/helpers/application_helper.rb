@@ -40,6 +40,10 @@ module ApplicationHelper
     end
   end
 
+  def custom_date(date)
+    I18n.l(date, format: '%d de %B %Y').capitalize
+  end
+
   def print_document(to, content, agreement)
     pdf = Prawn::Document.new(background: "private/membretada.png", background_scale: 0.36, right_margin: 20)
     y= 600

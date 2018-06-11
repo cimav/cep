@@ -1,0 +1,12 @@
+= form_for agreeable,html:{remote:true, class:'alertas redirect'} do |f|
+
+  .row
+    %p.pink-text.text-darken-3
+      Los acuerdos de autorización de beca deben modificarse en la plataforma de becas, sólo puede modificar las notas del acuerdo
+  .section
+    .row
+      %label.active{:for => "notes"} Notas
+      =text_field_tag :notes, agreeable.agreement.notes
+
+  .row
+    =f.submit 'Actualizar',class:'btn right'

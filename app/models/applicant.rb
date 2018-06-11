@@ -1,4 +1,4 @@
-class Applicant < RemoteModels
+class Applicant < SaposModels
   belongs_to :program
   belongs_to :campus
   belongs_to :institution, foreign_key: :previous_institution

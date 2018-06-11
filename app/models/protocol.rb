@@ -1,4 +1,4 @@
-class Protocol < RemoteModels
+class Protocol < SaposModels
 
   belongs_to :staff
   belongs_to :advance

@@ -42,14 +42,17 @@
         .card-content
           .card-title
             Documentos
-          #agreement_files
-            :javascript
-              refreshFiles(#{@agreement.id});
-          -if is_admin?
-            = form_tag "/agreements/#{@agreement.id}/upload_file", method: :post, class: "dropzone", id: "upload-dropzone" do
-              %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
-              .fallback
-                = file_field_tag "file", multiple: true
+          -if @agreement.agreeable_type == 'Scholarship' && @agreement.agreeable.person_type == 'Internship'
+            =render partial: 'scholarships/documents', locals:{files: @agreement.agreeable.person.internship_files}
+          -else
+            #agreement_files
+              :javascript
+                refreshFiles(#{@agreement.id});
+            -if is_admin?
+              = form_tag "/agreements/#{@agreement.id}/upload_file", method: :post, class: "dropzone", id: "upload-dropzone" do
+                %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
+                .fallback
+                  = file_field_tag "file", multiple: true
 
   .row
     .col.l12.m12
@@ -69,7 +72,7 @@
                         =f.select :answer, Response.const_get(@agreement.agreeable_type.upcase).invert.sort {|a,b| a[1] <=> b[1] }, {:include_blank => '-- Selecciona --',required:true}
                         =f.label :answer, 'Respuesta'
                       .col.l4.m4.input-field
-                        =f.text_field :comment
+                        =f.text_area :comment, class:'materialize-textarea no-padding'
                         =f.label :comment, 'Comentarios', class:'active'
                       .col.l4.m4.input-field.center
                         =f.submit 'Enviar', class:'btn blue darken-3'
@@ -111,11 +114,17 @@
         %ul.padding-content
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Editar acuerdo"}
             %a.ajax-item{:href => "/agreements/#{@agreement.id}/edit", "data-remote"=>"true", url:"agreements/#{@agreement.id}/edit"}
-              %i.fa.fa-pencil{"aria-hidden"=>true}
+              %i.fa.fa-pencil-alt{"aria-hidden"=>true}
           -if (@agreement.status.eql?Agreement::CLOSE) && (!@agreement.decision.eql? Response::TO_COMMITTEE)
-            %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Imprimir documento"}
-              %a{:href => "/#{@agreement.agreeable.class.table_name}/#{@agreement.agreeable.id}/document", target:'_blank'}
-                %i.fa.fa-file-text-o{"aria-hidden"=>true}
+            -if @agreement.agreeable_type == 'Scholarship'
+              -if @agreement.decision.eql? Response::ACCEPTED
+                %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Imprimir documento"}
+                  %a{:href => "/#{@agreement.agreeable.class.table_name}/#{@agreement.agreeable.id}/document", target:'_blank'}
+                    %i.fa.fa-file{"aria-hidden"=>true}
+            -else
+              %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Imprimir documento"}
+                %a{:href => "/#{@agreement.agreeable.class.table_name}/#{@agreement.agreeable.id}/document", target:'_blank'}
+                  %i.fa.fa-file{"aria-hidden"=>true}
           %li.waves-effect.waves-light.tooltipped{"data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Cerrar votación"}
             %a.ajax-response.refresh{:href => "/agreements/#{@agreement.id}/close_agreement", "data-remote"=>"true", "data-method"=>"post", "data-confirm"=>"¿Desea cerrar el acuerdo manualmente?"}
               %i.fa.fa-lock{"aria-hidden"=>true}

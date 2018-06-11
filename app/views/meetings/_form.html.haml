@@ -21,8 +21,9 @@
 
 :javascript
    $('.datepicker').pickadate({
+
         selectMonths: true, // Creates a dropdown to control month
-        selectYears: 9, // Creates a dropdown of 15 years to control year
+        selectYears: 15, // Creates a dropdown of 15 years to control year,
 
         // The title label to use for the month nav buttons
         labelMonthNext: 'Mes siguiente',
@@ -46,7 +47,8 @@
         clear: 'Limpiar',
         close: 'Cerrar',
 
-  });
+        format: 'yyyy-mm-dd'
+   });
 
     $('.timepicker').pickatime({
     default: 'now', // Set default time: 'now', '1:30AM', '16:30'

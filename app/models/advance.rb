@@ -1,4 +1,4 @@
-class Advance < RemoteModels
+class Advance < SaposModels
   belongs_to :student
   has_many :protocols
 

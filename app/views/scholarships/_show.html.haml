@@ -1,0 +1,89 @@
+
+.section.valign-wrapper
+  .row
+    .col.s12.m1
+      %img.responsive-img.circle{src:"http://posgrado.cimav.edu.mx/imagen/#{agreeable.person_type.downcase}/#{agreeable.person_id}"}
+    .col.s12.m11
+      %h4
+        = agreeable.person.full_name
+      .row
+        .col.s12.m6
+          -if agreeable.person_type.eql?'Student' # Campos específicos de estudiantes y practicantes
+            %p
+              %b Programa:
+              =agreeable.person.program.name
+            %p
+              %b Director de tesis:
+              = agreeable.person.supervisor.full_name
+          -else
+            %p
+              %b Área:
+              =agreeable.person.area.name
+          %p
+            %b Curp:
+            -if !agreeable.person.curp.blank?
+              = agreeable.person.curp
+            -else
+              %span.red-text
+                Sin capturar
+
+          %p
+            %b Correo electrónico:
+            -if !agreeable.person.email.blank?
+              = agreeable.person.email
+            -else
+              %span.red-text
+                Sin capturar
+          %p
+            %b Fecha de inicio (beca):
+            -if !agreeable.start_date.blank?
+              = custom_date(agreeable.start_date)
+            -else
+              %span.red-text
+                Sin capturar
+          %p
+            %b Fecha de inicio (beca):
+            -if !agreeable.end_date.blank?
+              = custom_date(agreeable.end_date)
+            -else
+              %span.red-text
+                Sin capturar
+          %p
+            %b Tipo de beca:
+            = agreeable.scholarship_type.name
+          %p
+            %b Proyecto:
+            -if !agreeable.project_number.blank?
+              = agreeable.project_number
+            -else
+              %span.red-text
+                Sin capturar
+          -if is_admin?
+            %p
+              %b Número de solicitud:
+              -if !agreeable.request_number.blank?
+                = agreeable.request_number
+              -else
+                %span.red-text
+                  Sin capturar
+        .col.s12.m6
+          %table.grey.lighten-4
+            %thead
+              %tr
+                %th
+                  Concepto
+                %th
+                  Cantidad
+            %tbody
+              %tr
+                %th
+                  Monto máximo
+                %td
+                  = number_to_currency(agreeable.max_amount,unit: "$", separator: ".", delimiter: ",", format: "%u%n")
+              %tr.grey.lighten-2
+                %th
+                  Monto a otorgar
+                %th
+                  = number_to_currency(agreeable.amount,unit: "$", separator: ".", delimiter: ",", format: "%u%n")
+
+
