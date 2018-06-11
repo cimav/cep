@@ -13,7 +13,6 @@
 !/log/.keep
 !/tmp/.keep
 .idea
-Gemfile.lock
 private
 
 # Ignore Byebug command history file.
