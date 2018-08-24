@@ -44,6 +44,11 @@ Rails.application.routes.draw do
   get '/new_admissions/:id/document' => 'new_admissions#document'
   get '/scholarships/:id/document' => 'scholarships#document'
 
+  # reports
+  get 'reports/teacher_evaluation'
+  get 'reports/download_teacher_evaluation'
+  get 'reports/get_term_courses/:staff_id' => 'reports#get_evaluation_term_courses'
+
   resources 'users'
   resources 'meetings'
   resources 'agreements', :only => [:show,:index]
