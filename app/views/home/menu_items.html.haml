@@ -20,6 +20,19 @@
               Nueva sesión
               %i.fa.fa-plus.white-text{"aria-hidden" => "true"}
 
+%ul.collapsible.collapsible-accordion
+  %li
+    .collapsible-header
+      %span
+        Reportes
+      %span.right
+        %i.fa.fa-bank.white-text{"aria-hidden" => "true"}
+    .collapsible-body
+      %ul.menu-list
+        %li
+          %a.menu-item{href:"/reports/teacher_evaluation","data-remote"=>"true",url:"reports/teacher_evaluation"}
+            Evaluación docente
+
 -if is_admin?
   %ul.collapsible
     %li
