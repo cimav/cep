@@ -1,6 +1,10 @@
 class ScholarshipsController < ApplicationController
   include ActionView::Helpers::NumberHelper
 
+  def public_document
+    document
+  end
+
   def document
     @scholarship = Scholarship.find(params[:id])
 
