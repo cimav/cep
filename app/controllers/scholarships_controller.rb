@@ -1,5 +1,6 @@
 class ScholarshipsController < ApplicationController
   include ActionView::Helpers::NumberHelper
+  skip_before_action :auth_required, only: [:public_document]
 
   def public_document
     document
