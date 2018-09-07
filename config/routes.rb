@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get '/professional_exams/:id/document' => 'professional_exams#document'
   get '/new_admissions/:id/document' => 'new_admissions#document'
   get '/scholarships/:id/document' => 'scholarships#document'
+  get '/scholarships/:id/scholarship_document' => 'scholarships#public_document'
 
   # reports
   get 'reports/teacher_evaluation'
