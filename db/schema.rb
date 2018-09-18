@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112225602) do
+ActiveRecord::Schema.define(version: 20180918170251) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20180112225602) do
     t.integer  "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "status"
   end
 
   add_foreign_key "agreement_files", "agreements"
