@@ -9,7 +9,7 @@ class Response < ApplicationRecord
   # Respuestas para acuerdo genérico
   ACCEPTED = 'ACEPTAR'
   REJECTED = 'RECHAZAR'
-  TO_COMMITTEE = 'RESOLVER EN COMITE'
+  TO_COMMITTEE = 'RESOLVER EN COMITÉ'
 
   # Respuestas para nuevas admisiones
   PROPAEDEUTIC = 'CURSO PROPEDEUTICO'
