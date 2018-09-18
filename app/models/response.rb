@@ -12,7 +12,7 @@ class Response < ApplicationRecord
   TO_COMMITTEE = 'RESOLVER EN COMITÉ'
 
   # Respuestas para nuevas admisiones
-  PROPAEDEUTIC = 'CURSO PROPEDEUTICO'
+  PROPAEDEUTIC = 'CURSO PROPEDÉUTICO'
   PROGRAM_ACCEPTED = 'ACEPTAR EN PROGRAMA'
 
 
