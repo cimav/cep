@@ -87,7 +87,7 @@
                   %th Voto
                   %th Comentarios
               %tbody
-                -@ceps.each do |member|
+                -@ceps.where(status:User::ACTIVE).each do |member|
                   %tr
                     %td
                       =image_tag "http://cimav.edu.mx/foto/#{member.email[/[^@]+/]}/50", class:'circle responsive-img', alt:'*'
@@ -96,8 +96,8 @@
                     %td
                       -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
                       -if response.size > 0
-                        .grey-text.text-darken-2
-                          =response.first.answer.capitalize
+
+                        =response.first.answer.capitalize
                       -else
                         = "---"
                     %td
@@ -105,6 +105,24 @@
                         =response.first.comment
                       -else
                         = "---"
+                -@ceps.where(status:User::INACTIVE).each do |member|
+                  -if member.responses.where(agreement_id: @agreement.id).size > 0
+                    %tr.grey-text
+                      %td
+                        =image_tag "http://cimav.edu.mx/foto/#{member.email[/[^@]+/]}/50", class:'circle responsive-img', alt:'fotografía'
+                      %td
+                        ="#{member.name} (inactivo)"
+                      %td
+                        -response = Response.where(:user_id => member.id).where(:agreement_id => @agreement.id)
+                        -if response.size > 0
+                          =response.first.answer.capitalize
+                        -else
+                          = "---"
+                      %td
+                        -if response.size >0
+                          =response.first.comment
+                        -else
+                          = "---"
 
   -if is_admin?
     .row

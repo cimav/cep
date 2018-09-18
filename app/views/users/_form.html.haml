@@ -9,6 +9,10 @@
   .row.input-field
     =f.select :user_type, [['Administrador', User::ADMIN],['Miembro del CEP', User::CEP],['Espectador', User::VIEWER]]
     =f.label :user_type, 'Tipo de usuario'
+  -if screen=='edit'
+    .row.input-field
+      =f.select :status, User::STATUS.invert
+      =f.label :status, 'Tipo de usuario'
   .row
     =f.submit 'Guardar', class:'btn'
 
