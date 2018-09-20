@@ -217,7 +217,7 @@ class AgreementsController < ApplicationController
       if agreement.status.eql? Agreement::OPEN
         # solo se notifica a quienes no han votado
         send_to = []
-        User.where(user_type: User::CEP).each do |cep|
+        User.where(user_type: User::CEP).where(status:User::ACTIVE).each do |cep|
           if has_voted(cep, agreement)
             send_to << cep
           end
