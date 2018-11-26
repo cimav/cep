@@ -271,7 +271,7 @@ class AgreementsController < ApplicationController
             end
             # Obtener la decisión más votada
             more_voted = votes_hash.max_by{|k,v| v}
-            number_of_members = User.where(user_type: User::CEP).size
+            number_of_members = User.where(user_type: User::CEP).where(status: User::ACTIVE).size
             if more_voted[1] > number_of_members/2
               # Asignar al acuerdo la decisión más votada
               agreement.decision = more_voted[0]
@@ -283,7 +283,7 @@ class AgreementsController < ApplicationController
               agreement.status = Agreement::CLOSE
               agreement.decision = Response::TO_COMMITTEE
               if agreement.save!
-                # Si no se obtuvo una mayoria, ek acuerdo debe resolverse en la reunion del CEP
+                # Si no se obtuvo una mayoria, el acuerdo debe resolverse en la reunion del CEP
                 response[:message] = 'No se pudo llegar a una decisión'
               end
             end
