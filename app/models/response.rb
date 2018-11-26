@@ -58,7 +58,7 @@ class Response < ApplicationRecord
       end
       # Obtener la decisión más votada
       more_voted = responses_hash.max_by{|k,v| v}
-      number_of_members = User.where(user_type: User::CEP).size
+      number_of_members = User.where(user_type: User::CEP).where(status: User::ACTIVE).size
       if more_voted[1] > number_of_members/2
         # Asignar la decisión más votada
         agreement.decision = more_voted[0]
@@ -66,7 +66,7 @@ class Response < ApplicationRecord
         agreement.decision_date = DateTime.now
         agreement.save!
         if agreement.agreeable_type == 'Scholarship'
-          ################## se cambia el estatus a la eca dependiendo de la decisión
+          ################## se cambia el estatus a la beca dependiendo de la decisión
           if more_voted[0] == ACCEPTED
             agreement.agreeable.status = Scholarship::APPROVED
           end
