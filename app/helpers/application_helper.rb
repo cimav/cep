@@ -47,7 +47,13 @@ module ApplicationHelper
   def print_document(to, content, agreement)
     pdf = Prawn::Document.new(background: "private/membretada.png", background_scale: 0.36, right_margin: 20)
     y= 600
-    pdf.font_size 12
+    pdf.font_families.update(
+        "Montserrat" => { :bold        => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Bold.ttf"),
+                          :italic      => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Italic.ttf"),
+                          :bold_italic => Rails.root.join("app/assets/fonts/montserrat/Montserrat-BoldItalic.ttf"),
+                          :normal      => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Regular.ttf") })
+    pdf.font "Montserrat"
+    pdf.font_size 11
 
     if agreement.decision.eql? Response::TO_COMMITTEE
       text = "<b>Este acuerdo fue resuelto en reunión del comité</b>"
@@ -59,7 +65,7 @@ module ApplicationHelper
       text = "Coordinación de Estudios de Posgrado
            <b>#{agreement.id_key}</b>
             Chihuahua, Chih., a #{I18n.l(agreement.updated_at, format: '%d de %B del %Y')}"
-      pdf.text_box text,size:11, at:[320,y], align: :right, inline_format:true
+      pdf.text_box text, at:[320,y], align: :right, inline_format:true
 
       # Destinatario
       text = to

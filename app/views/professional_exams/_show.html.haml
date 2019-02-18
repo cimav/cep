@@ -26,12 +26,24 @@
         =agreeable.student.campus.name
         %br
         %b
+      %ul.browser-default
+        %b Sinodales:
+        %li=agreeable.synod1
+        %li=agreeable.synod2
+        %li=agreeable.synod3
+        %li=agreeable.synod4
+        %li=agreeable.synod5
+        -if agreeable.student.program.level == '2'
+          %li=agreeable.synod6
+          %li=agreeable.synod7
+
     .col.l4.m4
       %p.flow-text
         Fecha de examen:
         %br
       .larger-text.pink-text
         = f_date(agreeable.exam_date) rescue 'No se ha agendado'
+
 
 
 

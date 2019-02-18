@@ -73,7 +73,7 @@ class ProfessionalExamsController < ApplicationController
   def new
     @meeting_id = params[:meeting_id]
     @professional_exam = ProfessionalExam.new
-    @students = Student.select("MAX(id) as id,first_name,last_name").where(:status=>[1,2,3,5,6]).group("first_name, last_name").order("first_name")
+    @students = Student.select("MAX(id) as id,first_name,last_name,program_id").where(:status=>[1,2,3,5,6]).group("first_name, last_name, program_id").order("first_name")
     render layout:false
   end
 
@@ -96,7 +96,7 @@ class ProfessionalExamsController < ApplicationController
   private
 
   def professional_exam_params
-    params.require(:professional_exam).permit(:student_id, :exam_date)
+    params.require(:professional_exam).permit(:student_id, :exam_date, :synod1, :synod2,:synod3,:synod4,:synod5,:synod6,:synod7)
   end
 
   def get_datetime(params)

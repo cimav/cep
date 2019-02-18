@@ -1,11 +1,13 @@
-.row
-  %h2
-    Editar acuerdo
+
 .row
   .chip.right
     ="#{@agreement.id_key} #{a_class_to_name(@agreement.agreeable_type)}"
 .row
-  =render partial:"#{@agreement.agreeable.class.table_name}/edit", locals:{agreeable:@agreement.agreeable}
+  .card
+    .card-content
+      .card-title
+        Editar acuerdo
+      =render partial:"#{@agreement.agreeable.class.table_name}/edit", locals:{agreeable:@agreement.agreeable}
 
 :javascript
     //$('select').material_select();
