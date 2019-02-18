@@ -9,8 +9,15 @@ class ScholarshipsController < ApplicationController
   def document
     @scholarship = Scholarship.find(params[:id])
 
-    pdf = Prawn::Document.new(background: "private/membretada2018.png", background_scale: 0.36, left_margin: 30,right_margin: 30)
+    pdf = Prawn::Document.new(background: "private/membretada.png", background_scale: 0.36, right_margin: 20)
     pdf.font_size 12
+    pdf.font_families.update(
+        "Montserrat" => { :bold        => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Bold.ttf"),
+                          :italic      => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Italic.ttf"),
+                          :bold_italic => Rails.root.join("app/assets/fonts/montserrat/Montserrat-BoldItalic.ttf"),
+                          :normal      => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Regular.ttf") })
+    pdf.font "Montserrat"
+    pdf.font_size 11
     # Cabecera
     text = "Coordinación de Estudios de Posgrado
          <b>FOLIO---</b>
