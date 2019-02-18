@@ -65,7 +65,7 @@ module ApplicationHelper
       text = "Coordinación de Estudios de Posgrado
            <b>#{agreement.id_key}</b>
             Chihuahua, Chih., a #{I18n.l(agreement.updated_at, format: '%d de %B del %Y')}"
-      pdf.text_box text, at:[320,y], align: :right, inline_format:true
+      pdf.text_box text, at:[200,y], align: :right, inline_format:true
 
       # Destinatario
       text = to
