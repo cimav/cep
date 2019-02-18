@@ -1,10 +1,11 @@
 = form_for agreeable,html:{remote:true, class:'alertas redirect'} do |f|
 
-  .row.input-field
-    %label.active{:for => "student_id"} Estudiante
-    =f.collection_select :student_id, @students, :id, :full_name,prompt: true, class:'select2'
+  .row
+    .input-field
+      %label.active{:for => "student_id"} Estudiante
+      =f.collection_select :student_id, @students, :id, :full_name,prompt: true, class:'select2'
 
-  .row.input-field
+  .row
     -if !agreeable.exam_date.nil?
       -datetime = agreeable.exam_date
     -else
@@ -19,6 +20,34 @@
     .input-field.col.s3
       =text_field_tag :time,time, class: "timepicker", :type => "text", id:'exam_time'
       =label_tag :exam_time, 'Hora', class:'active'
+
+    .row
+      .input-field.col.s12
+        =f.label :synod1, "Sinodal 1", class:'active'
+        =f.text_field :synod1, required:true, placeholder:'Escriba el nombre del sinodal'
+      .input-field.col.s12
+        =f.label :synod2, "Sinodal 2", class:'active'
+        =f.text_field :synod2, required:true, placeholder:'Escriba el nombre del sinodal'
+      .input-field.col.s12
+        =f.label :synod3, "Sinodal 3", class:'active'
+        =f.text_field :synod3, required:true, placeholder:'Escriba el nombre del sinodal'
+      .input-field.col.s12
+        =f.label :synod4, "Sinodal 4", class:'active'
+        =f.text_field :synod4, required:true, placeholder:'Escriba el nombre del sinodal'
+      .input-field.col.s12
+        =f.label :synod5, "Sinodal 5", class:'active'
+        =f.text_field :synod5, required:true, placeholder:'Escriba el nombre del sinodal'
+    .row
+      .col.s12
+        %p.grey-text
+          %b Si es estudiante de doctorado debe especificar a 7 sinodales
+      .input-field.col.s12
+        =f.label :synod6, "Sinodal 6", class:'active'
+        =f.text_field :synod6, placeholder:'Escriba el nombre del sinodal'
+      .input-field.col.s12
+        =f.label :synod7, "Sinodal 7", class:'active'
+        =f.text_field :synod7, placeholder:'Escriba el nombre del sinodal'
+
   .row.input-field
 
     %label.active{:for => "notes"} Notas

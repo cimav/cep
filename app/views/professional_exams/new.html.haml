@@ -1,28 +1,53 @@
+.card
+  .card-content
+    .card-title
+      Exámen de grado
+    = form_for @professional_exam, html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/professional_exams"   do |f|
 
-.row
-  %h1 Examen de grado
-= form_for @professional_exam, html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/professional_exams"   do |f|
 
+      .row
+        .input-field.col.s12.l6
+          %label.active{:for => "student_id"} Estudiante
+          =f.select :student_id, options_for_select(@students.map {|p| [p.full_name, p.id, {'data-program-level' => p.program.level }]}), {include_blank:true}, {required:true}
 
-  .row.input-field
-    %label.active{:for => "student_id"} Estudiante
-    =f.collection_select :student_id, @students, :id, :full_name, {include_blank:true}, {required:true}
+        .input-field.col.s12.l3
+          =text_field_tag :date,'', class: "datepicker"
+          =label_tag :date, 'Fecha'
 
-  .row
-    .input-field.col.s3
-      =text_field_tag :date,'', class: "datepicker"
-      =label_tag :date, 'Fecha'
+        .input-field.col.s12.l3
+          =text_field_tag :time,'', class: "timepicker", id:'exam_time',:type => "text"
+          =label_tag :exam_time, 'Hora'
+      .row
+        .input-field.col.s12
+          =f.label :synod1, "Sinodal 1", class:'active'
+          =f.text_field :synod1, required:true, placeholder:'Escriba el nombre del sinodal'
+        .input-field.col.s12
+          =f.label :synod2, "Sinodal 2", class:'active'
+          =f.text_field :synod2, required:true, placeholder:'Escriba el nombre del sinodal'
+        .input-field.col.s12
+          =f.label :synod3, "Sinodal 3", class:'active'
+          =f.text_field :synod3, required:true, placeholder:'Escriba el nombre del sinodal'
+        .input-field.col.s12
+          =f.label :synod4, "Sinodal 4", class:'active'
+          =f.text_field :synod4, required:true, placeholder:'Escriba el nombre del sinodal'
+        .input-field.col.s12
+          =f.label :synod5, "Sinodal 5", class:'active'
+          =f.text_field :synod5, required:true, placeholder:'Escriba el nombre del sinodal'
+        .input-field.col.s12#synod6Div{style:'display:none'}
+          =f.label :synod6, "Sinodal 6", class:'active'
+          =f.text_field :synod6, placeholder:'Escriba el nombre del sinodal'
+        .input-field.col.s12#synod7Div{style:'display:none'}
+          =f.label :synod7, "Sinodal 7", class:'active'
+          =f.text_field :synod7, placeholder:'Escriba el nombre del sinodal'
 
-    .input-field.col.s3
-      =text_field_tag :time,'', class: "timepicker", id:'exam_time',:type => "text"
-      =label_tag :exam_time, 'Hora'
+      .section
+        .row
+          .input-field.col.s12
+            %label.active{:for => "notes"} Notas
+            =text_field_tag :notes,'', placeholder:'Puede escribir alguna nota útil para la decisión del CEP'
 
-  .row.input-field
-    %label.active{:for => "notes"} Notas
-    =text_field_tag :notes
-
-  .row
-    =f.submit 'listo',class:'btn right'
+      .row
+        =f.submit 'listo',class:'btn right'
 
 :javascript
     $("select").select2();
@@ -33,6 +58,7 @@
     today: 'Today',
     clear: 'Clear',
     close: 'Ok',
+    min: new Date(new Date().getTime()+1468800000), // No se permite seleccionar fechas menores a 17 días
     closeOnSelect: false // Close upon selecting a date,
     });
 
@@ -46,4 +72,14 @@
         autoclose: false, // automatic close timepicker
         ampmclickable: true, // make AM PM clickable
         aftershow: function(){} //Function for after opening timepicker
+    });
+
+    $("#professional_exam_student_id").on('change',function () {
+      if ($(this).find('option:selected').attr('data-program-level') == 2){
+         $("#synod6Div").show();
+         $("#synod7Div").show();
+      }else{
+         $("#synod6Div").hide();
+         $("#synod7Div").hide();
+      }
     });

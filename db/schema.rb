@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180918170251) do
+ActiveRecord::Schema.define(version: 20190207201434) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 20180918170251) do
     t.integer  "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "synod1"
+    t.string   "synod2"
+    t.string   "synod3"
+    t.string   "synod4"
+    t.string   "synod5"
+    t.string   "synod6"
+    t.string   "synod7"
     t.index ["student_id"], name: "index_professional_exams_on_student_id", using: :btree
   end
 
