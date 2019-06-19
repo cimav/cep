@@ -10,6 +10,8 @@ class Student < SaposModels
   has_many :tutor_committees
   has_many :thesis_directors
 
+  has_many :student_files
+
   has_many :scholarships, as: :person
 
 

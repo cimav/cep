@@ -44,6 +44,8 @@
             Documentos
           -if @agreement.agreeable_type == 'Scholarship' && @agreement.agreeable.person_type == 'Internship'
             =render partial: 'scholarships/documents', locals:{files: @agreement.agreeable.person.internship_files}
+          -elsif @agreement.agreeable_type == 'Scholarship' && @agreement.agreeable.person_type == 'Student'
+            =render partial: 'scholarships/student_documents', locals:{files: @agreement.agreeable.person.student_files}
           -else
             #agreement_files
               :javascript
