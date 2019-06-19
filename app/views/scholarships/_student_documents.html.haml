@@ -1,0 +1,16 @@
+%table.bordered.file-table
+  %thead
+    %tr
+      %th Tipo de documento
+      %th Archivo
+  %tbody
+    %tr
+      %td
+        Solicitud oficial de la institución de procedencia
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:StudentFile::INSTITUTION_REQUEST).last}
+    %tr
+      %td
+        Plan de trabajo detallado
+      %td
+        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:StudentFile::WORKPLAN).last}
