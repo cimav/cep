@@ -6,11 +6,41 @@
   %tbody
     %tr
       %td
-        Solicitud oficial de la institución de procedencia
+        Constancia de estudios
       %td
-        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:StudentFile::INSTITUTION_REQUEST).last}
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::REGISTRATION_PROOF).last}
     %tr
       %td
-        Plan de trabajo detallado
+        Copia de credencial del IFE o INE
       %td
-        =render partial: 'scholarships/internship_file', locals:{file: files.where(file_type:StudentFile::WORKPLAN).last}
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::IFE).last}
+    %tr
+      %td
+        Cuenta bancaria con CLABE
+      %td
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::BANK_ACCOUNT).last}
+    %tr
+      %td
+        Copia del CURP
+      %td
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::CURP).last}
+    %tr
+      %td
+        Comprobante de domicilio
+      %td
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::ADDRESS_BILL).last}
+    %tr
+      %td
+        Programa de trabajo detallado
+      %td
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::WORKPLAN).last}
+    %tr
+      %td
+        Comprobante de seguro médico
+      %td
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::INSURANCE).last}
+    %tr
+      %td
+        Credencial del CIMAV vigente
+      %td
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::CIMAV_CREDENTIAL).last}
