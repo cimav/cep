@@ -26,32 +26,32 @@ class ScholarshipsController < ApplicationController
     pdf.text text, size: 11, align: :right, inline_format: true
 
     # Destinatario
-    text = "Lic. Nathanael Martínez Coronel \n Director de Administración y Finanzas \n CIMAV"
+    text = "C.P. Justo Martínez Carrazco \nEncargado de Despacho de la\nDirección de Administración y Finanzas \nCIMAV"
     pdf.move_down 10
     pdf.text text
     # Presente
     pdf.move_down 10
     pdf.text "<b>P r e s e n t e.-</b>", :size => 12, inline_format: true
     # contenido
-    text = "Por este conducto y de la manera más atenta solicito se sirva generar apoyo de Beca para: <b>#{@scholarship.person.full_name}</b>"
+    text = "Por este conducto le comento que el Comité de Estudios de Posgrado con fecha de este oficio autorizó el pago de la beca:"
     pdf.move_down 20
     pdf.text text, inline_format: true
     # tabla
     pdf.font_size 10
     pdf.move_down 30
     if @scholarship.person_type == 'Internship'
-    table_data = [['Actividad', 'Monto', 'Periodo', 'Responsable', 'Proyecto', 'No. solicitud'],
-                  [@scholarship.person.internship_type.name, number_to_currency(@scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(@scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(@scholarship.end_date, format: '%B %Y')).capitalize}", @scholarship.person.staff.full_name, (@scholarship.project_number rescue ''), (@scholarship.request_number rescue '')]]
+    table_data = [['Actividad', 'Nombre del Becario', 'Monto', 'Periodo', 'Responsable', 'Proyecto', 'No. solicitud'],
+                  [@scholarship.person.internship_type.name, @scholarship.person.full_name,number_to_currency(@scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(@scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(@scholarship.end_date, format: '%B %Y')).capitalize}", @scholarship.person.staff.full_name, (@scholarship.project_number rescue ''), (@scholarship.request_number rescue '')]]
     pdf.table table_data, :position => :center, header: @person = 'Internship'
     else
       pdf.font_size 9
-      table_data = [['Programa', 'Monto', 'Periodo', 'Director de tesis', 'Proyecto', 'No. solicitud'],
-                    [@scholarship.person.program.name, number_to_currency(@scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(@scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(@scholarship.end_date, format: '%B %Y')).capitalize}", @scholarship.person.supervisor.full_name, (@scholarship.project_number rescue ''), (@scholarship.request_number rescue '')]]
+      table_data = [['Programa', 'Nombre del Becario', 'Monto', 'Periodo', 'Director de tesis', 'Proyecto', 'No. solicitud'],
+                    [@scholarship.person.program.name, @scholarship.person.full_name, number_to_currency(@scholarship.amount, unit: "$", separator: ".", delimiter: ",", format: "%u%n"), "#{(I18n.l(@scholarship.start_date, format: '%B %Y')).capitalize} - #{(I18n.l(@scholarship.end_date, format: '%B %Y')).capitalize}", @scholarship.person.supervisor.full_name, (@scholarship.project_number rescue ''), (@scholarship.request_number rescue '')]]
       pdf.table table_data, :position => :center, header: @person = 'Student'
     end
     true
     pdf.font_size 12
-    text = "\n\n Sin más por el momento reciba un cordial saludo.."
+    text = "\n\n Por lo anterior le solicito de la manera más atenta se sirva generar el apoyo correspondiente"
     pdf.move_down 20
     pdf.text text, inline_format: true
     # nota sólo para practicantes

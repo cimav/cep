@@ -18,3 +18,7 @@
 //= require materialize-sprockets
 //= require dropzone
 //= require select2
+//
+$('.datepicker').on('mousedown',function(event){
+    event.preventDefault();
+})

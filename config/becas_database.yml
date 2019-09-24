@@ -21,4 +21,4 @@ production:
   <<: *default
   database: becas_production
   username: root
-  password: <%= ENV['BECAS_DATABASE_PASSWORD'] %>
+  password: 
