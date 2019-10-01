@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190207201434) do
+ActiveRecord::Schema.define(version: 20190930214908) do
 
   create_table "agreement_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agreement_id"
@@ -28,12 +28,13 @@ ActiveRecord::Schema.define(version: 20190207201434) do
     t.string   "agreeable_type"
     t.integer  "agreeable_id"
     t.string   "notes"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "decision"
     t.string   "id_key"
     t.integer  "consecutive"
     t.datetime "decision_date"
+    t.integer  "notification_sent"
     t.index ["agreeable_id", "agreeable_type"], name: "index_agreements_on_agreeable_id_and_agreeable_type", using: :btree
     t.index ["agreeable_type", "agreeable_id"], name: "index_agreements_on_agreeable_type_and_agreeable_id", using: :btree
     t.index ["meeting_id"], name: "index_agreements_on_meeting_id", using: :btree
