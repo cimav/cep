@@ -19,9 +19,7 @@ class ScholarshipsController < ApplicationController
     pdf.font "Montserrat"
     pdf.font_size 11
     # Cabecera
-    text = "Coordinación de Estudios de Posgrado
-         <b>FOLIO---</b>
-          Chihuahua, Chih., a #{I18n.l(Date.today, format: '%d de %B del %Y')}"
+    text = "Chihuahua, Chih., a #{I18n.l(Date.today, format: '%d de %B del %Y')}"
     pdf.move_down 100
     pdf.text text, size: 11, align: :right, inline_format: true
 
@@ -50,16 +48,15 @@ class ScholarshipsController < ApplicationController
       pdf.table table_data, :position => :center, header: @person = 'Student'
     end
     true
-    pdf.font_size 12
+    pdf.font_size 10
     text = "\n\n Por lo anterior le solicito de la manera más atenta se sirva generar el apoyo correspondiente"
     pdf.move_down 20
     pdf.text text, inline_format: true
-    # nota sólo para practicantes
-    if @scholarship.person_type == 'Internship'
-      text = "“EL BECARIO DECLARA BAJO PROTESTA DE DECIR VERDAD QUE NO RECIBE APOYOS SIMILARES POR PARTE DE CONACYT”"
-      pdf.move_down 40
-      pdf.text text, align: :center, inline_format: true, size: 8
-    end
+
+    text = "\n\n Sin más por el momento reciba un cordial saludo"
+    pdf.move_down 20
+    pdf.text text, inline_format: true
+
     # atentamente
     text = "Atentamente,"
     pdf.move_down 70
@@ -68,6 +65,13 @@ class ScholarshipsController < ApplicationController
     text = "<b>Lic. Emilio Pascual Domínguez Lechuga \n Coordinador de Estudios de Posgrado</b>"
     pdf.move_down 40
     pdf.text text, align: :center, inline_format: true
+
+    # nota sólo para practicantes
+    if @scholarship.person_type == 'Internship'
+      text = "“EL BECARIO DECLARA BAJO PROTESTA DE DECIR VERDAD QUE NO RECIBE APOYOS SIMILARES POR PARTE DE CONACYT”"
+      pdf.move_down 40
+      pdf.text text, align: :center, inline_format: true, size: 8
+    end
 
     send_data pdf.render, filename: "Solicitud de beca#{@scholarship.id}.pdf", type: 'application/pdf', disposition: 'inline'
   end

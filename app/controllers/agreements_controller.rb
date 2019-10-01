@@ -22,6 +22,7 @@ class AgreementsController < ApplicationController
   def create
     agreement = Agreement.new(agreement_params)
     agreement.meeting_id = params[:meeting_id]
+    agreement.notification_sent = Agreement::NOT_SENT
     if agreement.save
       case agreement.agreeable_type
         when Agreement::SYNOD_DESINGATION
