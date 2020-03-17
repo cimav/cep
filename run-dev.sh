@@ -6,4 +6,6 @@ export RAILS_ENV='development'
 export SAPOS_URL='http://localhost:3001'
 export SAPOS_DIR='/home/geovany/cimav/sapos'
 
+export RUBYOPT="-W0"
+
 rails s -p 3000 -b 0.0.0.0

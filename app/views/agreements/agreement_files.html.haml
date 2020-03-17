@@ -26,11 +26,16 @@
           %td
             =link_to "/agreement_files/#{file.id}" ,target: :_blank, class:'grey-text text-darken-2' do
               .truncate
-                =file.name
+                -if file.file_type.eql? AgreementFile::AUTO
+                  %b
+                    =file.name
+                -else
+                  =file.name
           -if is_admin?
             %td
-              =link_to "/agreement_files/#{file.id}", class:'delete_file red-text', method:'delete', agreement_id: file.agreement_id, remote:true do
-                %i.fa.fa-trash{"aria-hidden" => "true"}
+              -if !file.file_type.eql? AgreementFile::AUTO
+                =link_to "/agreement_files/#{file.id}", class:'delete_file red-text', method:'delete', agreement_id: file.agreement_id, remote:true do
+                  %i.fa.fa-trash{"aria-hidden" => "true"}
 -else
   %blockquote
     No hay documentos

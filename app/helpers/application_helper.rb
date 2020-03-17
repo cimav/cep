@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def print_document(to, content, agreement)
-    pdf = Prawn::Document.new(background: "private/membretada.png", background_scale: 0.36, right_margin: 20)
+    pdf = Prawn::Document.new(background: "private/membretada_2020.png", background_scale: 0.36, right_margin: 20)
     y= 600
     pdf.font_families.update(
         "Montserrat" => { :bold        => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Bold.ttf"),

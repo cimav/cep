@@ -13,7 +13,12 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def filename
-    original_filename.gsub(/ /i,'_').gsub(/[^\.a-z0-9_]/i, '') if original_filename
+    if model.agreement.agreeable_type.eql? 'GeneralIssue'
+      key = model.agreement.id_key.sub! '/', '-'
+      "#{model.agreement.agreeable_type}-#{key}.pdf"
+    else
+      original_filename.gsub(/ /i,'_').gsub(/[^\.a-z0-9_]/i, '') if original_filename
+    end
   end
 
   def store_dir
