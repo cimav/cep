@@ -1,0 +1,16 @@
+= form_for agreeable, html:{ remote: true, class:'alertas redirect'} do |f|
+
+  .row.input-field
+    %label.active{:for => "student_id"} Estudiante
+    =f.collection_select :student_id, @students, :id, :full_name,prompt: true
+  .row
+    .col.l11.m11
+      .row.input-field
+        %label.active{:for => "peer1"} Par 1
+        =f.collection_select :peer1, @staffs, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => "peer2"} Par 2
+        =f.collection_select :peer2,  @staffs, :id, :full_name,prompt: true
+  .row
+    =f.submit 'listo',class:'btn '
+

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get '/meetings/:meeting_id/tutor_committees/new' => 'tutor_committees#new'
   get '/meetings/:meeting_id/thesis_directors/new' => 'thesis_directors#new'
   get '/meetings/:meeting_id/general_issues/new' => 'general_issues#new'
+  get '/meetings/:meeting_id/peer_comittee_designations/new' => 'peer_comittee_designations#new'
 
   get '/meetings/:id/new_agreement' => 'meetings#new_agreement'
   get '/agreements/:id/files' => 'agreements#agreement_files'
@@ -38,6 +39,7 @@ Rails.application.routes.draw do
   post '/meetings/:meeting_id/new_admissions' => 'new_admissions#create'
   post '/meetings/:meeting_id/professional_exams' => 'professional_exams#create'
   post '/meetings/:meeting_id/general_issues' => 'general_issues#create'
+  post '/meetings/:meeting_id/peer_comittee_designations' => 'peer_comittee_designations#create'
 
   # print document
   get '/professional_exams/:id/document' => 'professional_exams#document'
@@ -60,6 +62,7 @@ Rails.application.routes.draw do
   resources 'thesis_directors', :except => [:new, :create, :show]
   resources 'general_issues', :except => [:new, :create, :show]
   resources 'scholarships', :only => [:update]
+  resources 'peer_comittee_designations', :except => [:new, :create, :show]
 
 
 end

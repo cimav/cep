@@ -21,3 +21,6 @@
   .col.l4.m4
     .card-panel
       =link_to 'Asuntos generales', "/meetings/#{@meeting.id}/general_issues/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/general_issues/new"
+  .col.l4.m4
+    .card-panel
+      =link_to 'Designación de comité de pares', "/meetings/#{@meeting.id}/peer_comittee_designations/new", remote:true, class:'ajax-item', url:"meetings/#{@meeting.id}/peer_comittee_designations/new"

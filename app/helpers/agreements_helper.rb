@@ -29,6 +29,8 @@ module AgreementsHelper
         "Asuntos generales"
       when "Scholarship"
         "Autorización de beca"
+      when "PeerComitteeDesignation"
+        "Designación de comité de pares"
     end
   end
 

@@ -5,3 +5,30 @@
         Asunto:
       %p
         =agreeable.subject.gsub(/\n/, '<br/>').html_safe
+      %h5
+        Dirigido a:
+      -if agreeable.addressed_to == GeneralIssue::TO_WHOM_CONCERN
+        %p A quien corresponda
+      -if agreeable.addressed_to == GeneralIssue::TEACHER
+        %p
+          .chip{class:'green lighten-4'}
+            Docente
+          -if agreeable.teacher
+            =Staff.find(agreeable.teacher).full_name
+          -else
+            Sin selección de docente
+      -if agreeable.addressed_to == GeneralIssue::STUDENT
+        %p
+          .chip{class:'green lighten-4'}
+            Estudiante
+          -if agreeable.student
+            =agreeable.student.full_name
+          -else
+            Sin selección de estudiante
+      %h5
+        Resolución:
+      %p
+        -if agreeable.resolution
+          =agreeable.resolution.gsub(/\n/, '<br/>').html_safe
+        -else
+          Sin resolución

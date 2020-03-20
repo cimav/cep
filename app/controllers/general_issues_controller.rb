@@ -63,15 +63,14 @@ class GeneralIssuesController < ApplicationController
   def new
     @meeting_id = params[:meeting_id]
     @general_issue = GeneralIssue.new
+    @staffs = Staff.all.order(:first_name)
+    @students = Student.select("MAX(id) as id,first_name,last_name,program_id").where(:status=>[1,2,3,5,6]).group("first_name, last_name, program_id").order("first_name")
     render layout:false
   end
-
-
-
 
   private
 
   def general_issue_params
-    params.require(:general_issue).permit(:subject)
+    params.require(:general_issue).permit(:subject, :student_id, :teacher, :addressed_to, :resolution)
   end
 end

@@ -1,0 +1,38 @@
+
+.section.valign-wrapper
+  .row
+    .col.l3.m3
+      %a.expediente-trigger{"data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
+        %img.student-img.responsive-img.circle.tooltipped.hoverable{src:"http://posgrado.cimav.edu.mx/imagen/student/#{agreeable.student.id}","data-position"=>"bottom", "data-delay"=>"80", "data-tooltip"=>"Ver expediente de estudiante"}
+    .col.l5.m5
+      %a.expediente-trigger{"data-remote"=>"true", href:"agreements/#{agreeable.id}/student_record/#{agreeable.student_id}"}
+        .larger-text
+          =agreeable.student.full_name
+      %p
+        %b
+          Matrícula
+        =agreeable.student.card
+        %br
+        %b
+          Programa:
+        =agreeable.student.program.name
+        %br
+        %b
+          Estatus:
+        =agreeable.student.get_status
+        %br
+        %b
+          Campus:
+        =agreeable.student.campus.name
+        %br
+        %b
+    .col.l4.m4
+      %p.larger-text
+        Pares:
+      .pink-text
+        -if agreeable.peer1
+          %p
+            =Staff.find(agreeable.peer1).full_name
+        -if agreeable.peer2
+          %p
+            =Staff.find(agreeable.peer2).full_name

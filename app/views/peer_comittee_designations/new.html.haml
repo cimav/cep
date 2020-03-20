@@ -1,0 +1,23 @@
+
+.row
+  %h3 Designación de sinodales
+
+=form_for @peer_comittee_designation, html:{remote:true, class:'alertas redirect'}, url:"/meetings/#{@meeting_id}/peer_comittee_designations" do |f|
+
+  .row.input-field
+    %label.active{:for => "student_id"} Estudiante
+    =f.collection_select :student_id,@students, :id, :full_name, {include_blank:true}, {required:true}
+  .row
+    .col.l1.m1
+    .col.l11.m11
+      .row.input-field
+        %label.active{:for => "peer1"} Par 1
+        =f.collection_select :peer1, @staffs, :id, :full_name,prompt: true
+      .row.input-field
+        %label.active{:for => "peer2"} Par 2
+        =f.collection_select :peer2,  @staffs, :id, :full_name,prompt: true
+  .row
+    =f.submit 'Crear', class:'btn'
+
+:javascript
+  $("select").select2();

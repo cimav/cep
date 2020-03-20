@@ -14,6 +14,7 @@ class Student < SaposModels
 
   has_many :scholarships, as: :person
 
+  has_many :general_issues
 
   def full_name
     "#{self.first_name} #{self.last_name}"

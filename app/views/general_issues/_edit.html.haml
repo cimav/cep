@@ -1,12 +1,60 @@
-= form_for agreeable,html:{remote:true, class:'alertas redirect'} do |f|
+= form_for agreeable, html:{remote:true, class:'alertas redirect', id: 'form-agreeable'} do |f|
 
   .row.input-field
-    %label.active{:for => "applicant_id"} Asunto
-    =f.text_area :subject, class:'materialize-textarea'
+    %label.active{:for => "subject"} Asunto
+    =f.text_field :subject, class:'materialize-textarea'
+
+  .row
+    .input-field.col.s6
+      %label.active Dirigido a:
+      .row
+        =f.radio_button :addressed_to, GeneralIssue::TO_WHOM_CONCERN
+        =f.label :addressed_to, 'A quien corresponda', value:GeneralIssue::TO_WHOM_CONCERN
+        %span{:style=>"padding-right:40px;"}
+        =f.radio_button :addressed_to, GeneralIssue::TEACHER
+        =f.label :addressed_to, 'Docente', value:GeneralIssue::TEACHER
+        %span{:style=>"padding-right:40px;"}
+        =f.radio_button :addressed_to, GeneralIssue::STUDENT
+        =f.label :addressed_to, 'Estudiante', value:GeneralIssue::STUDENT
+
+  .row.input-field#row-receiver-student
+    %label.active{:for => "student_id"} Estudiante
+    =f.collection_select :student_id, @students, :id, :full_name, {:prompt=>"Por favor, seleccione estudiante"}
+  .row.input-field#row-receiver-staff
+    %label.active{:for => "teacher"} Docente
+    =f.collection_select :teacher, @staffs, :id, :full_name, {:prompt=>"Por favor, seleccione docente"}
 
   .row.input-field
     %label.active{:for => "notes"} Notas
-    =text_field_tag :notes, agreeable.agreement.notes
+    =text_area_tag :notes, agreeable.agreement.notes, class:'materialize-textarea'
+
+  .row.input-field
+    %label.active{:for => "resolution"} Resolución
+    =f.text_area :resolution, class:'materialize-textarea'
 
   .row
     =f.submit 'listo',class:'btn'
+
+:javascript
+
+  $('#form-agreeable').ready(receiver);
+
+  $('#form-agreeable').on('change', 'input:checked', receiver);
+
+  function receiver() {
+    let addressed_to = $("input[name='general_issue[addressed_to]']:checked").val();
+    switch(addressed_to) {
+      case "0":
+        $('#row-receiver-student').hide();
+        $('#row-receiver-staff').hide();
+        break;
+      case "1":
+        $('#row-receiver-student').hide();
+        $('#row-receiver-staff').show();
+        break;
+      case "2":
+        $('#row-receiver-student').show();
+        $('#row-receiver-staff').hide();
+        break;
+    }
+  }
