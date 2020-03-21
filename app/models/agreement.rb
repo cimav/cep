@@ -91,10 +91,12 @@ class Agreement < ApplicationRecord
         pdf.text "<b>Oficio A#{self.consecutive}.#{last_change.month}<sup>#{self.meeting.consecutive}</sup>.#{last_change.year}</b>\n", :inline_format=>true, :align=>:right, :size=>size
         pdf.text "Chihuahua, Chih., a #{s_date.day} de #{get_month_name(s_date.month)} de #{s_date.year}", :inline_format=>true, :align=>:right, :size=>size
 
-        ############################### ASUNTOS GENERALES ###################################
+
         if self.agreeable_type.eql? 'GeneralIssue'
+          ############################### ASUNTOS GENERALES ###################################
           @render_pdf = true
 
+          # Cabecera
           if self.agreeable.addressed_to.eql? GeneralIssue::TEACHER
             title = Staff.find(self.agreeable.teacher).title rescue 'C.'
             full_name = Staff.find(self.agreeable.teacher).full_name rescue 'A quien corresponda.'
@@ -125,8 +127,14 @@ class Agreement < ApplicationRecord
           pdf.text atentamente, :align=>:center,:valign=>:top,:inline_format=>true
           # FOOTER
           pdf.number_pages "Página <page> de <total>", :at=>[0,-23], :align=>:center, :size=>size-3,:inline_format=>true
+
+
         elsif self.agreeable_type.eql? 'PeerComitteeDesignation'
-          #@render_pdf  = true
+          ############################### Designación de comité de Pares ###################################
+
+          @render_pdf = true
+          pdf = PeerComitteeDesignationPdf.new(self)
+
         end
 
         if @render_pdf

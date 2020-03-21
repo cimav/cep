@@ -1,7 +1,5 @@
 class DocumentUploader < CarrierWave::Uploader::Base
 
-
-
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -13,7 +11,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def filename
-    if model.agreement.agreeable_type.eql? 'GeneralIssue'
+    if model.file_type === AgreementFile::AUTO # agreement.file_type agreeable_type.eql? 'GeneralIssue'
       key = model.agreement.id_key.sub! '/', '-'
       "#{model.agreement.agreeable_type}-#{key}.pdf"
     else
