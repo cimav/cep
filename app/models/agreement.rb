@@ -54,8 +54,6 @@ class Agreement < ApplicationRecord
 
   def generate_pdf
 
-    # Avance: solo GeneralIssue
-
     if self.status_changed? and self.status.equal? Agreement::CLOSE
 
       @r_root = Rails.root.to_s
@@ -71,7 +69,6 @@ class Agreement < ApplicationRecord
       @nbsp = Prawn::Text::NBSP
 
       filename = "#{Rails.root.to_s}/private/prawn/membretada_conacyt_2020.png"
-
       Prawn::Document.new(:background => filename, :background_scale=>0.36, :margin=>[160,60,60,60] ) do |pdf|
         pdf.font_families.update(
             "Montserrat" => { :bold        => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Bold.ttf"),
@@ -133,8 +130,7 @@ class Agreement < ApplicationRecord
           ############################### Designación de comité de Pares ###################################
 
           @render_pdf = true
-          pdf = PeerComitteeDesignationPdf.new(self)
-
+	  pdf = PeerComitteeDesignationPdf.new(self, "#{Rails.root.to_s}/private/prawn/membretada_conacyt_2020.png")
         end
 
         if @render_pdf
@@ -154,6 +150,8 @@ class Agreement < ApplicationRecord
     agreementFile.agreement = self
     agreementFile.pdf_data = the_pdf.render
     agreementFile.name = agreementFile.file.filename
+
+	puts "ulpoad_file > #{agreementFile.name}"
 
     agreementFile.save
 

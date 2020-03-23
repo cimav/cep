@@ -1,7 +1,7 @@
 class PeerComitteeDesignationPdf < Prawn::Document
 
-  def initialize(agreement)
-    super(:background => "#{Rails.root.to_s}/private/prawn/membretada_conacyt_2020.png", :background_scale=>0.36, :margin=>[160,60,60,60])
+  def initialize(agreement, bg_filename)
+    super(:background => bg_filename, :background_scale=>0.36, :margin=>[160,60,60,60])
 
     font_families.update(
         "Montserrat" => { :bold        => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Bold.ttf"),
@@ -10,6 +10,7 @@ class PeerComitteeDesignationPdf < Prawn::Document
                           :normal      => Rails.root.join("app/assets/fonts/montserrat/Montserrat-Regular.ttf") })
     font "Montserrat"
     font_size 11
+
     ## CABECERA
     size = font_size
     s_date           = agreement.meeting.date
@@ -29,10 +30,8 @@ class PeerComitteeDesignationPdf < Prawn::Document
     student_program = agreement.agreeable.student.program.name rescue 'A quien corresponda.'
     supervisor_full_name = agreement.agreeable.supervisor.title rescue 'C.'
     supervisor_title = agreement.agreeable.supervisor.full_name rescue 'A quien corresponda.'
-
     people = "#{p1_title} #{p1_full_name}"
     cabecera(people,agreement.agreeable_type)
-
 
     # CONTENIDO
     text "Por este conducto me permito informar a Usted que el Comité de Estudios de Posgrado lo ha nombrado integrante del Comité de Pares de #{student_full_name} adscrito al programa de #{student_program}.\n\n Quedo a sus ordenes para cualquier duda al respecto.", :align=>:justify,:inline_format=>true
