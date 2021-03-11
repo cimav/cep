@@ -44,3 +44,10 @@
         Credencial del CIMAV vigente
       %td
         =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::CIMAV_CREDENTIAL).last}
+
+    %tr
+      %td
+        Carta de solicitud de beca del CIMAV con monto a pagar y firma del responsable
+      %td
+        =render partial: 'scholarships/student_file', locals:{student_id: student_id, file: files.where(file_type:StudentFile::REQUEST_LETTER).last}
+

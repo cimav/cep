@@ -13,6 +13,8 @@ class StudentFile < SaposModels
   WORKPLAN            = 11
   INSURANCE           = 12
   CIMAV_CREDENTIAL    = 13
+  ACTIVITY_REPORT     = 14
+  REQUEST_LETTER      = 15
 
   REQUESTED_DOCUMENTS = {
       NORMAL              => 'Documento genérico',
@@ -26,7 +28,9 @@ class StudentFile < SaposModels
       ADDRESS_BILL        => 'Comprobante de domicilio',
       WORKPLAN            => 'Plan de trabajo',
       INSURANCE           => 'Seguro médico',
-      CIMAV_CREDENTIAL    => 'Credencial del CIMAV'
+      CIMAV_CREDENTIAL    => 'Credencial del CIMAV',
+      ACTIVITY_REPORT     => 'Reporte de actividades',
+      REQUEST_LETTER      => 'Carta de solicitud de beca del CIMAV con monto a pagar y firma del responsable'
   }
 
   def get_document_text

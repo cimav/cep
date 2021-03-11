@@ -129,3 +129,28 @@ body{
   padding-bottom: 0 !important;
 }
 
+.grid-container-parent {
+  position: relative;
+  height: 100%;
+}
+.grid-container-sesion-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px 2px;
+  grid-template-areas:
+    "item-num item-type"
+    "item-num item-date"
+    ". .";
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+}
+.item-num { grid-area: item-num; line-height: normal; font-size: large;}
+.item-type { grid-area: item-type; line-height: normal; font-size: smaller;}
+.item-date { grid-area: item-date; line-height: normal; font-size: smaller;}
+

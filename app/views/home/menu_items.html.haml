@@ -10,9 +10,41 @@
         -@meetings.each do |meeting|
           %li
             %a.menu-item{href:"/meetings/#{meeting.id}","data-remote"=>"true",url:"meetings/#{meeting.id}"}
-              =meeting.id_key
+              %div.grid-container-parent
+                %div.grid-container-sesion-item
+                  %div.item-num
+                    =meeting.num
+                  %div.item-type
+                    - if meeting.meeting_type == 1            
+                      %span{:style => 'color: #45BC57;'}
+                        ='Ordinaria'
+                    - else
+                      %span{:style => 'color: #ffd966;'}
+                        ='Extraordinaria'
+                  %div.item-date
+                    -# =meeting.str_date
+                    - if meeting.meeting_type == 1
+                      %span{:style => 'color: #45BC57;'}
+                        =meeting.str_date
+                    - else
+                      %span{:style => 'color: #ffd966;'}
+                        =meeting.str_date
 
-
+              -# =meeting.id_key
+              -# b_color = meeting.meeting.type == 1 ? 'color:green;' : 'color:blue;'
+                %div
+                  %span
+                    =meeting.num
+                  %span
+                    %div
+                      - if meeting.meeting_type == 1	   	
+                        %span.badge{:style => 'color: #45BC57;'}
+                          ='Ord'
+                      - else
+                        %span.badge{:style => 'color: #ffd966;'}
+                          ='Ext'
+                    %div{:style => ''}
+                      =meeting.str_date      	
 
         -if is_admin?
           %li

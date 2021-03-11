@@ -52,4 +52,12 @@ class Meeting < ApplicationRecord
     self.save
   end
 
+  def num
+    self.id_key.delete("^0-9")                      
+  end
+
+  def str_date
+    self.date.strftime("%d/%b/%Y")
+  end
+
 end

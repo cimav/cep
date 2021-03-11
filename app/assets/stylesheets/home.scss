@@ -1,3 +1,18 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.grid-container-sesion-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px 2px;
+  grid-template-areas:
+    "item-num item-type"
+    "item-num item-date"
+    ". .";
+}
+.item-num { grid-area: item-num; }
+.item-type { grid-area: item-type; }
+.item-date { grid-area: item-date; }
+

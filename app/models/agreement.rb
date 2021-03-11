@@ -133,10 +133,15 @@ class Agreement < ApplicationRecord
 	  pdf = PeerComitteeDesignationPdf.new(self, "#{Rails.root.to_s}/private/prawn/membretada_conacyt_2020.png")
         end
 
+
+	# logger.info "helo<<<<<< #{@render_pdf} >>>"
+
         if @render_pdf
           upload_auto_file(pdf)
         else
-          render :text=>"Documento no disponible o no autorizado"
+          
+	#render :text=>"Documento no disponible o no autorizado"
+	
         end
       end#end Prawn
 
