@@ -4,5 +4,5 @@ class TutorCommittee < ApplicationRecord
 
   validates :tutor1, presence: true
   validates :tutor2, presence: true
-  validates :tutor3, presence: true
+  # validates :tutor3, presence: true
 end
