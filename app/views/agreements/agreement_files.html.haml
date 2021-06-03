@@ -23,6 +23,11 @@
                   %i.far.fa-file-excel.fa-2x{"aria-hidden" => "true"}
                 -when '.xlsx'
                   %i.far.fa-file-excel.fa-2x{"aria-hidden" => "true"}
+                -when '.txt'
+                  %i.far.fa-file-alt.fa-2x{"aria-hidden" => "true"}
+                -else
+                  %i.far.fa-file-exclamation.fa-2x{"aria-hidden" => "true"}
+
           %td
             =link_to "/agreement_files/#{file.id}" ,target: :_blank, class:'grey-text text-darken-2' do
               .truncate
