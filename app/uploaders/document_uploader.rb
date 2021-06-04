@@ -13,7 +13,10 @@ class DocumentUploader < CarrierWave::Uploader::Base
   def filename
     if model.file_type === AgreementFile::AUTO # agreement.file_type agreeable_type.eql? 'GeneralIssue'
       key = model.agreement.id_key.sub! '/', '-'
-      "#{model.agreement.agreeable_type}-#{key}.pdf"
+      "#{model.agreement.agreeable_type}-#{key}-Oficio.pdf"
+    elsif model.file_type === AgreementFile::VOTE # agreement.file_type agreeable_type.eql? 'GeneralIssue'
+      key = model.agreement.id_key.sub! '/', '-'
+      "#{model.agreement.agreeable_type}-#{key}-Votacion.pdf"
     else
       original_filename.gsub(/ /i,'_').gsub(/[^\.a-z0-9_]/i, '') if original_filename
     end
