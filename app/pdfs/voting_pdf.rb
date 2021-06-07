@@ -15,17 +15,17 @@ class VotingPdf < PrawnPdf
 
     text "<b>Votación:</b>:\n", :align=>:justify,:inline_format=>true
     data = []
-    data << [{:content => "<b>Miembro</b>", :align => :center}, {:content => "<b>Voto</b>", :align => :center}, {:content => "<b>Comentario</b>", :align => :center}]
+    data << [{:content => "<b>Miembro</b>", :align => :center}, {:content => "<b>Voto</b>", :align => :center}]
     @agreement.responses.each do |r|
       data << [r.user.name, r.answer, r.comment]
     end
-    tabla = make_table(data, :width => 500, :cell_style => {:size => 9, :padding => 2, :inline_format => true, :border_width => 1},
-                           :position => :center, :column_widths => [205, 80, 215])
+    tabla = make_table(data, :width => 400, :cell_style => {:size => 9, :padding => 2, :inline_format => true, :border_width => 1},
+                           :position => :center, :column_widths => [300, 100])
     tabla.draw
 
-    text "\n\n<b>Resolución:</b>:", :align=>:justify,:inline_format=>true
-    resolution = @agreement.agreeable.resolution.blank? ? "\nSin resolución.\n\n" : "\n#{@agreement.agreeable.resolution}\n\n"
-    text resolution, :align=>:justify,:inline_format=>true
+    #text "\n\n<b>Resolución:</b>:", :align=>:justify,:inline_format=>true
+    #resolution = @agreement.agreeable.resolution.blank? ? "\nSin resolución.\n\n" : "\n#{@agreement.agreeable.resolution}\n\n"
+    #text resolution, :align=>:justify,:inline_format=>true
 
     # FOOTER
     number_pages "Página <page> de <total>", :at=>[0,-23], :align=>:center, :size=>font_size,:inline_format=>true
